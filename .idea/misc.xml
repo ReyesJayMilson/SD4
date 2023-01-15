@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/SD4/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
+        <entry key="..\:/SD4/app/src/main/res/layout/profiles.xml" value="0.358695652173913" />
+        <entry key="..\:/SD4/app/src/main/res/layout/profiles_test.xml" value="0.358695652173913" />
         <entry key="..\:/Users/reyes/AndroidStudioProjects/BreederManagementSystem/app/src/main/res/drawable/defaultprofile_background.xml" value="0.163" />
         <entry key="..\:/Users/reyes/AndroidStudioProjects/BreederManagementSystem/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/reyes/AndroidStudioProjects/BreederManagementSystem/app/src/main/res/layout/profiles.xml" value="0.33" />
