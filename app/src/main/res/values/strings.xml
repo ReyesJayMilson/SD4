@@ -4,4 +4,8 @@
     <string name="add_profile_name">add profile name</string>
     <string name="Cancel_Profile">Cancel</string>
     <string name="Submit_Profile">Submit</string>
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
