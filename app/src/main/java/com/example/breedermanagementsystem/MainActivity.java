@@ -1,8 +1,5 @@
 package com.example.breedermanagementsystem;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +13,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +27,6 @@ public class MainActivity extends AppCompatActivity {
     TextView tvTitle, tvSelectBreed;
     ArrayAdapter<String> userProfileAA;
     DatabaseHelper dbhelper;
-
-
-
 
 
     @Override
@@ -72,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("Add New Profile");
 
-                View dialogView = getLayoutInflater().inflate(R.layout.profiles,null);
+                View dialogView = getLayoutInflater().inflate(R.layout.profiles, null);
 
                 builder.setView(dialogView);
                 final EditText etProfileName = dialogView.findViewById(R.id.et_ProfileName);
@@ -85,15 +82,14 @@ public class MainActivity extends AppCompatActivity {
                             etProfileName.setError("Profile name cannot be empty");
                             return;
                         }
-                        Profiles profiles;
-                        profiles = new Profiles(-1, etProfileName.getText().toString());
+                        GetSetProfiles profiles;
+                        profiles = new GetSetProfiles(-1, etProfileName.getText().toString());
                         //Save the profile name to a database or file
 
 
+                        boolean success = dbhelper.addProfile((profiles));
 
-                        boolean success = dbhelper.addOne((profiles));
-
-                        if(success) {
+                        if (success) {
                             ShowProfileList();
                             Toast.makeText(MainActivity.this, "Profile added successfully", Toast.LENGTH_SHORT).show();
                         } else {
@@ -112,8 +108,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void ShowProfileList() {
         List<String> profileNames = new ArrayList<>();
-        List<Profiles> profiles = dbhelper.getEveryone();
-        for(Profiles profile : profiles) {
+        List<GetSetProfiles> profiles = dbhelper.getEveryProfile();
+        for (GetSetProfiles profile : profiles) {
             profileNames.add(profile.getName());
         }
         userProfileAA = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, profileNames);
