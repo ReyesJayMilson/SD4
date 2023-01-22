@@ -6,8 +6,9 @@ public class GetSetPigeons {
     private String name;
     private int birth_year;
     private String breed;
-    private String color;
     private String gender;
+    private String color;
+
     private String status;
     private String notes;
 
@@ -15,9 +16,9 @@ public class GetSetPigeons {
         this.ring_id = ring_id;
         this.name = name;
         this.birth_year = birth_year;
-        this.color = color;
         this.breed = breed;
         this.gender = gender;
+        this.color = color;
         this.status = status;
         this.notes = notes;
     }

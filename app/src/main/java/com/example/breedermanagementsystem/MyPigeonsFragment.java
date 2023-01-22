@@ -1,11 +1,13 @@
 package com.example.breedermanagementsystem;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -33,14 +35,17 @@ public class MyPigeonsFragment extends Fragment {
         dbhelper = new DatabaseHelper(view.getContext());
         pigeonsRecView = view.findViewById(R.id.rc_Pigeons);
 
-        ArrayList<GetSetPigeons> pigeons = new ArrayList<>();
-        pigeons.add(new GetSetPigeons("1a2", "examplename", 2015, "examplebreed", "examplecolor", "male", "alive","examplenotes"));
-        pigeons.add(new GetSetPigeons("20a", "examplename2", 2015, "examplebreed2", "examplecolor2", "male", "dead","examplenotes2"));
+//        ArrayList<GetSetPigeons> pigeons = new ArrayList<>();
+//        pigeons.add(new GetSetPigeons("1a2", "examplename", 2015, "examplebreed", "examplecolor", "male", "alive","examplenotes"));
+//        pigeons.add(new GetSetPigeons("20a", "examplename2", 2015, "examplebreed2", "examplecolor2", "male", "dead","examplenotes2"));
+
+        ArrayList<GetSetPigeons> pigeons = dbhelper.getEveryPigeon();
 
         PigeonsRecViewAdapter adapter = new PigeonsRecViewAdapter(view.getContext());
         adapter.setPigeons(pigeons);
 
         pigeonsRecView.setAdapter((adapter));
+
 
         pigeonsRecView.setLayoutManager(new GridLayoutManager(view.getContext(), 3));
         addPigeon = view.findViewById(R.id.bt_AddPigeon);
@@ -55,6 +60,8 @@ public class MyPigeonsFragment extends Fragment {
         });
         return view;
     }
+
+
 
 
 }

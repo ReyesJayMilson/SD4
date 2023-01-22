@@ -86,7 +86,7 @@ public class AddingPigeon extends AppCompatActivity {
                 rbStatus = findViewById(selectedStatusID);
                 selectedStatus = rbStatus.getText().toString();
                 GetSetPigeons pigeons = new GetSetPigeons(etRingID.getText().toString(), etName.getText().toString(), selectedYear,
-                        etBreed.getText().toString(), etColor.getText().toString(), selectedGender, selectedStatus, etNotes.getText().toString());
+                        etBreed.getText().toString(), selectedGender, etColor.getText().toString(), selectedStatus, etNotes.getText().toString());
 
                 boolean success = dbhelper.addPigeon(pigeons);
 
