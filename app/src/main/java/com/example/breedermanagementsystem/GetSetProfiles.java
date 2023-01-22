@@ -1,18 +1,16 @@
 package com.example.breedermanagementsystem;
 
-import android.widget.Button;
-
-public class Profiles {
+public class GetSetProfiles {
 
     private int id;
     private String name;
 
-    public Profiles(int id, String name) {
+    public GetSetProfiles(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Profiles() {
+    public GetSetProfiles() {
     }
 
     // toString for printing the contents of a class object
@@ -41,5 +39,3 @@ public class Profiles {
         this.name = name;
     }
 }
-//    Button btnSubmit = findViewById(R.id.btn_SubmitProfile);
-//    Button btnCancel = findViewById(R.id.btn_CancelProfile);
