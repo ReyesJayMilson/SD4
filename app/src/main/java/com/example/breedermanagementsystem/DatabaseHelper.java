@@ -18,7 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_USER_ID = "ID";
     public static final String PIGEON_TABLE = "PIGEON_TABLE";
     public static final String COLUMN_PIGEON_NAME = "PIGEON_NAME";
-    public static final String COLUMN_RING_ID = "ID";
+    public static final String COLUMN_RING_ID = "RING_ID";
     public static final String COLUMN_PIGEON_BIRTH_YEAR = "PIGEON_BIRTH_YEAR";
     public static final String COLUMN_PIGEON_BREED = "PIGEON_BREED";
     public static final String COLUMN_PIGEON_GENDER = "PIGEON_GENDER";
@@ -37,12 +37,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         //Create Table for Profiles
         String createProfileTableStatement = "CREATE TABLE " + USERPROFILE_TABLE + " (" + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_USERPROFILE_NAME + " TEXT)";
-
         db.execSQL(createProfileTableStatement);
 
         //Create Table for Pigeons
         String createPigeonTableStatement = "CREATE TABLE " + PIGEON_TABLE + " (" + COLUMN_RING_ID + " TEXT PRIMARY KEY, " + COLUMN_PIGEON_NAME + " TEXT, " + COLUMN_PIGEON_BIRTH_YEAR + " INTEGER, " + COLUMN_PIGEON_BREED + " TEXT, " + COLUMN_PIGEON_GENDER + " TEXT, " + COLUMN_PIGEON_COLOR + " TEXT,"+ COLUMN_PIGEON_STATUS + " TEXT, " + COLUMN_PIGEON_NOTES + " TEXT)";
         db.execSQL(createPigeonTableStatement);
+
+        //Create Table for Profiles
+        String createEggTrackerTableStatement = "CREATE TABLE EGGTRACKER_TABLE (EGG_ID INTEGER PRIMARY KEY AUTOINCREMENT, CAGE_NUMBER INTEGER, LAYING_DATE DATE, HATCHING_DATE DATE, FATHER TEXT, MOTHER TEXT)";
+        db.execSQL(createEggTrackerTableStatement);
+
+        //Create Table for Profiles
+        String createTransactionTableStatement = "CREATE TABLE TRANSACTION_TABLE (TRANSACTION_ID INTEGER PRIMARY KEY AUTOINCREMENT, BUYER_NAME TEXT, SELLER NAME, AMOUNT INTEGER, DETAILS TEXT)";
+        db.execSQL(createTransactionTableStatement);
+
+        //Create Table for Profiles
+        String createProductTableStatement = "CREATE TABLE PRODUCT_TABLE (PRODUCT_ID INTEGER PRIMARY KEY AUTOINCREMENT, PRODUCT_NAME TEXT, PRODUCT_PRICE INTEGER, QUANTITY INTEGER)";
+        db.execSQL(createProductTableStatement);
+
+        //Create Table for Profiles
+        String createCommonDiseaseLibraryTableStatement = "CREATE TABLE COMMONDISEASELIB_TABLE (DISEASE_ID INTEGER PRIMARY KEY AUTOINCREMENT, DISEASE_NAME TEXT, DESCRIPTION TEXT)";
+        db.execSQL(createCommonDiseaseLibraryTableStatement);
+
+
 
 //                                          "CREATE TABLE " + PIGEON_TABLE + " (" + COLUMN_RING_ID + " TEXT PRIMARY KEY, " + COLUMN_PIGEON_NAME + " TEXT, " + COLUMN_PIGEON_BIRTH_YEAR + " INTEGER, " + COLUMN_PIGEON_BREED + " TEXT, " + COLUMN_PIGEON_GENDER + " TEXT, " + COLUMN_PIGEON_COLOR  + " TEXT,"+COLUMN_PIGEON_STATUS + " TEXT, " + COLUMN_PIGEON_NOTES + " TEXT)";
 
@@ -162,9 +179,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public List<GetSetPigeons> getEveryPigeons() {
+    public ArrayList<GetSetPigeons> getEveryPigeon() {
 
-        List<GetSetPigeons> returnList = new ArrayList<>();
+        ArrayList<GetSetPigeons> returnList = new ArrayList<>();
 
         // get data from the database
 
@@ -177,16 +194,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             // loop through the cursor, put them in return list
             do {
                 String ringID = cursor.getString(0);
-                String name = cursor.getString(1);
-                int birthyear = cursor.getInt(2);
-                String breed = cursor.getString(3);
-                String gender = cursor.getString(4);
-                String color = cursor.getString(5);
-                String status = cursor.getString(6);
-                String notes = cursor.getString(7);
+                String pigeonName = cursor.getString(1);
+                int pigeonBirthYear = cursor.getInt(2);
+                String pigeonBreed = cursor.getString(3);
+                String pigeonGender = cursor.getString(4);
+                String pigeonColor = cursor.getString(5);
+                String pigeonStatus = cursor.getString(6);
+                String pigeonNotes = cursor.getString(7);
 
-                GetSetPigeons newPigeon = new GetSetPigeons(ringID, name, birthyear, breed, gender, color, status, notes);
-                returnList.add(newPigeon);
+
+                GetSetPigeons newPigeons = new GetSetPigeons(ringID, pigeonName, pigeonBirthYear, pigeonBreed, pigeonGender, pigeonColor, pigeonStatus, pigeonNotes );
+                returnList.add(newPigeons);
 
             } while (cursor.moveToNext());
 
