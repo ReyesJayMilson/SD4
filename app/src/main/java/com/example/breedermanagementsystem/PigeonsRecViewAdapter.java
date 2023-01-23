@@ -101,12 +101,12 @@ public class PigeonsRecViewAdapter extends RecyclerView.Adapter<PigeonsRecViewAd
                         //Put the data in the intent extras
                         intent.putExtra("ring_id", pigeons.get(clickedPosition).getRing_id());
                         intent.putExtra("name", pigeons.get(clickedPosition).getName());
-                        intent.putExtra("birthyear" , pigeons.get(clickedPosition).getBirth_year());
-                        intent.putExtra("breed" , pigeons.get(clickedPosition).getBreed());
-                        intent.putExtra("gender" , pigeons.get(clickedPosition).getGender());
-                        intent.putExtra("color" , pigeons.get(clickedPosition).getColor());
-                        intent.putExtra("status" , pigeons.get(clickedPosition).getStatus());
-                        intent.putExtra("notes" , pigeons.get(clickedPosition).getNotes());
+                        intent.putExtra("birthyear", pigeons.get(clickedPosition).getBirth_year());
+                        intent.putExtra("breed", pigeons.get(clickedPosition).getBreed());
+                        intent.putExtra("gender", pigeons.get(clickedPosition).getGender());
+                        intent.putExtra("color", pigeons.get(clickedPosition).getColor());
+                        intent.putExtra("status", pigeons.get(clickedPosition).getStatus());
+                        intent.putExtra("notes", pigeons.get(clickedPosition).getNotes());
                         context.startActivity(intent);
                         bottomSheetDialog.dismiss();
                     }

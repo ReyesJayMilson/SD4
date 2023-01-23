@@ -1,6 +1,5 @@
 package com.example.breedermanagementsystem;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,7 +12,6 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -62,7 +60,6 @@ public class EditingPigeon extends AppCompatActivity {
         etNotes = findViewById(R.id.et_Notes);
 
 
-
         //adding the resources to the birthyear
         List<Integer> Listyears = new ArrayList<>();
         Calendar cal = Calendar.getInstance();
@@ -91,9 +88,9 @@ public class EditingPigeon extends AppCompatActivity {
 
         etRingID.setVisibility(View.GONE);
         etName.setText(name);
-        spBirthYear.setSelection(((ArrayAdapter<Integer>)spBirthYear.getAdapter()).getPosition(birthYear));
+        spBirthYear.setSelection(((ArrayAdapter<Integer>) spBirthYear.getAdapter()).getPosition(birthYear));
         etBreed.setText(breed);
-        spGender.setSelection(((ArrayAdapter<String>)spGender.getAdapter()).getPosition(gender));
+        spGender.setSelection(((ArrayAdapter<String>) spGender.getAdapter()).getPosition(gender));
         etColor.setText(color);
         switch (status) {
             case "Alive":

@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:text="Ring ID: "
             android:textColor="@color/black" />
+
         <TextView
             android:id="@+id/bsv_name"
             android:layout_width="match_parent"
@@ -23,6 +24,7 @@
             android:layout_below="@+id/bsv_ringid"
             android:text="Name: "
             android:textColor="@color/black" />
+
         <TextView
             android:id="@+id/bsv_birthyear"
             android:layout_width="match_parent"
@@ -30,6 +32,7 @@
             android:layout_below="@+id/bsv_name"
             android:text="Birth Year: "
             android:textColor="@color/black" />
+
         <TextView
             android:id="@+id/bsv_breed"
             android:layout_width="match_parent"
@@ -37,6 +40,7 @@
             android:layout_below="@+id/bsv_birthyear"
             android:text="Breed: "
             android:textColor="@color/black" />
+
         <TextView
             android:id="@+id/bsv_gender"
             android:layout_width="match_parent"
@@ -44,6 +48,7 @@
             android:layout_below="@+id/bsv_breed"
             android:text="Gender: "
             android:textColor="@color/black" />
+
         <TextView
             android:id="@+id/bsv_color"
             android:layout_width="match_parent"
@@ -51,6 +56,7 @@
             android:layout_below="@+id/bsv_gender"
             android:text="Color: "
             android:textColor="@color/black" />
+
         <TextView
             android:id="@+id/bsv_status"
             android:layout_width="match_parent"
@@ -58,6 +64,7 @@
             android:layout_below="@+id/bsv_color"
             android:text="Status: "
             android:textColor="@color/black" />
+
         <TextView
             android:id="@+id/bsv_notes"
             android:layout_width="match_parent"
@@ -75,17 +82,15 @@
             android:layout_marginRight="10dp">
 
         </Button>
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bsv_editpigeon"
             android:text="Edit"
             android:layout_below="@+id/bsv_notes"
-            android:layout_toRightOf="@+id/bsv_deletepigeon">
-        </Button>
+            android:layout_toRightOf="@+id/bsv_deletepigeon"></Button>
     </RelativeLayout>
-
-
 
 
 </RelativeLayout>
