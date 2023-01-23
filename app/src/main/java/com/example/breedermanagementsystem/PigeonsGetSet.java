@@ -1,9 +1,10 @@
 package com.example.breedermanagementsystem;
 
-public class GetSetPigeons {
+public class PigeonsGetSet {
 
     private String ring_id;
     private String name;
+    private int cage_no;
     private int birth_year;
     private String breed;
     private String gender;
@@ -12,9 +13,10 @@ public class GetSetPigeons {
     private String status;
     private String notes;
 
-    public GetSetPigeons(String ring_id, String name, int birth_year, String breed, String gender, String color, String status, String notes) {
+    public PigeonsGetSet(String ring_id, String name, int cage_no, int birth_year, String breed, String gender, String color, String status, String notes) {
         this.ring_id = ring_id;
         this.name = name;
+        this.cage_no = cage_no;
         this.birth_year = birth_year;
         this.breed = breed;
         this.gender = gender;
@@ -28,7 +30,8 @@ public class GetSetPigeons {
         return "GetSetPigeons{" +
                 "ring_id=" + ring_id +
                 ", name='" + name + '\'' +
-                ", birth_year=" + birth_year +
+                ", cage_no='" + name + '\'' +
+                ", birth_year=" + cage_no +
                 ", breed='" + breed + '\'' +
                 ", gender='" + gender + '\'' +
                 ", color='" + color + '\'' +
@@ -43,6 +46,9 @@ public class GetSetPigeons {
 
     public String getName() {
         return name;
+    }
+    public int getCage_no() {
+        return cage_no;
     }
 
     public int getBirth_year() {
@@ -75,6 +81,10 @@ public class GetSetPigeons {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setCage_no(int cage_no) {
+        this.cage_no = cage_no;
     }
 
     public void setBirth_year(int birth_year) {

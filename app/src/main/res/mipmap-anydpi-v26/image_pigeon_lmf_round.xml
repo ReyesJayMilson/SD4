@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
-    <background android:drawable="@drawable/image_pigeon_lmf_background"/>
-    <foreground android:drawable="@mipmap/image_pigeon_lmf_foreground"/>
+    <background android:drawable="@drawable/image_pigeon_lmf_background" />
+    <foreground android:drawable="@mipmap/image_pigeon_lmf_foreground" />
 </adaptive-icon>

@@ -9,6 +9,5 @@
         android:id="@+id/eggplaceholder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Placeholder">
-    </TextView>
+        android:text="Placeholder"></TextView>
 </RelativeLayout>

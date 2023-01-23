@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class PigeonsRecViewAdapter extends RecyclerView.Adapter<PigeonsRecViewAdapter.ViewHolder> {
 
     DatabaseHelper dbhelper;
-    private ArrayList<GetSetPigeons> pigeons = new ArrayList<>();
+    private ArrayList<PigeonsGetSet> pigeons = new ArrayList<>();
 
     private Context context;
 
@@ -44,7 +44,7 @@ public class PigeonsRecViewAdapter extends RecyclerView.Adapter<PigeonsRecViewAd
             @Override
             public void onClick(View v) {
                 int clickedPosition = holder.getAdapterPosition();
-                View bottomSheetView = LayoutInflater.from(context).inflate(R.layout.bottomsheetpigeons, null);
+                View bottomSheetView = LayoutInflater.from(context).inflate(R.layout.pigeons_bottom_sheet, null);
 
                 //Set the contents of the bottom sheet
                 TextView ringIdTextView = bottomSheetView.findViewById(R.id.bsv_ringid);
@@ -53,8 +53,11 @@ public class PigeonsRecViewAdapter extends RecyclerView.Adapter<PigeonsRecViewAd
                 TextView nameTextView = bottomSheetView.findViewById(R.id.bsv_name);
                 nameTextView.setText("Name: " + pigeons.get(clickedPosition).getName());
 
-                TextView birtyearTextView = bottomSheetView.findViewById(R.id.bsv_birthyear);
-                birtyearTextView.setText("Birth Year: " + pigeons.get(clickedPosition).getBirth_year());
+                TextView cagenumberTextView = bottomSheetView.findViewById(R.id.bsv_cagenumber);
+                cagenumberTextView.setText("Cage No.: " + pigeons.get(clickedPosition).getCage_no());
+
+                TextView birthyearTextView = bottomSheetView.findViewById(R.id.bsv_birthyear);
+                birthyearTextView.setText("Birth Year: " + pigeons.get(clickedPosition).getBirth_year());
 
                 TextView breedTextView = bottomSheetView.findViewById(R.id.bsv_breed);
                 breedTextView.setText("Breed: " + pigeons.get(clickedPosition).getBreed());
@@ -66,10 +69,10 @@ public class PigeonsRecViewAdapter extends RecyclerView.Adapter<PigeonsRecViewAd
                 colorTextView.setText("Color: " + pigeons.get(clickedPosition).getColor());
 
                 TextView statusTextView = bottomSheetView.findViewById(R.id.bsv_status);
-                statusTextView.setText("Status ID: " + pigeons.get(clickedPosition).getStatus());
+                statusTextView.setText("Status: " + pigeons.get(clickedPosition).getStatus());
 
                 TextView notesTextView = bottomSheetView.findViewById(R.id.bsv_notes);
-                notesTextView.setText("Notes ID: " + pigeons.get(clickedPosition).getNotes());
+                notesTextView.setText("Notes: " + pigeons.get(clickedPosition).getNotes());
 
                 //Create a new BottomSheetDialog
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
@@ -97,16 +100,17 @@ public class PigeonsRecViewAdapter extends RecyclerView.Adapter<PigeonsRecViewAd
                     @Override
                     public void onClick(View v) {
                         //Create a new Intent
-                        Intent intent = new Intent(context, EditingPigeon.class);
+                        Intent intent = new Intent(context, PigeonEditing.class);
                         //Put the data in the intent extras
                         intent.putExtra("ring_id", pigeons.get(clickedPosition).getRing_id());
                         intent.putExtra("name", pigeons.get(clickedPosition).getName());
-                        intent.putExtra("birthyear" , pigeons.get(clickedPosition).getBirth_year());
-                        intent.putExtra("breed" , pigeons.get(clickedPosition).getBreed());
-                        intent.putExtra("gender" , pigeons.get(clickedPosition).getGender());
-                        intent.putExtra("color" , pigeons.get(clickedPosition).getColor());
-                        intent.putExtra("status" , pigeons.get(clickedPosition).getStatus());
-                        intent.putExtra("notes" , pigeons.get(clickedPosition).getNotes());
+                        intent.putExtra("cage_number", pigeons.get(clickedPosition).getCage_no());
+                        intent.putExtra("birth_year", pigeons.get(clickedPosition).getBirth_year());
+                        intent.putExtra("breed", pigeons.get(clickedPosition).getBreed());
+                        intent.putExtra("gender", pigeons.get(clickedPosition).getGender());
+                        intent.putExtra("color", pigeons.get(clickedPosition).getColor());
+                        intent.putExtra("status", pigeons.get(clickedPosition).getStatus());
+                        intent.putExtra("notes", pigeons.get(clickedPosition).getNotes());
                         context.startActivity(intent);
                         bottomSheetDialog.dismiss();
                     }
@@ -121,7 +125,7 @@ public class PigeonsRecViewAdapter extends RecyclerView.Adapter<PigeonsRecViewAd
         return pigeons.size();
     }
 
-    public void setPigeons(ArrayList<GetSetPigeons> pigeons) {
+    public void setPigeons(ArrayList<PigeonsGetSet> pigeons) {
         this.pigeons = pigeons;
         notifyDataSetChanged();
     }

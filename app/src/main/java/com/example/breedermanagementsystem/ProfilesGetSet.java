@@ -1,16 +1,16 @@
 package com.example.breedermanagementsystem;
 
-public class GetSetProfiles {
+public class ProfilesGetSet {
 
     private int id;
     private String name;
 
-    public GetSetProfiles(int id, String name) {
+    public ProfilesGetSet(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public GetSetProfiles() {
+    public ProfilesGetSet() {
     }
 
     // toString for printing the contents of a class object

@@ -14,7 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -354,7 +354,7 @@
                         android:layout_marginTop="35dp"
                         android:text="Stress is again the primary reason why a pigeon will show symptoms of mycoplasma. Therefore, managing a clean, stress-free, ideal environment for your pigeon is crucial in keeping your bird healthy."
                         android:textSize="12dp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                 </RelativeLayout>
 

@@ -1,6 +1,5 @@
 package com.example.breedermanagementsystem;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,12 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 
-public class MyPigeonsFragment extends Fragment {
+public class PigeonsFragment extends Fragment {
 
     private RecyclerView pigeonsRecView;
     static PigeonsRecViewAdapter adapter;
     private DatabaseHelper dbhelper;
-    private ArrayList<GetSetPigeons> pigeons = new ArrayList<>();
+    private ArrayList<PigeonsGetSet> pigeons = new ArrayList<>();
     private Button addPigeon;
 
 
@@ -50,7 +47,7 @@ public class MyPigeonsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // Code to be executed when the button is clicked
-                Intent intent = new Intent(getContext(), AddingPigeon.class);
+                Intent intent = new Intent(getContext(), PigeonAdding.class);
                 startActivity(intent);
 
 

@@ -1,6 +1,5 @@
 package com.example.breedermanagementsystem;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,17 +12,16 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 
-public class EditingPigeon extends AppCompatActivity {
+public class PigeonAdding extends AppCompatActivity {
 
     Button btSave;
-    EditText etRingID, etName, etBreed, etColor, etNotes;
+    EditText etRingID, etName, etBreed, etColor, etNotes, etCageNumber;
     Spinner spBirthYear, spGender;
     int selectedYear, selectedStatusID;
     RadioGroup rgStatus;
@@ -36,45 +34,46 @@ public class EditingPigeon extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_pigeon);
 
+        setContentView(R.layout.pigeon_add);
 
-        dbhelper = new DatabaseHelper(EditingPigeon.this);
+        dbhelper = new DatabaseHelper(PigeonAdding.this);
 
-        String ringId = getIntent().getStringExtra("ring_id");
-        String name = getIntent().getStringExtra("name");
-        int birthYear = getIntent().getIntExtra("birth_year", 0);
-        String breed = getIntent().getStringExtra("breed");
-        String gender = getIntent().getStringExtra("gender");
-        String color = getIntent().getStringExtra("color");
-        String status = getIntent().getStringExtra("status");
-        String notes = getIntent().getStringExtra("notes");
+//        String ringId = getIntent().getStringExtra("ring_id");
+//        String name = getIntent().getStringExtra("name");
+//
+//        boolean isFromEditButton = getIntent().getBooleanExtra("isFromEditButton", false);
+//        if (isFromEditButton) {
+//            etRingID.setText(ringId);
+//            etName.setText(name);
+//            // set the other EditText fields here as well
+//        }
 
 
         btSave = findViewById(R.id.bt_Save);
         etRingID = findViewById(R.id.et_RingID);
         etName = findViewById(R.id.et_Name);
+        etCageNumber = findViewById(R.id.et_CageNo);
         spBirthYear = findViewById(R.id.sp_BirthYear);
         etBreed = findViewById(R.id.et_Breed);
-        spGender = findViewById(R.id.sp_Gender);
         etColor = findViewById(R.id.et_Color);
-        rgStatus = findViewById(R.id.rg_Status);
+        spGender = findViewById(R.id.sp_Gender);
         etNotes = findViewById(R.id.et_Notes);
-
-
+        rgStatus = findViewById(R.id.rg_Status);
 
         //adding the resources to the birthyear
-        List<Integer> Listyears = new ArrayList<>();
+        List<Integer> years = new ArrayList<>();
         Calendar cal = Calendar.getInstance();
         int currentYear = cal.get(Calendar.YEAR);
         for (int i = currentYear; i > currentYear - 40; i--) {
-            Listyears.add(i);
+            years.add(i);
         }
 
-        ArrayAdapter<Integer> yearsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Listyears);
+        ArrayAdapter<Integer> yearsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, years);
         yearsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spBirthYear.setAdapter(yearsAdapter);
 
+        spBirthYear.setPrompt("Birth Year");
 //        spBirthYear.setSelection(0);
 
         //adding the resources to the gender
@@ -89,45 +88,28 @@ public class EditingPigeon extends AppCompatActivity {
 //        spGender.setSelection(0);
 
 
-        etRingID.setVisibility(View.GONE);
-        etName.setText(name);
-        spBirthYear.setSelection(((ArrayAdapter<Integer>)spBirthYear.getAdapter()).getPosition(birthYear));
-        etBreed.setText(breed);
-        spGender.setSelection(((ArrayAdapter<String>)spGender.getAdapter()).getPosition(gender));
-        etColor.setText(color);
-        switch (status) {
-            case "Alive":
-                rgStatus.check(R.id.rb_Alive);
-                break;
-            case "Dead":
-                rgStatus.check(R.id.rb_Dead);
-                break;
-            case "Sold":
-                rgStatus.check(R.id.rb_Sold);
-                break;
-        }
-        etNotes.setText(notes);
-
-
         btSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 indexYear = spBirthYear.getSelectedItemPosition();
-                selectedYear = Listyears.get(indexYear);
+                selectedYear = years.get(indexYear);
                 indexGender = spGender.getSelectedItemPosition();
                 selectedGender = Listgender.get(indexGender);
                 selectedStatusID = rgStatus.getCheckedRadioButtonId();
                 rbStatus = findViewById(selectedStatusID);
                 selectedStatus = rbStatus.getText().toString();
-                GetSetPigeons pigeons = new GetSetPigeons(ringId, etName.getText().toString(), selectedYear, etBreed.getText().toString(), selectedGender, etColor.getText().toString(), selectedStatus, etNotes.getText().toString());
+                PigeonsGetSet pigeons = new PigeonsGetSet(etRingID.getText().toString(), etName.getText().toString(), Integer.parseInt(etCageNumber.getText().toString()), selectedYear, etBreed.getText().toString(), selectedGender, etColor.getText().toString(), selectedStatus, etNotes.getText().toString());
 
-                boolean success = dbhelper.editPigeon(pigeons);
+                boolean success = dbhelper.addPigeon(pigeons);
 
                 if (success) {
-                    Toast.makeText(EditingPigeon.this, "Pigeon saved", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PigeonAdding.this, "Pigeon added", Toast.LENGTH_SHORT).show();
+//                    int position = MyPigeonsFragment.pigeons.size();
+//                    MyPigeonsFragment.pigeons.add(pigeons);
+//                    MyPigeonsFragment.adapter.notifyItemInserted(position);
                     finish();
                 } else {
-                    Toast.makeText(EditingPigeon.this, "Pigeon not saved", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PigeonAdding.this, "Pigeon not added", Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -82,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
                             etProfileName.setError("Profile name cannot be empty");
                             return;
                         }
-                        GetSetProfiles profiles;
-                        profiles = new GetSetProfiles(-1, etProfileName.getText().toString());
+                        ProfilesGetSet profiles;
+                        profiles = new ProfilesGetSet(-1, etProfileName.getText().toString());
                         //Save the profile name to a database or file
 
 
@@ -108,8 +108,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void ShowProfileList() {
         List<String> profileNames = new ArrayList<>();
-        List<GetSetProfiles> profiles = dbhelper.getEveryProfile();
-        for (GetSetProfiles profile : profiles) {
+        List<ProfilesGetSet> profiles = dbhelper.getEveryProfile();
+        for (ProfilesGetSet profile : profiles) {
             profileNames.add(profile.getName());
         }
         userProfileAA = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, profileNames);
