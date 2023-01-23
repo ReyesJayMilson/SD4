@@ -29,6 +29,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_PIGEON_COLOR = "PIGEON_COLOR";
     public static final String COLUMN_PIGEON_STATUS = "PIGEON_STATUS";
     public static final String COLUMN_PIGEON_NOTES = "PIGEON_NOTES";
+    public static final String EGGMONITORING_TABLE = "EGGMONITORING_TABLE";
+    public static final String COLUMN_EGG_ID = "EGG_ID";
     private Context context;
 
 
@@ -48,7 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(createPigeonTableStatement);
 
         //Create Table for Profiles
-        String createEggTrackerTableStatement = "CREATE TABLE EGGMONITORING_TABLE (EGG_ID INTEGER PRIMARY KEY AUTOINCREMENT, CAGE_NO INTEGER, NEST_NO INTEGER, LAYING_DATE DATE, HATCHING_DATE DATE, FATHER TEXT, MOTHER TEXT)";
+        String createEggTrackerTableStatement = "CREATE TABLE " + EGGMONITORING_TABLE + " (" + COLUMN_EGG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, CAGE_NO INTEGER, NEST_NO INTEGER, LAYING_DATE DATE, HATCHING_DATE DATE, FATHER TEXT, MOTHER TEXT)";
         db.execSQL(createEggTrackerTableStatement);
 
         String creatHealthCalendarTableStatement = "CREATE TABLE HEALTHCALENDER_TABLE (HEALTH_ID INTEGER PRIMARY KEY AUTOINCREMENT, NOTE_DATE DATE, RING_ID, NOTE_DESCRIPTION TEXT)";
