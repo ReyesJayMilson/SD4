@@ -407,7 +407,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="115dp"
-                        android:layout_marginTop="85dp"
+                        android:layout_marginTop="55dp"
                         android:text="Respiratory infections make it hard for a bird to breathe and fly so they are less active and competing pigeons will perform poorly. "
                         android:textSize="15dp"
                         android:textStyle="bold" />
