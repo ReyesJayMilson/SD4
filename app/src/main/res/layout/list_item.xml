@@ -165,7 +165,7 @@
                         android:layout_marginHorizontal="105dp"
                         android:layout_marginTop="0dp"
                         android:background="@android:color/holo_orange_light"
-                        android:text="Pigeon Coccida"
+                        android:text="Pigeon Coccidia"
                         android:textSize="20dp"
                         android:textStyle="bold" />
 
