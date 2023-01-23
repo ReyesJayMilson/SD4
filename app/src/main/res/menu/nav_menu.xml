@@ -1,66 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+    tools:showIn = "navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:checkableBehavior="single">
 
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/baseline_home_24"
-            android:title="Home" />
+            android:title="Home"/>
 
         <item
             android:id="@+id/nav_mypigeons"
             android:icon="@mipmap/pigeon_foreground"
-            android:title="My Pigeons" />
+            android:title="My Pigeons"/>
 
         <item
             android:id="@+id/nav_eggtracker"
             android:icon="@mipmap/egg_foreground"
-            android:title="Egg Monitoring" />
+            android:title="Egg Monitoring"/>
 
         <item
             android:id="@+id/nav_healthcalendar"
             android:icon="@mipmap/calendar_foreground"
-            android:title="Health Calendar" />
+            android:title="Health Calendar"/>
 
         <item
             android:id="@+id/nav_transactions"
             android:icon="@mipmap/transaction_foreground"
-            android:title="Transactions" />
+            android:title="Transactions"/>
 
         <item
             android:id="@+id/nav_products"
             android:icon="@mipmap/product_foreground"
-            android:title="Products" />
+            android:title="Products"/>
 
         <item
             android:id="@+id/nav_commondiseaselib"
             android:icon="@mipmap/disease_foreground"
-            android:title="Common Disease Library" />
+            android:title="Common Disease Library"/>
 
 
     </group>
 
-    <item android:title="">
+    <item
+        android:title="">
 
         <menu>
             <item
                 android:id="@+id/nav_settings"
                 android:icon="@drawable/baseline_settings_24"
-                android:title="Settings" />
+                android:title="Settings"/>
 
 
             <item
                 android:id="@+id/nav_changeprofile"
                 android:icon="@drawable/baseline_exit_to_app_24"
-                android:title="Change Profile" />
+                android:title="Change Profile"/>
 
             <item
                 android:id="@+id/nav_about"
                 android:icon="@drawable/baseline_info_24"
-                android:title="About" />
+                android:title="About"/>
         </menu>
     </item>
 

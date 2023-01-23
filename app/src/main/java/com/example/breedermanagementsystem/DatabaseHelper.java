@@ -31,32 +31,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_PIGEON_NOTES = "PIGEON_NOTES";
     public static final String EGGMONITORING_TABLE = "EGGMONITORING_TABLE";
     public static final String COLUMN_EGG_ID = "EGG_ID";
-    public static final String COLUMN_CAGE_NO = "CAGE_NO";
-    public static final String COLUMN_LAYING_DATE = "LAYING_DATE";
-    public static final String COLUMN_HATCHING_DATE = "HATCHING_DATE";
-    public static final String COLUMN_FATHER = "FATHER";
-    public static final String COLUMN_MOTHER = "MOTHER";
-    public static final String HEALTHCALENDER_TABLE = "HEALTHCALENDER_TABLE";
-    public static final String COLUMN_HEALTH_ID = "HEALTH_ID";
-    public static final String COLUMN_NOTE_DATE = "NOTE_DATE";
-    public static final String COLUMN_NOTE_DESCRIPTION = "NOTE_DESCRIPTION";
-    public static final String TRANSACTION_TABLE = "TRANSACTION_TABLE";
-    public static final String COLUMN_TRANSACTION_ID = "TRANSACTION_ID";
-    public static final String COLUMN_TRANSACTION_TYPE = "TRANSACTION_TYPE";
-    public static final String COLUMN_TRANSACTION_DATE = "TRANSACTION_DATE";
-    public static final String COLUMN_TRANSACTION_PARTNER = "TRANSACTION_PARTNER";
-    public static final String COLUMN_TRANSACTION_AMOUNT = "TRANSACTION_AMOUNT";
-    public static final String COLUMN_TRANSACTION_DETAILS = "TRANSACTION_DETAILS";
-    public static final String PRODUCT_TABLE = "PRODUCT_TABLE";
-    public static final String COLUMN_PRODUCT_ID = "PRODUCT_ID";
-    public static final String COLUMN_PRODUCT_NAME = "PRODUCT_NAME";
-    public static final String COLUMN_PRODUCT_PRICE = "PRODUCT_PRICE";
-    public static final String COLUMN_PRODUCT_QUANTITY = "PRODUCT_QUANTITY";
-    public static final String COLUMN_USE_PER_WEEK = "USE_PER_WEEK";
-    public static final String COMMONDISEASELIBRARY_TABLE = "COMMONDISEASELIBRARY_TABLE";
-    public static final String COLUMN_DISEASE_ID = "DISEASE_ID";
-    public static final String COLUMN_DISEASE_NAME = "DISEASE_NAME";
-    public static final String COLUMN_DISEASE_DESCRIPTION = "DISEASE_DESCRIPTION";
     private Context context;
 
 
@@ -76,22 +50,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(createPigeonTableStatement);
 
         //Create Table for Profiles
-        String createEggTrackerTableStatement = "CREATE TABLE " + EGGMONITORING_TABLE + " (" + COLUMN_EGG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_CAGE_NO + " INTEGER, NEST_NO INTEGER, " + COLUMN_LAYING_DATE + " DATE, " + COLUMN_HATCHING_DATE + " DATE, " + COLUMN_FATHER + " TEXT, " + COLUMN_MOTHER + " TEXT)";
+        String createEggTrackerTableStatement = "CREATE TABLE " + EGGMONITORING_TABLE + " (" + COLUMN_EGG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, CAGE_NO INTEGER, NEST_NO INTEGER, LAYING_DATE DATE, HATCHING_DATE DATE, FATHER TEXT, MOTHER TEXT)";
         db.execSQL(createEggTrackerTableStatement);
 
-        String creatHealthCalendarTableStatement = "CREATE TABLE " + HEALTHCALENDER_TABLE + " (" + COLUMN_HEALTH_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NOTE_DATE + " DATE, RING_ID , " + COLUMN_NOTE_DESCRIPTION + " TEXT)";
+        String creatHealthCalendarTableStatement = "CREATE TABLE HEALTHCALENDER_TABLE (HEALTH_ID INTEGER PRIMARY KEY AUTOINCREMENT, NOTE_DATE DATE, RING_ID, NOTE_DESCRIPTION TEXT)";
         db.execSQL(creatHealthCalendarTableStatement);
 
         //Create Table for Profiles
-        String createTransactionTableStatement = "CREATE TABLE " + TRANSACTION_TABLE + " (" + COLUMN_TRANSACTION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_TRANSACTION_TYPE + " TEXT, " + COLUMN_TRANSACTION_DATE + " DATE, " + COLUMN_TRANSACTION_PARTNER + " TEXT, " + COLUMN_TRANSACTION_AMOUNT + " INTEGER, " + COLUMN_TRANSACTION_DETAILS + " TEXT)";
+        String createTransactionTableStatement = "CREATE TABLE TRANSACTION_TABLE (TRANSACTION_ID INTEGER PRIMARY KEY AUTOINCREMENT, TRANSACTION_TYPE TEXT, TRANSACTION_DATE DATE, TRANSACTION_PARTNER, TRANSACTION_AMOUNT INTEGER, TRANSACTION_DETAILS TEXT)";
         db.execSQL(createTransactionTableStatement);
 
         //Create Table for Profiles
-        String createProductTableStatement = "CREATE TABLE " + PRODUCT_TABLE + " (" + COLUMN_PRODUCT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_PRODUCT_NAME + " TEXT, " + COLUMN_PRODUCT_PRICE + " INTEGER, " + COLUMN_PRODUCT_QUANTITY + " TEXT, " + COLUMN_USE_PER_WEEK + " TEXT)";
+        String createProductTableStatement = "CREATE TABLE PRODUCT_TABLE (PRODUCT_ID INTEGER PRIMARY KEY AUTOINCREMENT, PRODUCT_NAME TEXT, PRODUCT_PRICE INTEGER, PRODUCT_QUANTITY TEXT, USE_PER_WEEK TEXT)";
         db.execSQL(createProductTableStatement);
 
         //Create Table for Profiles
-        String createCommonDiseaseLibraryTableStatement = "CREATE TABLE " + COMMONDISEASELIBRARY_TABLE + " (" + COLUMN_DISEASE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_DISEASE_NAME + " TEXT, " + COLUMN_DISEASE_DESCRIPTION + " TEXT)";
+        String createCommonDiseaseLibraryTableStatement = "CREATE TABLE COMMONDISEASELIBRARY_TABLE (DISEASE_ID INTEGER PRIMARY KEY AUTOINCREMENT, DISEASE_NAME TEXT, DISEASE_DESCRIPTION TEXT)";
         db.execSQL(createCommonDiseaseLibraryTableStatement);
 
 
