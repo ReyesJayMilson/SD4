@@ -20,7 +20,7 @@ import java.util.Calendar;
 import java.util.List;
 
 
-public class AddingPigeon extends AppCompatActivity {
+public class EditingPigeon extends AppCompatActivity {
 
     Button btSave;
     EditText etRingID, etName, etBreed, etColor, etNotes;
@@ -36,10 +36,10 @@ public class AddingPigeon extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.add_pigeon);
 
-        dbhelper = new DatabaseHelper(AddingPigeon.this);
+
+        dbhelper = new DatabaseHelper(EditingPigeon.this);
 
         String ringId = getIntent().getStringExtra("ring_id");
         String name = getIntent().getStringExtra("name");
@@ -50,37 +50,31 @@ public class AddingPigeon extends AppCompatActivity {
         String status = getIntent().getStringExtra("status");
         String notes = getIntent().getStringExtra("notes");
 
-        boolean isFromEditButton = getIntent().getBooleanExtra("isFromEditButton", false);
-        if (isFromEditButton) {
-            etRingID.setText(ringId);
-            etName.setText(name);
-            // set the other EditText fields here as well
-        }
-
 
         btSave = findViewById(R.id.bt_Save);
         etRingID = findViewById(R.id.et_RingID);
         etName = findViewById(R.id.et_Name);
         spBirthYear = findViewById(R.id.sp_BirthYear);
         etBreed = findViewById(R.id.et_Breed);
-        etColor = findViewById(R.id.et_Color);
         spGender = findViewById(R.id.sp_Gender);
-        etNotes = findViewById(R.id.et_Notes);
+        etColor = findViewById(R.id.et_Color);
         rgStatus = findViewById(R.id.rg_Status);
+        etNotes = findViewById(R.id.et_Notes);
+
+
 
         //adding the resources to the birthyear
-        List<Integer> years = new ArrayList<>();
+        List<Integer> Listyears = new ArrayList<>();
         Calendar cal = Calendar.getInstance();
         int currentYear = cal.get(Calendar.YEAR);
         for (int i = currentYear; i > currentYear - 40; i--) {
-            years.add(i);
+            Listyears.add(i);
         }
 
-        ArrayAdapter<Integer> yearsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, years);
+        ArrayAdapter<Integer> yearsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Listyears);
         yearsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spBirthYear.setAdapter(yearsAdapter);
 
-        spBirthYear.setPrompt("Birth Year");
 //        spBirthYear.setSelection(0);
 
         //adding the resources to the gender
@@ -95,28 +89,45 @@ public class AddingPigeon extends AppCompatActivity {
 //        spGender.setSelection(0);
 
 
+        etRingID.setVisibility(View.GONE);
+        etName.setText(name);
+        spBirthYear.setSelection(((ArrayAdapter<Integer>)spBirthYear.getAdapter()).getPosition(birthYear));
+        etBreed.setText(breed);
+        spGender.setSelection(((ArrayAdapter<String>)spGender.getAdapter()).getPosition(gender));
+        etColor.setText(color);
+        switch (status) {
+            case "Alive":
+                rgStatus.check(R.id.rb_Alive);
+                break;
+            case "Dead":
+                rgStatus.check(R.id.rb_Dead);
+                break;
+            case "Sold":
+                rgStatus.check(R.id.rb_Sold);
+                break;
+        }
+        etNotes.setText(notes);
+
+
         btSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 indexYear = spBirthYear.getSelectedItemPosition();
-                selectedYear = years.get(indexYear);
+                selectedYear = Listyears.get(indexYear);
                 indexGender = spGender.getSelectedItemPosition();
                 selectedGender = Listgender.get(indexGender);
                 selectedStatusID = rgStatus.getCheckedRadioButtonId();
                 rbStatus = findViewById(selectedStatusID);
                 selectedStatus = rbStatus.getText().toString();
-                GetSetPigeons pigeons = new GetSetPigeons(etRingID.getText().toString(), etName.getText().toString(), selectedYear, etBreed.getText().toString(), selectedGender, etColor.getText().toString(), selectedStatus, etNotes.getText().toString());
+                GetSetPigeons pigeons = new GetSetPigeons(ringId, etName.getText().toString(), selectedYear, etBreed.getText().toString(), selectedGender, etColor.getText().toString(), selectedStatus, etNotes.getText().toString());
 
-                boolean success = dbhelper.addPigeon(pigeons);
+                boolean success = dbhelper.editPigeon(pigeons);
 
                 if (success) {
-                    Toast.makeText(AddingPigeon.this, "Pigeon added", Toast.LENGTH_SHORT).show();
-//                    int position = MyPigeonsFragment.pigeons.size();
-//                    MyPigeonsFragment.pigeons.add(pigeons);
-//                    MyPigeonsFragment.adapter.notifyItemInserted(position);
+                    Toast.makeText(EditingPigeon.this, "Pigeon saved", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
-                    Toast.makeText(AddingPigeon.this, "Pigeon not added", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditingPigeon.this, "Pigeon not saved", Toast.LENGTH_SHORT).show();
                 }
             }
         });
