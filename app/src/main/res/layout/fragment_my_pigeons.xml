@@ -24,7 +24,7 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/rectangular_border"
         android:backgroundTint="@color/teal_200"
-        android:text="+"
+        android:text="Add Pigeon"
         android:textColor="@color/black"
         android:textSize="20sp" />
 
@@ -37,37 +37,3 @@
 
 
 </RelativeLayout>
-
-    <!--    <EditText-->
-    <!--        android:id="@+id/et_RingID"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:ems="10"-->
-    <!--        android:hint="Ring ID"-->
-    <!--        android:inputType="textPersonName" />-->
-
-    <!--    <EditText-->
-    <!--        android:id="@+id/et_BirthYear"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:ems="10"-->
-    <!--        android:hint="Birth Year"-->
-    <!--        android:inputType="textPersonName" />-->
-
-    <!--    <EditText-->
-    <!--        android:id="@+id/et_PigeonBreed"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:ems="10"-->
-    <!--        android:hint="Pigeon Breed"-->
-    <!--        android:inputType="textPersonName" />-->
-
-    <!--    <EditText-->
-    <!--        android:id="@+id/et_PigeonColor"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:ems="10"-->
-    <!--        android:hint="Pigeon Color"-->
-    <!--        android:inputType="textPersonName"-->
-    <!--        android:text="Name" />-->
-

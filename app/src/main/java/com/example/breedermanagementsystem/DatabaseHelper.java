@@ -52,6 +52,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_DISEASE_ID = "DISEASE_ID";
     public static final String COLUMN_DISEASE_NAME = "DISEASE_NAME";
     public static final String COLUMN_DISEASE_DESCRIPTION = "DISEASE_DESCRIPTION";
+    public static final String COLUMN_NEST_NO = "NEST_NO";
     private Context context;
 
 
@@ -71,14 +72,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(createPigeonTableStatement);
 
         //Create Table for Profiles
-        String createEggTrackerTableStatement = "CREATE TABLE " + EGGMONITORING_TABLE + " (" + COLUMN_EGG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_CAGE_NO + " INTEGER, NEST_NO INTEGER, " + COLUMN_LAYING_DATE + " DATE, " + COLUMN_HATCHING_DATE + " DATE, " + COLUMN_FATHER + " TEXT, " + COLUMN_MOTHER + " TEXT)";
+        String createEggTrackerTableStatement = "CREATE TABLE " + EGGMONITORING_TABLE + " (" + COLUMN_EGG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_CAGE_NO + " INTEGER, " + COLUMN_NEST_NO + " INTEGER, " + COLUMN_LAYING_DATE + " TEXT, " + COLUMN_HATCHING_DATE + " TEXT, " + COLUMN_FATHER + " TEXT, " + COLUMN_MOTHER + " TEXT)";
         db.execSQL(createEggTrackerTableStatement);
 
-        String creatHealthCalendarTableStatement = "CREATE TABLE " + HEALTHCALENDER_TABLE + " (" + COLUMN_HEALTH_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NOTE_DATE + " DATE, RING_ID , " + COLUMN_NOTE_DESCRIPTION + " TEXT)";
+        String creatHealthCalendarTableStatement = "CREATE TABLE " + HEALTHCALENDER_TABLE + " (" + COLUMN_HEALTH_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NOTE_DATE + " TEXT, RING_ID , " + COLUMN_NOTE_DESCRIPTION + " TEXT)";
         db.execSQL(creatHealthCalendarTableStatement);
 
         //Create Table for Profiles
-        String createTransactionTableStatement = "CREATE TABLE " + TRANSACTION_TABLE + " (" + COLUMN_TRANSACTION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_TRANSACTION_TYPE + " TEXT, " + COLUMN_TRANSACTION_DATE + " DATE, " + COLUMN_TRANSACTION_PARTNER + " TEXT, " + COLUMN_TRANSACTION_AMOUNT + " INTEGER, " + COLUMN_TRANSACTION_DETAILS + " TEXT)";
+        String createTransactionTableStatement = "CREATE TABLE " + TRANSACTION_TABLE + " (" + COLUMN_TRANSACTION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_TRANSACTION_TYPE + " TEXT, " + COLUMN_TRANSACTION_DATE + " TEXT, " + COLUMN_TRANSACTION_PARTNER + " TEXT, " + COLUMN_TRANSACTION_AMOUNT + " INTEGER, " + COLUMN_TRANSACTION_DETAILS + " TEXT)";
         db.execSQL(createTransactionTableStatement);
 
         //Create Table for Profiles
@@ -276,5 +277,80 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return returnList;
     }
+
+    public List<String> getAllRingIds() {
+        List<String> ringIds = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(PIGEON_TABLE, new String[] { COLUMN_RING_ID }, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            do {
+                ringIds.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return ringIds;
+    }
+
+    ///////////////////////PROFILES//////////////////////////////
+    public boolean addEgg(EggsGetSet eggs) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COLUMN_CAGE_NO, eggs.getCage_number());
+        cv.put(COLUMN_NEST_NO, eggs.getNest_number());
+        cv.put(COLUMN_LAYING_DATE, eggs.getLaying_date());
+        cv.put(COLUMN_HATCHING_DATE, eggs.getHatching_date());
+        cv.put(COLUMN_FATHER, eggs.getFather());
+        cv.put(COLUMN_MOTHER, eggs.getMother());
+
+
+        long insert = db.insert(EGGMONITORING_TABLE, null, cv);
+
+
+        if (insert == -1) {
+            return false;
+        } else {
+            ArrayList<EggsGetSet> updatedList = getEveryEgg();
+            EggTrackerFragment.adapter.notifyDataSetChanged();
+            EggTrackerFragment.adapter.setEggs(updatedList);
+            return true;
+        }
+
+    }
+
+    public ArrayList<EggsGetSet> getEveryEgg() {
+
+        ArrayList<EggsGetSet> returnList = new ArrayList<>();
+
+        // get data from the database
+
+        String queryString = "SELECT * FROM " + EGGMONITORING_TABLE;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+            // loop through the cursor, put them in return list
+            do {
+                int eggID = cursor.getInt(0);
+                int cageNumber = cursor.getInt(1);
+                int nestNumber = cursor.getInt(2);
+                String layDate = cursor.getString(3);
+                String hatchDate = cursor.getString(4);
+                String father = cursor.getString(5);
+                String mother = cursor.getString(6);
+
+
+                EggsGetSet newEggs = new EggsGetSet(eggID, cageNumber, nestNumber, layDate, hatchDate, father, mother);
+                returnList.add(newEggs);
+
+            } while (cursor.moveToNext());
+
+        } else {
+
+        }
+        return returnList;
+    }
+
 
 }

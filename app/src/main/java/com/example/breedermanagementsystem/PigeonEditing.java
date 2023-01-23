@@ -111,6 +111,10 @@ public class PigeonEditing extends AppCompatActivity {
         btSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (etCageNumber.getText().toString().trim().isEmpty()) {
+                    Toast.makeText(PigeonEditing.this, "Cage Number cannot be empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 indexYear = spBirthYear.getSelectedItemPosition();
                 selectedYear = Listyears.get(indexYear);
                 indexGender = spGender.getSelectedItemPosition();

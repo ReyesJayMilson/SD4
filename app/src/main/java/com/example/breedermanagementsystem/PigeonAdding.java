@@ -91,6 +91,14 @@ public class PigeonAdding extends AppCompatActivity {
         btSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (etRingID.getText().toString().trim().isEmpty()) {
+                    Toast.makeText(PigeonAdding.this, "Ring ID cannot be empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (etCageNumber.getText().toString().trim().isEmpty()) {
+                    Toast.makeText(PigeonAdding.this, "Cage Number cannot be empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 indexYear = spBirthYear.getSelectedItemPosition();
                 selectedYear = years.get(indexYear);
                 indexGender = spGender.getSelectedItemPosition();
