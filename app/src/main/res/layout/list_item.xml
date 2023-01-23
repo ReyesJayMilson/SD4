@@ -54,6 +54,7 @@
                         android:layout_marginTop="0dp"
                         android:background="@android:color/holo_orange_light"
                         android:text="Pigeon Canker"
+                        android:textColor="@color/black"
                         android:textSize="25dp"
                         android:textStyle="bold" />
 
@@ -110,6 +111,7 @@
                         android:layout_marginTop="0dp"
                         android:background="@android:color/holo_orange_light"
                         android:text="Pigeon Worm"
+                        android:textColor="@color/black"
                         android:textSize="20dp"
                         android:textStyle="bold" />
 
@@ -166,6 +168,7 @@
                         android:layout_marginTop="0dp"
                         android:background="@android:color/holo_orange_light"
                         android:text="Pigeon Coccidia"
+                        android:textColor="@color/black"
                         android:textSize="20dp"
                         android:textStyle="bold" />
 
@@ -222,6 +225,7 @@
                         android:layout_marginTop="0dp"
                         android:background="@android:color/holo_orange_light"
                         android:text="Pigeon Hexamita"
+                        android:textColor="@color/black"
                         android:textSize="20dp"
                         android:textStyle="bold" />
 
@@ -278,6 +282,7 @@
                         android:layout_marginTop="0dp"
                         android:background="@android:color/holo_orange_light"
                         android:text="Pigeon Lice, Mite and Fly"
+                        android:textColor="@color/black"
                         android:textSize="16dp"
                         android:textStyle="bold" />
 
@@ -334,6 +339,7 @@
                         android:layout_marginTop="0dp"
                         android:background="@android:color/holo_orange_light"
                         android:text="Pigeon Mycoplasma"
+                        android:textColor="@color/black"
                         android:textSize="18dp"
                         android:textStyle="bold" />
 
@@ -390,6 +396,7 @@
                         android:layout_marginTop="0dp"
                         android:background="@android:color/holo_orange_light"
                         android:text="Pigeon Respiratory Infections"
+                        android:textColor="@color/black"
                         android:textSize="18dp"
                         android:textStyle="bold" />
 
