@@ -1,11 +1,14 @@
 package com.example.breedermanagementsystem;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +26,7 @@ public class PigeonsRecViewAdapter extends RecyclerView.Adapter<PigeonsRecViewAd
 
     public PigeonsRecViewAdapter(Context context) {
         this.context = context;
+        dbhelper = new DatabaseHelper(context);
     }
 
     @NonNull
@@ -42,7 +46,7 @@ public class PigeonsRecViewAdapter extends RecyclerView.Adapter<PigeonsRecViewAd
                 int clickedPosition = holder.getAdapterPosition();
                 View bottomSheetView = LayoutInflater.from(context).inflate(R.layout.bottomsheetpigeons, null);
 
-                //Set the contents of the bottom sheet, for example
+                //Set the contents of the bottom sheet
                 TextView ringIdTextView = bottomSheetView.findViewById(R.id.bsv_ringid);
                 ringIdTextView.setText("Ring ID: " + pigeons.get(clickedPosition).getRing_id());
 
@@ -72,6 +76,41 @@ public class PigeonsRecViewAdapter extends RecyclerView.Adapter<PigeonsRecViewAd
                 bottomSheetDialog.setContentView(bottomSheetView);
                 bottomSheetDialog.show();
 
+
+                final Button deleteButton = bottomSheetView.findViewById(R.id.bsv_deletepigeon);
+                deleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        boolean success = dbhelper.deletePigeon(pigeons.get(clickedPosition));
+
+                        if (success) {
+                            Toast.makeText(view.getContext(), "Pigeon deleted successfully", Toast.LENGTH_SHORT).show();
+                            bottomSheetDialog.dismiss();
+                        } else {
+                            Toast.makeText(view.getContext(), "Pigeon not deleted", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+                Button editButton = bottomSheetView.findViewById(R.id.bsv_editpigeon);
+                editButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Create a new Intent
+                        Intent intent = new Intent(context, EditingPigeon.class);
+                        //Put the data in the intent extras
+                        intent.putExtra("ring_id", pigeons.get(clickedPosition).getRing_id());
+                        intent.putExtra("name", pigeons.get(clickedPosition).getName());
+                        intent.putExtra("birthyear" , pigeons.get(clickedPosition).getBirth_year());
+                        intent.putExtra("breed" , pigeons.get(clickedPosition).getBreed());
+                        intent.putExtra("gender" , pigeons.get(clickedPosition).getGender());
+                        intent.putExtra("color" , pigeons.get(clickedPosition).getColor());
+                        intent.putExtra("status" , pigeons.get(clickedPosition).getStatus());
+                        intent.putExtra("notes" , pigeons.get(clickedPosition).getNotes());
+                        context.startActivity(intent);
+                        bottomSheetDialog.dismiss();
+                    }
+                });
             }
         });
 

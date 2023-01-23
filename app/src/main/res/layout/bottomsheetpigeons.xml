@@ -7,7 +7,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="20dp">
+        android:padding="20dp"
+        android:id="@+id/bsp_rlone">
+
         <TextView
             android:id="@+id/bsv_ringid"
             android:layout_width="match_parent"
@@ -63,6 +65,27 @@
             android:layout_below="@+id/bsv_status"
             android:text="Notes: "
             android:textColor="@color/black" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bsv_deletepigeon"
+            android:text="Delete"
+            android:layout_below="@+id/bsv_notes"
+            android:layout_marginRight="10dp">
+
+        </Button>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bsv_editpigeon"
+            android:text="Edit"
+            android:layout_below="@+id/bsv_notes"
+            android:layout_toRightOf="@+id/bsv_deletepigeon">
+        </Button>
     </RelativeLayout>
+
+
+
 
 </RelativeLayout>
