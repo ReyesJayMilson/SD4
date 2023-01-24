@@ -40,7 +40,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PigeonsFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_home);
+            navigationView.setCheckedItem(R.id.nav_mypigeons);
         }
     }
 

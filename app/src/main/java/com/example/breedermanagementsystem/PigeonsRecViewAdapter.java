@@ -6,11 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -39,7 +39,7 @@ public class PigeonsRecViewAdapter extends RecyclerView.Adapter<PigeonsRecViewAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.ph.setText("Ring ID: " + pigeons.get(position).getRing_id());
+        holder.ph.setText(pigeons.get(position).getRing_id());
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,12 +133,12 @@ public class PigeonsRecViewAdapter extends RecyclerView.Adapter<PigeonsRecViewAd
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView ph;
-        private RelativeLayout parent;
+        private CardView parent;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ph = itemView.findViewById(R.id.placeholder);
-            parent = itemView.findViewById(R.id.parent);
+            ph = itemView.findViewById(R.id.idplaceholder_pigeon);
+            parent = itemView.findViewById(R.id.parent_pigeon);
 
 
         }
