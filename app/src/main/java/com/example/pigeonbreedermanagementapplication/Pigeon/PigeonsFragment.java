@@ -2,6 +2,7 @@ package com.example.pigeonbreedermanagementapplication.Pigeon;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,8 +39,10 @@ public class PigeonsFragment extends Fragment {
 
 
         pigeons = dbhelper.getEveryPigeon();
+        Log.d("TAG", "Pigeonlist" + dbhelper.getEveryPigeon());
 
         pigeonadapter = new PigeonsRecViewAdapter(view.getContext());
+
         pigeonadapter.setPigeons(pigeons);
 
         pigeonsRecView.setAdapter(pigeonadapter);

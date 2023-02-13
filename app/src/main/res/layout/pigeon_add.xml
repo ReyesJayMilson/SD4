@@ -6,14 +6,24 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="100dp"
         android:gravity="bottom">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:id="@+id/iv_AddImage"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:src="@mipmap/pigeon_image"/>
+
 
         <EditText
             android:id="@+id/et_RingID"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_alignParentTop="true"
+            android:layout_below="@id/iv_AddImage"
             android:layout_centerHorizontal="true"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="16dp"
@@ -209,14 +219,20 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/et_Notes"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/rectangular_border"
             android:backgroundTint="@color/teal_200"
             android:text="Save"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
-
     </RelativeLayout>
+
+
+
 </ScrollView>

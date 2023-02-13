@@ -2,6 +2,7 @@ package com.example.pigeonbreedermanagementapplication.Pigeon;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ public class PigeonsRecViewAdapter extends RecyclerView.Adapter<PigeonsRecViewAd
     public PigeonsRecViewAdapter(Context context) {
         this.context = context;
         dbhelper = new DatabaseHelper(context);
+        Log.d("TAG", "Context:" + context);
     }
 
     @NonNull
@@ -37,11 +39,13 @@ public class PigeonsRecViewAdapter extends RecyclerView.Adapter<PigeonsRecViewAd
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pigeons_list_item, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.ph.setText(pigeons.get(position).getRing_id());
+        Log.d("TAG", "Pigeons:" + pigeons);
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,6 +117,7 @@ public class PigeonsRecViewAdapter extends RecyclerView.Adapter<PigeonsRecViewAd
                         intent.putExtra("color", pigeons.get(clickedPosition).getColor());
                         intent.putExtra("status", pigeons.get(clickedPosition).getStatus());
                         intent.putExtra("notes", pigeons.get(clickedPosition).getNotes());
+                        intent.putExtra("image", pigeons.get(clickedPosition).getImage());
                         context.startActivity(intent);
                         bottomSheetDialog.dismiss();
                     }
@@ -124,12 +129,15 @@ public class PigeonsRecViewAdapter extends RecyclerView.Adapter<PigeonsRecViewAd
 
     @Override
     public int getItemCount() {
+        Log.d("TAG", "pigeonssize:" + pigeons.size() );
         return pigeons.size();
+
     }
 
     public void setPigeons(ArrayList<PigeonsGetSet> pigeons) {
         this.pigeons = pigeons;
         notifyDataSetChanged();
+        Log.d("TAG", "Debug message" + pigeons);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -139,6 +147,7 @@ public class PigeonsRecViewAdapter extends RecyclerView.Adapter<PigeonsRecViewAd
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            Log.d("TAG", "Debug message" + itemView);
             ph = itemView.findViewById(R.id.idplaceholder_pigeon);
             parent = itemView.findViewById(R.id.parent_pigeon);
 

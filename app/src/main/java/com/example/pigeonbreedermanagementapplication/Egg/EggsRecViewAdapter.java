@@ -1,6 +1,7 @@
 package com.example.pigeonbreedermanagementapplication.Egg;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -124,6 +125,7 @@ public class EggsRecViewAdapter extends RecyclerView.Adapter<EggsRecViewAdapter.
 
     @Override
     public int getItemCount() {
+        Log.d("TAG", "pigeonssize:" + eggs.size() );
         return eggs.size();
     }
 
