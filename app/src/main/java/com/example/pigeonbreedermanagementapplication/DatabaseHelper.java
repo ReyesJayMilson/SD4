@@ -54,10 +54,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_PRODUCT_PRICE = "PRODUCT_PRICE";
     public static final String COLUMN_PRODUCT_QUANTITY = "PRODUCT_QUANTITY";
     public static final String COLUMN_USE_PER_WEEK = "USE_PER_WEEK";
-    public static final String COMMONDISEASELIBRARY_TABLE = "COMMONDISEASELIBRARY_TABLE";
-    public static final String COLUMN_DISEASE_ID = "DISEASE_ID";
-    public static final String COLUMN_DISEASE_NAME = "DISEASE_NAME";
-    public static final String COLUMN_DISEASE_DESCRIPTION = "DISEASE_DESCRIPTION";
+
     public static final String COLUMN_NEST_NO = "NEST_NO";
     private Context context;
 
@@ -92,14 +89,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String createProductTableStatement = "CREATE TABLE " + PRODUCT_TABLE + " (" + COLUMN_PRODUCT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_PRODUCT_NAME + " TEXT, " + COLUMN_PRODUCT_PRICE + " INTEGER, " + COLUMN_PRODUCT_QUANTITY + " TEXT, " + COLUMN_USE_PER_WEEK + " TEXT)";
         db.execSQL(createProductTableStatement);
 
-        //Create Table for Profiles
-        String createCommonDiseaseLibraryTableStatement = "CREATE TABLE " + COMMONDISEASELIBRARY_TABLE + " (" + COLUMN_DISEASE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_DISEASE_NAME + " TEXT, " + COLUMN_DISEASE_DESCRIPTION + " TEXT)";
-        db.execSQL(createCommonDiseaseLibraryTableStatement);
 
         //Create Table for Images
 
 //                                          "CREATE TABLE " + PIGEON_TABLE + " (" + COLUMN_RING_ID + " TEXT PRIMARY KEY, " + COLUMN_PIGEON_NAME + " TEXT, " + COLUMN_PIGEON_BIRTH_YEAR + " INTEGER, " + COLUMN_PIGEON_BREED + " TEXT, " + COLUMN_PIGEON_GENDER + " TEXT, " + COLUMN_PIGEON_COLOR  + " TEXT,"+COLUMN_PIGEON_STATUS + " TEXT, " + COLUMN_PIGEON_NOTES + " TEXT)";
 
+
+        //Create table for disease
+        String createDiseasesTableStatement = "CREATE TABLE DISEASES_TABLE ( DISEASE_ID INTEGER PRIMARY KEY AUTOINCREMENT, DISEASE_NAME TEXT NOT NULL, DISEASE_DESCRIPTION TEXT NOT NULL, DISEASE_RECOMMENDATION TEXT NOT NULL)";
+        db.execSQL(createDiseasesTableStatement);
+
+        //Create table for SYMPTOMS
+        String createSymptomsTableStatement = "CREATE TABLE SYMPTOMS_TABLE ( SYMPTOM_ID INTEGER PRIMARY KEY AUTOINCREMENT, SYMPTOM_NAME TEXT NOT NULL, DISEASE_ID INTEGER NOT NULL, FOREIGN KEY (DISEASE_ID) REFERENCES DISEASES_TABLE(DISEASE_ID))";
+        db.execSQL(createSymptomsTableStatement);
     }
 
     @Override
