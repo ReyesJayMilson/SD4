@@ -56,6 +56,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_USE_PER_WEEK = "USE_PER_WEEK";
 
     public static final String COLUMN_NEST_NO = "NEST_NO";
+
+    public static final String COLUMN_DISEASE_NAME = "DISEASE_NAME";
+
+    public static final String COLUMN_DISEASE_ID = "DISEASE_ID";
+
+    public static final String COLUMN_DISEASE_DESC = "DISEASE_DESC";
+
+    public static final String TABLE_DISEASES = "DISEASES_TABLE";
     private Context context;
 
 
@@ -103,6 +111,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String createSymptomsTableStatement = "CREATE TABLE SYMPTOMS_TABLE ( SYMPTOM_ID INTEGER PRIMARY KEY AUTOINCREMENT, SYMPTOM_NAME TEXT NOT NULL, DISEASE_ID INTEGER NOT NULL, FOREIGN KEY (DISEASE_ID) REFERENCES DISEASES_TABLE(DISEASE_ID))";
         db.execSQL(createSymptomsTableStatement);
 
+
+        String insertDiseaseStatement = "INSERT INTO DISEASES_TABLE (DISEASE_NAME, DISEASE_DESCRIPTION, DISEASE_RECOMMENDATION) VALUES ('PIGEON CANKER', 'TEST DESC LINE 1 \n\t TEST DESC LINE 2 \n\t TEST DESC LINE 3', 'TEST RECOM LINE 1 \n\t TEST RECOM LINE 2')";
+        db.execSQL(insertDiseaseStatement);
+        String insertDiseaseStatement2 = "INSERT INTO DISEASES_TABLE (DISEASE_NAME, DISEASE_DESCRIPTION, DISEASE_RECOMMENDATION) VALUES ('Lagnat', 'TEST DESC LINE 1 \n\t TEST DESC LINE 2 \n\t TEST DESC LINE 3', 'TEST RECOM LINE 1 \n\t TEST RECOM LINE 2')";
+        db.execSQL(insertDiseaseStatement2);
+        String insertDiseaseStatement3 = "INSERT INTO DISEASES_TABLE (DISEASE_NAME, DISEASE_DESCRIPTION, DISEASE_RECOMMENDATION) VALUES ('Schizophrenia', 'TEST DESC LINE 1 \n\t TEST DESC LINE 2 \n\t TEST DESC LINE 3', 'TEST RECOM LINE 1 \n\t TEST RECOM LINE 2')";
+        db.execSQL(insertDiseaseStatement3);
+        String insertDiseaseStatement4 = "INSERT INTO DISEASES_TABLE (DISEASE_NAME, DISEASE_DESCRIPTION, DISEASE_RECOMMENDATION) VALUES ('Dementia', 'TEST DESC LINE 1 \n\t TEST DESC LINE 2 \n\t TEST DESC LINE 3', 'TEST RECOM LINE 1 \n\t TEST RECOM LINE 2')";
+        db.execSQL(insertDiseaseStatement4);
+        String insertDiseaseStatement5 = "INSERT INTO DISEASES_TABLE (DISEASE_NAME, DISEASE_DESCRIPTION, DISEASE_RECOMMENDATION) VALUES ('Cerebral Palsy', 'TEST DESC LINE 1 \n\t TEST DESC LINE 2 \n\t TEST DESC LINE 3', 'TEST RECOM LINE 1 \n\t TEST RECOM LINE 2')";
+        db.execSQL(insertDiseaseStatement5);
+        String insertDiseaseStatement6 = "INSERT INTO DISEASES_TABLE (DISEASE_NAME, DISEASE_DESCRIPTION, DISEASE_RECOMMENDATION) VALUES ('Erectile Dysfunction', 'TEST DESC LINE 1 \n\t TEST DESC LINE 2 \n\t TEST DESC LINE 3', 'TEST RECOM LINE 1 \n\t TEST RECOM LINE 2')";
+        db.execSQL(insertDiseaseStatement6);
+        String insertSymptomStatement1 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Difficulty Swallowing', 1)";
+        db.execSQL(insertSymptomStatement1);
+        String insertSymptomStatement2 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Vomiting', 1)";
+        db.execSQL(insertSymptomStatement2);
+        String insertSymptomStatement3 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Yellow or Whitish Cheesy Growths in Mouth or Throat', 1)";
+        db.execSQL(insertSymptomStatement3);
+        String insertSymptomStatement4 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Weight Loss', 1)";
+        db.execSQL(insertSymptomStatement4);
+        String insertSymptomStatement5 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Puffed Feathers', 1)";
+        db.execSQL(insertSymptomStatement5);
+        String insertSymptomStatement6 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Mucus in Throat', 1)";
+        db.execSQL(insertSymptomStatement6);
+
+
+
+
+
         //Table for Cage
         String createCageTableStatement = "CREATE TABLE CAGE_TABLE ( CAGE_NO INTEGER PRIMARY KEY AUTOINCREMENT)";
         db.execSQL(createCageTableStatement);
@@ -119,6 +157,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         onCreate(db);
     }
+
+
+    //////////////////////DISEASE LIBRARY/////////////////////////
+
+    public void insertDisease(Disease disease){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_DISEASE_NAME, disease.getName());
+        values.put(COLUMN_DISEASE_DESC, disease.getDesc());
+        db.insert(TABLE_DISEASES, null, values);
+        db.close();
+    }
+
+    public ArrayList<Disease> getAllDisease(){
+        ArrayList<Disease> diseaseList = new ArrayList<>();
+        String selectQuery = "SELECT * FROM " + TABLE_DISEASES;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()){
+            do{
+                Disease disease = new Disease();
+                disease.setId(cursor.getInt(0));
+                disease.setName(cursor.getString(1));
+                disease.setDesc(cursor.getString(2));
+                diseaseList.add(disease);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return diseaseList;
+    }
+
 
     ///////////////////////PROFILES//////////////////////////////
     public boolean addProfile(ProfilesGetSet profiles) {
