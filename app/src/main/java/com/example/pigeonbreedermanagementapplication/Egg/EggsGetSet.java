@@ -1,6 +1,4 @@
-package com.example.breedermanagementsystem;
-
-import java.util.Date;
+package com.example.pigeonbreedermanagementapplication.Egg;
 
 public class EggsGetSet
 {

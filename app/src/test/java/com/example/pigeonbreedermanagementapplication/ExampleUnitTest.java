@@ -1,4 +1,4 @@
-package com.example.breedermanagementsystem;
+package com.example.pigeonbreedermanagementapplication;
 
 import static org.junit.Assert.assertEquals;
 

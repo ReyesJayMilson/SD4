@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Breeder Management System</string>
+    <string name="app_name">Pigeon Breeder Management Application</string>
     <string name="add_new_profile">ADD NEW PROFILE</string>
     <string name="add_profile_name">add profile name</string>
     <string name="Cancel_Profile">Cancel</string>
