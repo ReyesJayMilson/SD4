@@ -24,8 +24,8 @@ import java.util.List;
 public class PigeonAdding extends AppCompatActivity {
 
     Button btSave;
-    EditText etRingID, etName, etBreed, etColor, etNotes, etCageNumber;
-    Spinner spBirthYear, spGender;
+    EditText etRingID, etName, etColor, etNotes, etCageNumber;
+    Spinner spBirthYear, spGender, spBreed;
     int selectedYear, selectedStatusID;
     RadioGroup rgStatus;
     RadioButton rbStatus;
@@ -58,7 +58,7 @@ public class PigeonAdding extends AppCompatActivity {
         etName = findViewById(R.id.et_Name);
         etCageNumber = findViewById(R.id.et_CageNo);
         spBirthYear = findViewById(R.id.sp_BirthYear);
-        etBreed = findViewById(R.id.sp_Breed);
+        spBreed = findViewById(R.id.sp_Breed);
         etColor = findViewById(R.id.et_Color);
         spGender = findViewById(R.id.sp_Gender);
         etNotes = findViewById(R.id.et_Notes);
