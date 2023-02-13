@@ -1,4 +1,4 @@
-package com.example.breedermanagementsystem;
+package com.example.pigeonbreedermanagementapplication.Egg;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
@@ -7,15 +7,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
+import com.example.pigeonbreedermanagementapplication.DatabaseHelper;
+import com.example.pigeonbreedermanagementapplication.R;
+
 import java.util.Calendar;
 import java.util.List;
 

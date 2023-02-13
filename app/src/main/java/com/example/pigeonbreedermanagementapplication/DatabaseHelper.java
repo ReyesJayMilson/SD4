@@ -1,10 +1,16 @@
-package com.example.breedermanagementsystem;
+package com.example.pigeonbreedermanagementapplication;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.pigeonbreedermanagementapplication.Egg.EggTrackerFragment;
+import com.example.pigeonbreedermanagementapplication.Egg.EggsGetSet;
+import com.example.pigeonbreedermanagementapplication.Pigeon.PigeonsFragment;
+import com.example.pigeonbreedermanagementapplication.Pigeon.PigeonsGetSet;
+import com.example.pigeonbreedermanagementapplication.Profile.ProfilesGetSet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,6 +96,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String createCommonDiseaseLibraryTableStatement = "CREATE TABLE " + COMMONDISEASELIBRARY_TABLE + " (" + COLUMN_DISEASE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_DISEASE_NAME + " TEXT, " + COLUMN_DISEASE_DESCRIPTION + " TEXT)";
         db.execSQL(createCommonDiseaseLibraryTableStatement);
 
+        //Create Table for Images
 
 //                                          "CREATE TABLE " + PIGEON_TABLE + " (" + COLUMN_RING_ID + " TEXT PRIMARY KEY, " + COLUMN_PIGEON_NAME + " TEXT, " + COLUMN_PIGEON_BIRTH_YEAR + " INTEGER, " + COLUMN_PIGEON_BREED + " TEXT, " + COLUMN_PIGEON_GENDER + " TEXT, " + COLUMN_PIGEON_COLOR  + " TEXT,"+COLUMN_PIGEON_STATUS + " TEXT, " + COLUMN_PIGEON_NOTES + " TEXT)";
 
@@ -193,8 +200,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
         } else {
             ArrayList<PigeonsGetSet> updatedList = getEveryPigeon();
-            PigeonsFragment.adapter.notifyDataSetChanged();
-            PigeonsFragment.adapter.setPigeons(updatedList);
+            PigeonsFragment.pigeonadapter.notifyDataSetChanged();
+            PigeonsFragment.pigeonadapter.setPigeons(updatedList);
             return true;
         }
     }
@@ -208,8 +215,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (rowsDeleted > 0) {
             // update the RecyclerView
             ArrayList<PigeonsGetSet> updatedList = getEveryPigeon();
-            PigeonsFragment.adapter.setPigeons(updatedList);
-            PigeonsFragment.adapter.notifyDataSetChanged();
+            PigeonsFragment.pigeonadapter.setPigeons(updatedList);
+            PigeonsFragment.pigeonadapter.notifyDataSetChanged();
             return true;
         } else {
             return false;
@@ -235,8 +242,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
         } else {
             ArrayList<PigeonsGetSet> updatedList = getEveryPigeon();
-            PigeonsFragment.adapter.setPigeons(updatedList);
-            PigeonsFragment.adapter.notifyDataSetChanged();
+            PigeonsFragment.pigeonadapter.setPigeons(updatedList);
+            PigeonsFragment.pigeonadapter.notifyDataSetChanged();
             return true;
         }
     }
@@ -311,8 +318,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
         } else {
             ArrayList<EggsGetSet> updatedList = getEveryEgg();
-            EggTrackerFragment.adapter.notifyDataSetChanged();
-            EggTrackerFragment.adapter.setEggs(updatedList);
+            EggTrackerFragment.eggadapter.notifyDataSetChanged();
+            EggTrackerFragment.eggadapter.setEggs(updatedList);
             return true;
         }
 

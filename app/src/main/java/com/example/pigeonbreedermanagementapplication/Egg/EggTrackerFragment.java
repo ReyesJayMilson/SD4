@@ -1,4 +1,4 @@
-package com.example.breedermanagementsystem;
+package com.example.pigeonbreedermanagementapplication.Egg;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,13 +11,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pigeonbreedermanagementapplication.DatabaseHelper;
+import com.example.pigeonbreedermanagementapplication.R;
+
 import java.util.ArrayList;
 
 
 public class EggTrackerFragment extends Fragment {
 
     private RecyclerView eggRecView;
-    static EggsRecViewAdapter adapter;
+    public static EggsRecViewAdapter eggadapter;
     private DatabaseHelper dbhelper;
     private ArrayList<EggsGetSet> eggs = new ArrayList<>();
     private Button addEgg;
@@ -36,10 +39,10 @@ public class EggTrackerFragment extends Fragment {
 
         eggs = dbhelper.getEveryEgg();
 
-        adapter = new EggsRecViewAdapter(view.getContext());
-        adapter.setEggs(eggs);
+        eggadapter = new EggsRecViewAdapter(view.getContext());
+        eggadapter.setEggs(eggs);
 
-        eggRecView.setAdapter(adapter);
+        eggRecView.setAdapter(eggadapter);
 
         eggRecView.setLayoutManager(new GridLayoutManager(view.getContext(), 5));
         addEgg = view.findViewById(R.id.bt_AddEgg);

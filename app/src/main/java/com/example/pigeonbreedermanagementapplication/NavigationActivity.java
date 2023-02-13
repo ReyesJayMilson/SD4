@@ -1,4 +1,4 @@
-package com.example.breedermanagementsystem;
+package com.example.pigeonbreedermanagementapplication;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -10,6 +10,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.pigeonbreedermanagementapplication.Egg.EggTrackerFragment;
+import com.example.pigeonbreedermanagementapplication.Home.HomeFragment;
+import com.example.pigeonbreedermanagementapplication.Pigeon.PigeonsFragment;
 import com.google.android.material.navigation.NavigationView;
 
 

@@ -1,4 +1,4 @@
-package com.example.breedermanagementsystem;
+package com.example.pigeonbreedermanagementapplication.Egg;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,8 +9,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.pigeonbreedermanagementapplication.DatabaseHelper;
+import com.example.pigeonbreedermanagementapplication.R;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.example.breedermanagementsystem;
+package com.example.pigeonbreedermanagementapplication.Pigeon;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,13 +11,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pigeonbreedermanagementapplication.DatabaseHelper;
+import com.example.pigeonbreedermanagementapplication.R;
+
 import java.util.ArrayList;
 
 
 public class PigeonsFragment extends Fragment {
 
     private RecyclerView pigeonsRecView;
-    static PigeonsRecViewAdapter adapter;
+    public static PigeonsRecViewAdapter pigeonadapter;
     private DatabaseHelper dbhelper;
     private ArrayList<PigeonsGetSet> pigeons = new ArrayList<>();
     private Button addPigeon;
@@ -36,10 +39,10 @@ public class PigeonsFragment extends Fragment {
 
         pigeons = dbhelper.getEveryPigeon();
 
-        adapter = new PigeonsRecViewAdapter(view.getContext());
-        adapter.setPigeons(pigeons);
+        pigeonadapter = new PigeonsRecViewAdapter(view.getContext());
+        pigeonadapter.setPigeons(pigeons);
 
-        pigeonsRecView.setAdapter(adapter);
+        pigeonsRecView.setAdapter(pigeonadapter);
 
         pigeonsRecView.setLayoutManager(new GridLayoutManager(view.getContext(), 3));
         addPigeon = view.findViewById(R.id.bt_AddPigeon);
