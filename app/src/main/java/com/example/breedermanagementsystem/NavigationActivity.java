@@ -2,7 +2,7 @@ package com.example.breedermanagementsystem;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,8 +39,8 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         toggle.syncState();
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MyPigeonsFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_home);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PigeonsFragment()).commit();
+            navigationView.setCheckedItem(R.id.nav_mypigeons);
         }
     }
 
@@ -52,7 +52,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
                 break;
 
             case R.id.nav_mypigeons:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MyPigeonsFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PigeonsFragment()).commit();
                 break;
 
             case R.id.nav_healthcalendar:
