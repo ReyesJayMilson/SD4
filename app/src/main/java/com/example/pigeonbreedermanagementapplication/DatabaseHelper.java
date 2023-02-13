@@ -71,7 +71,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(createProfileTableStatement);
 
         //Create Table for Pigeons
-        String createPigeonTableStatement = "CREATE TABLE " + PIGEON_TABLE + " (" + COLUMN_RING_ID + " TEXT PRIMARY KEY, " + COLUMN_PIGEON_NAME + " TEXT, " + COLUMN_CAGE_NO + " TEXT, " + COLUMN_PIGEON_BIRTH_YEAR + " INTEGER, " + COLUMN_PIGEON_BREED + " TEXT, " + COLUMN_PIGEON_GENDER + " TEXT, " + COLUMN_PIGEON_COLOR + " TEXT," + COLUMN_PIGEON_STATUS + " TEXT, " + COLUMN_PIGEON_NOTES + " TEXT)";
+        String createPigeonTableStatement = "CREATE TABLE " + PIGEON_TABLE + " (" + COLUMN_RING_ID + " TEXT PRIMARY KEY, " + COLUMN_PIGEON_NAME + " TEXT, " + COLUMN_CAGE_NO + " TEXT, " + COLUMN_PIGEON_BIRTH_YEAR + " INTEGER, " + COLUMN_PIGEON_BREED + " TEXT, " + COLUMN_PIGEON_GENDER + " TEXT, " + COLUMN_PIGEON_COLOR + " TEXT," + COLUMN_PIGEON_STATUS + " TEXT, " + COLUMN_PIGEON_NOTES + " TEXT, FOREIGN KEY (CAGE_NO) REFERENCES CAGE_TABLE(CAGE_NO))";
         db.execSQL(createPigeonTableStatement);
 
         //Create Table for Profiles
@@ -102,7 +102,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //Create table for SYMPTOMS
         String createSymptomsTableStatement = "CREATE TABLE SYMPTOMS_TABLE ( SYMPTOM_ID INTEGER PRIMARY KEY AUTOINCREMENT, SYMPTOM_NAME TEXT NOT NULL, DISEASE_ID INTEGER NOT NULL, FOREIGN KEY (DISEASE_ID) REFERENCES DISEASES_TABLE(DISEASE_ID))";
         db.execSQL(createSymptomsTableStatement);
+
+        //Table for Cage
+        String createCageTableStatement = "CREATE TABLE CAGE_TABLE ( CAGE_NO INTEGER PRIMARY KEY AUTOINCREMENT)";
+        db.execSQL(createCageTableStatement);
+
+        String createNestTableStatement = "CREATE TABLE NEST_TABLE ( NEST_NO INTEGER PRIMARY KEY AUTOINCREMENT)";
+        db.execSQL(createNestTableStatement);
     }
+
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
