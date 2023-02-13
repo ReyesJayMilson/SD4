@@ -79,6 +79,8 @@ public class PigeonAdding extends AppCompatActivity {
         spBirthYear.setPrompt("Birth Year");
 //        spBirthYear.setSelection(0);
 
+
+
         //adding the resources to the gender
         List<String> Listgender = new ArrayList<>();
         Listgender.add("Male");
