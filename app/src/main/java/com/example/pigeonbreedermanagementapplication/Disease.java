@@ -5,29 +5,37 @@ public class Disease {
     private String name;
     private String desc;
 
-    public int getId() {
+    private String symp;
+
+    public int getId(){
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(int id){
         this.id = id;
     }
 
-    public String getName() {
+    public String getName(){
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name){
         this.name = name;
     }
 
-    public String getDesc() {
+    public String getDesc(){
         return desc;
     }
 
-    public void setDesc(String desc) {
+    public void setDesc(String desc){
         this.desc = desc;
     }
 
+    public String getSymp(){
+        return symp;
+    }
 
+    public void setSymp(String desc){
+        this.symp = symp;
+    }
 }

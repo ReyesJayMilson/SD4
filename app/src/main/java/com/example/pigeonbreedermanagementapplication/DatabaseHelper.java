@@ -1,5 +1,6 @@
 package com.example.pigeonbreedermanagementapplication;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -67,6 +68,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_DISEASE_DESC = "DISEASE_DESC";
 
     public static final String TABLE_DISEASES = "DISEASES_TABLE";
+
+    public static final String TABLE_SYMPTOMS = "SYMPTOMS_TABLE";
+
+    public static final String COLUMN_SYMPTOM_DISEASE_ID = "DISEASE_ID";
+
+    public static final String COLUMN_SYMPTOM_ID = "SYMPTOM_ID";
+
+    public static final String COLUMN_SYMPTOM_NAME = "SYMPTOM_NAME";
+
     public static final String COLUMN_PIGEON_IMAGE = "PIGEON_IMAGE";
     private Context context;
 
@@ -195,6 +205,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return diseaseList;
     }
+
+//    List<Symptom> getSymptomsForDisease(int diseaseId) {
+//        List<Symptom> symptomList = new ArrayList<>();
+//
+//        // Connect to the database and fetch the data
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        String selectQuery = "SELECT * FROM " + TABLE_SYMPTOMS + " WHERE " + COLUMN_SYMPTOM_DISEASE_ID + " = " + diseaseId;
+//        Cursor cursor = db.rawQuery(selectQuery, null);
+//
+//        // Iterate through the cursor and add each symptom to the list
+//        if (cursor.moveToFirst()) {
+//            do {
+//                @SuppressLint("Range") int symptomId = cursor.getInt(cursor.getColumnIndex(COLUMN_SYMPTOM_ID));
+//                @SuppressLint("Range") String symptomName = cursor.getString(cursor.getColumnIndex(COLUMN_SYMPTOM_NAME));
+//
+//                Symptom symptom = new Symptom(symptomId, symptomName);
+//                symptomList.add(symptom);
+//            } while (cursor.moveToNext());
+//        }
+//
+//        cursor.close();
+//        db.close();
+//
+//        return symptomList;
+//    }
 
 
     ///////////////////////PROFILES//////////////////////////////
