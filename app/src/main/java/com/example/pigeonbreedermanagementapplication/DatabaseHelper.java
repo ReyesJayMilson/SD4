@@ -165,7 +165,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String createNestTableStatement = "CREATE TABLE NEST_TABLE ( NEST_NO INTEGER PRIMARY KEY AUTOINCREMENT)";
         db.execSQL(createNestTableStatement);
-        String initializeNestTableStatement = "INSERT INTO NEST_TABLE (CAGE_NO) VALUES (1)";
+        String initializeNestTableStatement = "INSERT INTO NEST_TABLE (NEST_NO) VALUES (1)";
         db.execSQL(initializeNestTableStatement);
     }
 
