@@ -16,15 +16,16 @@
         <TextView
             android:id="@+id/idplaceholder_pigeon"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:text="Placeholder ID"
             android:layout_centerHorizontal="true"
             android:textStyle="bold" />
 
         <ImageView
             android:layout_width="100dp"
-            android:layout_height="80dp"
-            android:id="@+id/iv_placeholder"
+            android:layout_height="100dp"
+            android:id="@+id/iv_placeholder_pigeon"
+            android:scaleType="centerCrop"
             android:layout_below="@id/idplaceholder_pigeon"
             android:layout_centerHorizontal="true"
             android:src="@mipmap/pigeon_image_foreground">

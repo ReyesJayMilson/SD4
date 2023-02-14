@@ -1,238 +1,254 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:gravity="bottom">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:id="@+id/iv_AddImage"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:src="@mipmap/pigeon_image"/>
-
-
-        <EditText
-            android:id="@+id/et_RingID"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_below="@id/iv_AddImage"
-            android:layout_centerHorizontal="true"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="16dp"
-            android:hint="Ring ID" />
+            android:layout_height="100dp"
+            android:gravity="bottom">
 
-        <EditText
-            android:id="@+id/et_Name"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_below="@+id/et_RingID"
-            android:layout_centerHorizontal="true"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="16dp"
-            android:hint="Name" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:orientation="horizontal"
-            android:layout_centerHorizontal="true"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="16dp"
-            android:layout_below="@+id/et_Name"
-            android:id="@+id/spinnerCage">
-
-            <TextView
-                android:id="@+id/tv_CageNo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cage Number"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="30dp"
-                android:textSize="18sp"
-                android:layout_gravity="center_vertical" />
-
-            <Spinner
-                android:id="@+id/sp_CageNo"
-                android:layout_width="100dp"
-                android:layout_height="48dp"
-                android:layout_centerHorizontal="true" />
-
-            <Button
-                android:id="@+id/bt_AddCage"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:text="+"
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:id="@+id/iv_AddImage"
+                android:scaleType="centerCrop"
+                android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_gravity="center_vertical"/>
+                android:layout_marginTop="16dp"
+                android:src="@mipmap/pigeon_image"/>
 
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:orientation="horizontal"
-            android:layout_centerHorizontal="true"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="16dp"
-            android:layout_below="@+id/spinnerCage"
-            android:id="@+id/spinnertext">
+            <EditText
+                android:id="@+id/et_RingID"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@id/iv_AddImage"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
+                android:hint="Ring ID" />
+
+            <EditText
+                android:id="@+id/et_Name"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/et_RingID"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
+                android:hint="Name" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_below="@+id/et_Name"
+                android:id="@+id/spinnerCage">
+
+                <TextView
+                    android:id="@+id/tv_CageNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cage Number"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="30dp"
+                    android:textSize="18sp"
+                    android:layout_gravity="center_vertical" />
+
+                <Spinner
+                    android:id="@+id/sp_CageNo"
+                    android:layout_width="100dp"
+                    android:layout_height="48dp"
+                    android:layout_centerHorizontal="true" />
+
+                <Button
+                    android:id="@+id/bt_AddCage"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="+"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_below="@+id/spinnerCage"
+                android:id="@+id/spinnertext">
+
+                <TextView
+                    android:id="@+id/tv_BirthYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Birth Year"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="30dp"
+                    android:textSize="18sp"
+                    android:layout_gravity="center_vertical" />
+
+                <Spinner
+                    android:id="@+id/sp_BirthYear"
+                    android:layout_width="200dp"
+                    android:layout_height="48dp"
+                    android:layout_centerHorizontal="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_below="@+id/spinnertext"
+                android:id="@+id/spinnerBreed">
+
+                <TextView
+                    android:id="@+id/tv_Breed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Breed"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="30dp"
+                    android:textSize="18sp"
+                    android:layout_gravity="center_vertical" />
+
+                <Spinner
+                    android:id="@+id/sp_Breed"
+                    android:layout_width="200dp"
+                    android:layout_height="48dp"
+                    android:layout_centerHorizontal="true" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_below="@+id/spinnerBreed"
+                android:id="@+id/genderLayout">
+
+                <TextView
+                    android:id="@+id/tv_Gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gender"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="30dp"
+                    android:textSize="18sp"
+                    android:layout_gravity="center_vertical" />
+
+                <Spinner
+                    android:id="@+id/sp_Gender"
+                    android:layout_width="200dp"
+                    android:layout_height="48dp"
+                    android:layout_centerHorizontal="true" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/et_Color"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/genderLayout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
+                android:hint="Color" />
+
+            <RadioGroup
+                android:id="@+id/rg_Status"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_below="@+id/et_Color"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <RadioButton
+                    android:id="@+id/rb_Alive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:text="Alive"
+                    android:layout_marginHorizontal="10dp"
+                    android:checked="true" />
+
+                <RadioButton
+                    android:id="@+id/rb_Dead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:text="Dead"
+                    android:layout_marginHorizontal="10dp" />
+
+                <RadioButton
+                    android:id="@+id/rb_Sold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:text="Sold"
+                    android:layout_marginHorizontal="10dp" />
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/et_Notes"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/et_Color"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
+                android:hint="Notes" />
 
             <TextView
-                android:id="@+id/tv_BirthYear"
+                android:id="@+id/filler1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Birth Year"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="30dp"
-                android:textSize="18sp"
-                android:layout_gravity="center_vertical" />
-
-            <Spinner
-                android:id="@+id/sp_BirthYear"
-                android:layout_width="200dp"
-                android:layout_height="48dp"
-                android:layout_centerHorizontal="true" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:orientation="horizontal"
-            android:layout_centerHorizontal="true"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="16dp"
-            android:layout_below="@+id/spinnertext"
-            android:id="@+id/spinnerBreed">
-
-            <TextView
-                android:id="@+id/tv_Breed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Breed"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="30dp"
-                android:textSize="18sp"
-                android:layout_gravity="center_vertical" />
-
-            <Spinner
-                android:id="@+id/sp_Breed"
-                android:layout_width="200dp"
-                android:layout_height="48dp"
-                android:layout_centerHorizontal="true" />
+                android:layout_height="130dp"
+                android:visibility="invisible"
+                android:layout_below="@+id/et_Notes"
+                android:text="TextView" />
 
 
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:orientation="horizontal"
-            android:layout_centerHorizontal="true"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="16dp"
-            android:layout_below="@+id/spinnerBreed"
-            android:id="@+id/genderLayout">
-
-            <TextView
-                android:id="@+id/tv_Gender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Gender"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="30dp"
-                android:textSize="18sp"
-                android:layout_gravity="center_vertical" />
-
-            <Spinner
-                android:id="@+id/sp_Gender"
-                android:layout_width="200dp"
-                android:layout_height="48dp"
-                android:layout_centerHorizontal="true" />
-        </LinearLayout>
-
-        <EditText
-            android:id="@+id/et_Color"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_below="@+id/genderLayout"
-            android:layout_centerHorizontal="true"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="16dp"
-            android:hint="Color" />
-
-        <RadioGroup
-            android:id="@+id/rg_Status"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_below="@+id/et_Color"
-            android:layout_centerHorizontal="true"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <RadioButton
-                android:id="@+id/rb_Alive"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:text="Alive"
-                android:layout_marginHorizontal="10dp"
-                android:checked="true" />
-
-            <RadioButton
-                android:id="@+id/rb_Dead"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:text="Dead"
-                android:layout_marginHorizontal="10dp" />
-
-            <RadioButton
-                android:id="@+id/rb_Sold"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:text="Sold"
-                android:layout_marginHorizontal="10dp" />
-        </RadioGroup>
-
-        <EditText
-            android:id="@+id/et_Notes"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_below="@+id/et_Color"
-            android:layout_centerHorizontal="true"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="16dp"
-            android:hint="Notes" />
-
-        <Button
-            android:id="@+id/bt_Save"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/et_Notes"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/rectangular_border"
-            android:backgroundTint="@color/teal_200"
-            android:text="Save"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-    </RelativeLayout>
+        </RelativeLayout>
 
 
 
-</ScrollView>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/bt_Save"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rectangular_border"
+        android:backgroundTint="@color/teal_200"
+        android:text="Save"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+
+</RelativeLayout>

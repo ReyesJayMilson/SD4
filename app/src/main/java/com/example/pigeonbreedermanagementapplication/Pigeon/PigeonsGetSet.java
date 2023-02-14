@@ -14,9 +14,9 @@ public class PigeonsGetSet {
 
     private String status;
     private String notes;
-    private byte[] image;
+    private String image;
 
-    public PigeonsGetSet(String ring_id, String name, int cage_no, int birth_year, String breed, String gender, String color, String status, String notes, byte[] image) {
+    public PigeonsGetSet(String ring_id, String name, int cage_no, int birth_year, String breed, String gender, String color, String status, String notes, String image) {
         this.ring_id = ring_id;
         this.name = name;
         this.cage_no = cage_no;
@@ -27,22 +27,6 @@ public class PigeonsGetSet {
         this.status = status;
         this.notes = notes;
         this.image = image;
-    }
-
-    @Override
-    public String toString() {
-        return "PigeonsGetSet{" +
-                "ring_id='" + ring_id + '\'' +
-                ", name='" + name + '\'' +
-                ", cage_no=" + cage_no +
-                ", birth_year=" + birth_year +
-                ", breed='" + breed + '\'' +
-                ", gender='" + gender + '\'' +
-                ", color='" + color + '\'' +
-                ", status='" + status + '\'' +
-                ", notes='" + notes + '\'' +
-                ", image=" + Arrays.toString(image) +
-                '}';
     }
 
     public String getRing_id() {
@@ -117,11 +101,27 @@ public class PigeonsGetSet {
         this.notes = notes;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "PigeonsGetSet{" +
+                "ring_id='" + ring_id + '\'' +
+                ", name='" + name + '\'' +
+                ", cage_no=" + cage_no +
+                ", birth_year=" + birth_year +
+                ", breed='" + breed + '\'' +
+                ", gender='" + gender + '\'' +
+                ", color='" + color + '\'' +
+                ", status='" + status + '\'' +
+                ", notes='" + notes + '\'' +
+                ", image='" + image + '\'' +
+                '}';
     }
 }

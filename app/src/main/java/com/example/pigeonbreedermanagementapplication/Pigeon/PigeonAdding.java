@@ -1,9 +1,11 @@
 package com.example.pigeonbreedermanagementapplication.Pigeon;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -30,6 +32,8 @@ import com.example.pigeonbreedermanagementapplication.Profile.ProfilesGetSet;
 import com.example.pigeonbreedermanagementapplication.R;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
@@ -39,19 +43,29 @@ import java.util.List;
 
 public class PigeonAdding extends AppCompatActivity {
 
-    Button btSave, btAddCage;
-    ImageView ivAddImage;
-    EditText etRingID, etName, etColor, etNotes, etCageNumber;
-    Spinner spBirthYear, spGender, spBreed, spCageNo;
-    int selectedYear, selectedStatusID,selectedCageNo;
-    RadioGroup rgStatus;
-    RadioButton rbStatus;
-    String selectedStatus, selectedGender, selectedBreed;
-    int indexYear, indexGender, indexBreed, indexCageNo;
-    byte[] pigeonImage;
-    DatabaseHelper dbhelper;
-    List<Integer> cageNumbers;
-
+    private Button btSave;
+    private Button btAddCage;
+    private ImageView ivAddImage;
+    private EditText etRingID;
+    private EditText etName;
+    private EditText etColor;
+    private EditText etNotes;
+    private Spinner spBirthYear;
+    private Spinner spGender;
+    private Spinner spBreed;
+    private Spinner spCageNo;
+    private RadioGroup rgStatus;
+    private RadioButton rbStatus;
+    private int selectedYear;
+    private int selectedStatusID;
+    private int selectedCageNo;
+    private String selectedStatus;
+    private String selectedGender;
+    private String selectedBreed;
+    private String filePath;
+    private DatabaseHelper dbhelper;
+    private List<Integer> cageNumbers;
+    private Bitmap imageBitmap;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,7 +90,6 @@ public class PigeonAdding extends AppCompatActivity {
         etRingID = findViewById(R.id.et_RingID);
         etName = findViewById(R.id.et_Name);
         spCageNo = findViewById(R.id.sp_CageNo);
-//        etCageNumber = findViewById(R.id.et_CageNo);
         spBirthYear = findViewById(R.id.sp_BirthYear);
         spBreed = findViewById(R.id.sp_Breed);
         etColor = findViewById(R.id.et_Color);
@@ -99,7 +112,8 @@ public class PigeonAdding extends AppCompatActivity {
                             Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                             startActivityForResult(takePicture, 0);
                         } else if (options[item].equals("Choose from Gallery")) {
-                            Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                            Intent pickPhoto = new Intent(Intent.ACTION_PICK,
+                                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                             startActivityForResult(pickPhoto, 1);
                         } else if (options[item].equals("Cancel")) {
                             dialog.dismiss();
@@ -109,7 +123,6 @@ public class PigeonAdding extends AppCompatActivity {
                 builder.show();
             }
         });
-
         //adding to cageNo
         cageNumbers = dbhelper.getAllCageNumbers();
         ArrayAdapter<Integer> cageadapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cageNumbers);
@@ -149,7 +162,6 @@ public class PigeonAdding extends AppCompatActivity {
 
         spBirthYear.setPrompt("Birth Year");
 //        spBirthYear.setSelection(0);
-
 
 
         //adding the resources to the gender
@@ -216,10 +228,6 @@ public class PigeonAdding extends AppCompatActivity {
         });
 
 
-
-
-
-
         btSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -231,71 +239,91 @@ public class PigeonAdding extends AppCompatActivity {
 //                    Toast.makeText(PigeonAdding.this, "Cage Number cannot be empty", Toast.LENGTH_SHORT).show();
 //                    return;
 //                }
-                indexCageNo = spCageNo.getSelectedItemPosition();
-                Log.d("TAG", "selecteditempos" + indexCageNo);
-                selectedCageNo = cageNumbers.get(indexCageNo);
-                indexYear = spBirthYear.getSelectedItemPosition();
-                selectedYear = years.get(indexYear);
-                indexBreed = spBreed.getSelectedItemPosition();
-                selectedBreed = breeds.get(indexBreed);
-                indexGender = spGender.getSelectedItemPosition();
-                selectedGender = Listgender.get(indexGender);
+
                 selectedStatusID = rgStatus.getCheckedRadioButtonId();
                 rbStatus = findViewById(selectedStatusID);
                 selectedStatus = rbStatus.getText().toString();
-                PigeonsGetSet pigeons = new PigeonsGetSet(etRingID.getText().toString(), etName.getText().toString(), selectedCageNo, selectedYear, selectedBreed, selectedGender, etColor.getText().toString(), selectedStatus, etNotes.getText().toString(), pigeonImage);
 
-                boolean success = dbhelper.addPigeon(pigeons);
+                selectedGender = spGender.getSelectedItem().toString();
+                selectedBreed = spBreed.getSelectedItem().toString();
+                selectedYear = Integer.parseInt(spBirthYear.getSelectedItem().toString());
+                selectedCageNo = Integer.parseInt(spCageNo.getSelectedItem().toString());
 
-                if (success) {
-                    Toast.makeText(PigeonAdding.this, "Pigeon added", Toast.LENGTH_SHORT).show();
+                String ringId = etRingID.getText().toString();
+                String name = etName.getText().toString();
+                String color = etColor.getText().toString();
+                String notes = etNotes.getText().toString();
+
+
+                Log.d("ImageBitmap", "ImageBitmap: " + imageBitmap);
+
+                if (ringId.equals("")){
+                    Toast.makeText(PigeonAdding.this, "Please input a Ring ID", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (filePath != null) {
+                        filePath = saveImageToInternalStorage(imageBitmap, ringId);
+                    }
+                    PigeonsGetSet pigeons = new PigeonsGetSet(ringId, name, selectedCageNo, selectedYear, selectedBreed, selectedGender, color, selectedStatus, notes, filePath);
+
+                    boolean success = dbhelper.addPigeon(pigeons);
+
+                    if (success) {
+
+                        Toast.makeText(PigeonAdding.this, "Pigeon added", Toast.LENGTH_SHORT).show();
 //                    int position = MyPigeonsFragment.pigeons.size();
 //                    MyPigeonsFragment.pigeons.add(pigeons);
 //                    MyPigeonsFragment.adapter.notifyItemInserted(position);
-                    finish();
-                } else {
-                    Toast.makeText(PigeonAdding.this, "Pigeon not added", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        Toast.makeText(PigeonAdding.this, "Pigeon not added", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
     }
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data){
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode != Activity.RESULT_CANCELED) {
-            switch (requestCode) {
-                case 0:
-                    if (resultCode == RESULT_OK && data != null) {
-                        Bitmap selectedImage = (Bitmap) data.getExtras().get("data");
-                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                        selectedImage.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-                        byte[] imageInByte = byteArrayOutputStream.toByteArray();
-
-                        pigeonImage = imageInByte;
-                        // You can now store imageInByte in your database as a BLOB
-                    }
-                    break;
-                case 1:
-                    if (resultCode == RESULT_OK && data != null) {
-                        Uri selectedImage = data.getData();
-                        try {
-                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
-                            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-                            byte[] imageInByte = byteArrayOutputStream.toByteArray();
-
-                            pigeonImage = imageInByte;
-
-                            // You can now store imageInByte in your database as a BLOB
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    break;
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 0) {
+                // for taking a photo
+                Bundle extras = data.getExtras();
+                imageBitmap = (Bitmap) extras.get("data");
+                ivAddImage.setImageBitmap(imageBitmap);
+            } else if (requestCode == 1) {
+                // for selecting an image from the gallery
+                Uri selectedImage = data.getData();
+                try {
+                    imageBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
+                    ivAddImage.setImageBitmap(imageBitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 
+    //save image to local storage
+    private String saveImageToInternalStorage (Bitmap imageBitmap, String imageName){
+        File directory = this.getDir("imageDir", Context.MODE_PRIVATE);
+        File myPath = new File(directory, imageName);
 
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(myPath);
+            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fos != null) {
+                    fos.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return myPath.getAbsolutePath();
+    }
 }
