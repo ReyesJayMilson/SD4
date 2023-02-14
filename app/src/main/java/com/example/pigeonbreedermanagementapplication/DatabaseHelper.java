@@ -81,7 +81,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(createProfileTableStatement);
 
         //Create Table for Pigeons
-        String createPigeonTableStatement = "CREATE TABLE " + PIGEON_TABLE + " (" + COLUMN_RING_ID + " TEXT PRIMARY KEY, " + COLUMN_PIGEON_NAME + " TEXT, " + COLUMN_CAGE_NO + " TEXT, " + COLUMN_PIGEON_BIRTH_YEAR + " INTEGER, " + COLUMN_PIGEON_BREED + " TEXT, " + COLUMN_PIGEON_GENDER + " TEXT, " + COLUMN_PIGEON_COLOR + " TEXT," + COLUMN_PIGEON_STATUS + " TEXT, " + COLUMN_PIGEON_NOTES + " TEXT, FOREIGN KEY (CAGE_NO) REFERENCES CAGE_TABLE(CAGE_NO))";
+        String createPigeonTableStatement = "CREATE TABLE " + PIGEON_TABLE + " (" + COLUMN_RING_ID + " TEXT PRIMARY KEY, " + COLUMN_PIGEON_NAME + " TEXT, " + COLUMN_CAGE_NO + " TEXT, " + COLUMN_PIGEON_BIRTH_YEAR + " INTEGER, " + COLUMN_PIGEON_BREED + " TEXT, " + COLUMN_PIGEON_GENDER + " TEXT, " + COLUMN_PIGEON_COLOR + " TEXT," + COLUMN_PIGEON_STATUS + " TEXT, " + COLUMN_PIGEON_NOTES + " TEXT, " + COLUMN_PIGEON_IMAGE + " TEXT, FOREIGN KEY (" + COLUMN_CAGE_NO + ") REFERENCES CAGE_TABLE(" + COLUMN_CAGE_NO + "))";
         db.execSQL(createPigeonTableStatement);
 
         //Create Table for Profiles
@@ -275,6 +275,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_PIGEON_COLOR, pigeons.getColor());
         cv.put(COLUMN_PIGEON_STATUS, pigeons.getStatus());
         cv.put(COLUMN_PIGEON_NOTES, pigeons.getNotes());
+        cv.put(COLUMN_PIGEON_IMAGE, pigeons.getImage());
 
 
         long insert = db.insert(PIGEON_TABLE, null, cv);
@@ -319,6 +320,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COLUMN_PIGEON_COLOR, pigeons.getColor());
         contentValues.put(COLUMN_PIGEON_STATUS, pigeons.getStatus());
         contentValues.put(COLUMN_PIGEON_NOTES, pigeons.getNotes());
+        contentValues.put(COLUMN_PIGEON_IMAGE, pigeons.getImage());
         String whereClause = COLUMN_RING_ID + " = ?";
         String[] whereArgs = {pigeons.getRing_id()};
         int update = db.update(PIGEON_TABLE, contentValues, whereClause, whereArgs);
@@ -356,7 +358,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String pigeonColor = cursor.getString(6);
                 String pigeonStatus = cursor.getString(7);
                 String pigeonNotes = cursor.getString(8);
-                byte[] pigeonImage = cursor.getBlob(9);
+                String pigeonImage = cursor.getString(9);
 
 
                 PigeonsGetSet newPigeons = new PigeonsGetSet(ringID, pigeonName, cageNumber, pigeonBirthYear, pigeonBreed, pigeonGender, pigeonColor, pigeonStatus, pigeonNotes, pigeonImage);

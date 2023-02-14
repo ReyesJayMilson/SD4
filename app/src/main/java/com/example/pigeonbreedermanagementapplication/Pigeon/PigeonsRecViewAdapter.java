@@ -2,11 +2,13 @@ package com.example.pigeonbreedermanagementapplication.Pigeon;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +47,10 @@ public class PigeonsRecViewAdapter extends RecyclerView.Adapter<PigeonsRecViewAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.ph.setText(pigeons.get(position).getRing_id());
+        if (pigeons.get(position).getImage() != null) {
+            holder.imageph.setImageBitmap(BitmapFactory.decodeFile(pigeons.get(position).getImage()));
+        }
+
         Log.d("TAG", "Pigeons:" + pigeons);
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,6 +148,7 @@ public class PigeonsRecViewAdapter extends RecyclerView.Adapter<PigeonsRecViewAd
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        private ImageView imageph;
         private TextView ph;
         private CardView parent;
 
@@ -149,6 +156,7 @@ public class PigeonsRecViewAdapter extends RecyclerView.Adapter<PigeonsRecViewAd
             super(itemView);
             Log.d("TAG", "Debug message" + itemView);
             ph = itemView.findViewById(R.id.idplaceholder_pigeon);
+            imageph = itemView.findViewById(R.id.iv_placeholder_pigeon);
             parent = itemView.findViewById(R.id.parent_pigeon);
 
 
