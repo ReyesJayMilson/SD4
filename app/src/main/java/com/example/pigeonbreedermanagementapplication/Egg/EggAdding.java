@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pigeonbreedermanagementapplication.DatabaseHelper;
+import com.example.pigeonbreedermanagementapplication.Pigeon.PigeonAdding;
 import com.example.pigeonbreedermanagementapplication.R;
 
 import java.util.Calendar;
@@ -22,13 +23,16 @@ import java.util.List;
 
 public class EggAdding extends AppCompatActivity {
 
-    Button btSave;
-    EditText etCageNumber, etNestNumber, etLayDate, etHatchDate, etQuantity;
-    Spinner spMother, spFather;
-    int selectedMotherID, selectedFatherID;
-    String selectedFather, selectedMother;
-    int indexFather, indexMother;
-    DatabaseHelper dbhelper;
+    private Button btSave, btAddCage, btAddNest;
+    private EditText etLayDate, etHatchDate, etQuantity;
+    private Spinner spMother, spFather, spCageNo, spNestNo;
+    private int selectedMotherID, selectedFatherID;
+    private int selectedCageNo, selectedNestNo;
+    private String selectedFather, selectedMother;
+    private int indexFather, indexMother;
+    private  DatabaseHelper dbhelper;
+    private List<Integer> cageNumbers;
+    private List<Integer> nestNumbers;
 
     private void showDatePickerDialog(final EditText et) {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
@@ -70,14 +74,64 @@ public class EggAdding extends AppCompatActivity {
 //            // set the other EditText fields here as well
 //        }
 
-
+        btAddCage = findViewById(R.id.bt_AddCage);
+        btAddNest = findViewById(R.id.bt_AddNest);
+        btAddCage = findViewById(R.id.bt_AddCage);
         btSave = findViewById(R.id.bt_Save);
-        etCageNumber = findViewById(R.id.et_CageNo);
-        etNestNumber = findViewById(R.id.et_NestNo);
+        spCageNo = findViewById(R.id.sp_CageNo);
+        spNestNo = findViewById(R.id.sp_NestNo);
         etLayDate = findViewById(R.id.et_LayDate);
         etQuantity = findViewById(R.id.et_Quantity);
         spFather = findViewById(R.id.sp_Father);
         spMother = findViewById(R.id.sp_Mother);
+
+        //adding to cageNo
+        cageNumbers = dbhelper.getAllCageNumbers();
+        ArrayAdapter<Integer> cageadapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cageNumbers);
+        cageadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spCageNo.setAdapter(cageadapter);
+
+        btAddCage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean success = dbhelper.addCageNumber();
+                if (success) {
+                    Toast.makeText(EggAdding.this, "Cage Number added", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    Toast.makeText(EggAdding.this, "Cage Number not added", Toast.LENGTH_SHORT).show();
+                }
+                cageNumbers = dbhelper.getAllCageNumbers();
+                ArrayAdapter<Integer> cageadapter = new ArrayAdapter<>(EggAdding.this, android.R.layout.simple_spinner_item, cageNumbers);
+                cageadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                cageadapter.notifyDataSetChanged();
+                spCageNo.setAdapter(cageadapter);
+            }
+        });
+
+        //adding to nestNo
+        nestNumbers = dbhelper.getAllNestNumbers();
+        ArrayAdapter<Integer> nestadapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, nestNumbers);
+        nestadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spNestNo.setAdapter(nestadapter);
+
+        btAddNest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean success = dbhelper.addNestNumber();
+                if (success) {
+                    Toast.makeText(EggAdding.this, "Cage Number added", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    Toast.makeText(EggAdding.this, "Cage Number not added", Toast.LENGTH_SHORT).show();
+                }
+                nestNumbers = dbhelper.getAllNestNumbers();
+                ArrayAdapter<Integer> nestadapter = new ArrayAdapter<>(EggAdding.this, android.R.layout.simple_spinner_item, cageNumbers);
+                nestadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                nestadapter.notifyDataSetChanged();
+                spNestNo.setAdapter(nestadapter);
+            }
+        });
 
         etLayDate.setFocusable(false);
         etLayDate.setOnClickListener(new View.OnClickListener() {
@@ -97,22 +151,18 @@ public class EggAdding extends AppCompatActivity {
         btSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (etCageNumber.getText().toString().trim().isEmpty() || etNestNumber.getText().toString().trim().isEmpty()) {
-                    Toast.makeText(EggAdding.this, "Cage Number or Nest Number cannot be empty", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (etQuantity.getText().toString().trim().isEmpty()) {
-                    Toast.makeText(EggAdding.this, "Quantity cannot be empty", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                indexFather = spFather.getSelectedItemPosition();
-                selectedFather = ringIds.get(indexFather);
-                indexMother = spMother.getSelectedItemPosition();
-                selectedMother = ringIds.get(indexMother);
+                selectedCageNo = Integer.parseInt(spCageNo.getSelectedItem().toString());
+                selectedNestNo = Integer.parseInt(spNestNo.getSelectedItem().toString());
+
+                String laydate = etLayDate.getText().toString();
+                String hatchdate = etLayDate.getText().toString();
+
+                selectedFather = spFather.getSelectedItem().toString();
+                selectedMother = spMother.getSelectedItem().toString();
 
                 int quantity = Integer.parseInt(etQuantity.getText().toString());
                 for (int i = 0; i < quantity; i++) {
-                    EggsGetSet eggs = new EggsGetSet(-1, Integer.parseInt(etCageNumber.getText().toString()), Integer.parseInt(etNestNumber.getText().toString()), etLayDate.getText().toString(), etLayDate.getText().toString(), selectedFather, selectedMother);
+                    EggsGetSet eggs = new EggsGetSet(-1, selectedCageNo, selectedNestNo, laydate, hatchdate, selectedFather, selectedMother);
 
                     dbhelper.addEgg(eggs);
                 }

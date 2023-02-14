@@ -9,33 +9,85 @@
         android:layout_height="match_parent"
         android:gravity="bottom">
 
-        <EditText
-            android:id="@+id/et_CageNo"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:orientation="horizontal"
             android:layout_centerHorizontal="true"
-            android:layout_alignParentTop="true"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="16dp"
-            android:inputType="number"
-            android:hint="Cage Number" />
+            android:id="@+id/spinnerCage">
 
-        <EditText
-            android:id="@+id/et_NestNo"
+            <TextView
+                android:id="@+id/tv_CageNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cage Number"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="30dp"
+                android:textSize="18sp"
+                android:layout_gravity="center_vertical" />
+
+            <Spinner
+                android:id="@+id/sp_CageNo"
+                android:layout_width="100dp"
+                android:layout_height="48dp"
+                android:layout_centerHorizontal="true" />
+
+            <Button
+                android:id="@+id/bt_AddCage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:text="+"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_vertical"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_below="@+id/et_CageNo"
+            android:orientation="horizontal"
             android:layout_centerHorizontal="true"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="16dp"
-            android:inputType="number"
-            android:hint="Nest Number" />
+            android:layout_below="@+id/spinnerCage"
+            android:id="@+id/spinnerNest">
+
+            <TextView
+                android:id="@+id/tv_NestNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nest Number"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="30dp"
+                android:textSize="18sp"
+                android:layout_gravity="center_vertical" />
+
+            <Spinner
+                android:id="@+id/sp_NestNo"
+                android:layout_width="100dp"
+                android:layout_height="48dp"
+                android:layout_centerHorizontal="true" />
+
+            <Button
+                android:id="@+id/bt_AddNest"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:text="+"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_vertical"/>
+
+        </LinearLayout>
+
 
         <EditText
             android:id="@+id/et_LayDate"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_below="@+id/et_NestNo"
+            android:layout_below="@+id/spinnerNest"
             android:layout_centerHorizontal="true"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="16dp"

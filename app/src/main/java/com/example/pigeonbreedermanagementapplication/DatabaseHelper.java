@@ -151,6 +151,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String createNestTableStatement = "CREATE TABLE NEST_TABLE ( NEST_NO INTEGER PRIMARY KEY AUTOINCREMENT)";
         db.execSQL(createNestTableStatement);
+        String initializeNestTableStatement = "INSERT INTO NEST_TABLE (CAGE_NO) VALUES (1)";
+        db.execSQL(initializeNestTableStatement);
     }
 
 
@@ -477,5 +479,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cageNumbers;
 
     }
+    public boolean addNestNumber() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("NEST_NO", (Integer) null);
+        long insert = db.insert("NEST_TABLE", null, cv);
+        if (insert == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public List<Integer> getAllNestNumbers() {
+        List<Integer> nestNumbers = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM NEST_TABLE", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                nestNumbers.add(cursor.getInt(0));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return nestNumbers;
+
+    }
+
 
 }
