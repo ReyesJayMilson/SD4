@@ -228,58 +228,7 @@ public class PigeonAdding extends AppCompatActivity {
         });
 
 
-        btSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (etRingID.getText().toString().trim().isEmpty()) {
-                    Toast.makeText(PigeonAdding.this, "Ring ID cannot be empty", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-//                if (etCageNumber.getText().toString().trim().isEmpty()) {
-//                    Toast.makeText(PigeonAdding.this, "Cage Number cannot be empty", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
 
-                selectedStatusID = rgStatus.getCheckedRadioButtonId();
-                rbStatus = findViewById(selectedStatusID);
-                selectedStatus = rbStatus.getText().toString();
-
-                selectedGender = spGender.getSelectedItem().toString();
-                selectedBreed = spBreed.getSelectedItem().toString();
-                selectedYear = Integer.parseInt(spBirthYear.getSelectedItem().toString());
-                selectedCageNo = Integer.parseInt(spCageNo.getSelectedItem().toString());
-
-                String ringId = etRingID.getText().toString();
-                String name = etName.getText().toString();
-                String color = etColor.getText().toString();
-                String notes = etNotes.getText().toString();
-
-
-                Log.d("ImageBitmap", "ImageBitmap: " + imageBitmap);
-
-                if (ringId.equals("")){
-                    Toast.makeText(PigeonAdding.this, "Please input a Ring ID", Toast.LENGTH_SHORT).show();
-                } else {
-                    if (filePath != null) {
-                        filePath = saveImageToInternalStorage(imageBitmap, ringId);
-                    }
-                    PigeonsGetSet pigeons = new PigeonsGetSet(ringId, name, selectedCageNo, selectedYear, selectedBreed, selectedGender, color, selectedStatus, notes, filePath);
-
-                    boolean success = dbhelper.addPigeon(pigeons);
-
-                    if (success) {
-
-                        Toast.makeText(PigeonAdding.this, "Pigeon added", Toast.LENGTH_SHORT).show();
-//                    int position = MyPigeonsFragment.pigeons.size();
-//                    MyPigeonsFragment.pigeons.add(pigeons);
-//                    MyPigeonsFragment.adapter.notifyItemInserted(position);
-                        finish();
-                    } else {
-                        Toast.makeText(PigeonAdding.this, "Pigeon not added", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        });
     }
 
     @Override

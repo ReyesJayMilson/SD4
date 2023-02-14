@@ -12,6 +12,8 @@ import com.example.pigeonbreedermanagementapplication.Egg.EggsGetSet;
 import com.example.pigeonbreedermanagementapplication.Pigeon.PigeonsFragment;
 import com.example.pigeonbreedermanagementapplication.Pigeon.PigeonsGetSet;
 import com.example.pigeonbreedermanagementapplication.Profile.ProfilesGetSet;
+import com.example.pigeonbreedermanagementapplication.Transaction.TransactionFragment;
+import com.example.pigeonbreedermanagementapplication.Transaction.TransactionGetSet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -389,7 +391,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return ringIds;
     }
 
-    ///////////////////////PROFILES//////////////////////////////
+    ///////////////////////EGGS//////////////////////////////
     public boolean addEgg(EggsGetSet eggs) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -452,6 +454,106 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
+    //////////////////////TRANSACTIONS/////////////////////////
+
+    public boolean addTransactions(TransactionGetSet transactions) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COLUMN_TRANSACTION_TYPE, transactions.getTransaction_type());
+        cv.put(COLUMN_TRANSACTION_DATE, transactions.getTransaction_date());
+        cv.put(COLUMN_TRANSACTION_PARTNER, transactions.getTransaction_partner());
+        cv.put(COLUMN_TRANSACTION_AMOUNT, transactions.getTransaction_amount());
+        cv.put(COLUMN_TRANSACTION_DETAILS, transactions.getTransaction_details());
+
+
+
+        long insert = db.insert(TRANSACTION_TABLE, null, cv);
+
+
+        if (insert == -1) {
+            return false;
+        } else {
+            ArrayList<TransactionGetSet> updatedList = getEveryTransaction();
+            TransactionFragment.transactionadapter.notifyDataSetChanged();
+            TransactionFragment.transactionadapter.setTransactions(updatedList);
+            return true;
+        }
+    }
+
+    public boolean deleteTransaction(TransactionGetSet transactions) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String whereClause = COLUMN_TRANSACTION_ID + " = ?";
+        String[] whereArgs = {String.valueOf(transactions.getTransaction_id())};
+        int rowsDeleted = db.delete(TRANSACTION_TABLE, whereClause, whereArgs);
+
+        if (rowsDeleted > 0) {
+            // update the RecyclerView
+            ArrayList<TransactionGetSet> updatedList = getEveryTransaction();
+            TransactionFragment.transactionadapter.notifyDataSetChanged();
+            TransactionFragment.transactionadapter.setTransactions(updatedList);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean editTransaction(TransactionGetSet transactions) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_TRANSACTION_ID, transactions.getTransaction_id());
+        cv.put(COLUMN_TRANSACTION_TYPE, transactions.getTransaction_type());
+        cv.put(COLUMN_TRANSACTION_DATE, transactions.getTransaction_date());
+        cv.put(COLUMN_TRANSACTION_PARTNER, transactions.getTransaction_partner());
+        cv.put(COLUMN_TRANSACTION_AMOUNT, transactions.getTransaction_amount());
+        cv.put(COLUMN_TRANSACTION_DETAILS, transactions.getTransaction_details());
+        String whereClause = COLUMN_TRANSACTION_ID + " = ?";
+        String[] whereArgs = {String.valueOf(transactions.getTransaction_id())};
+        int update = db.update(TRANSACTION_TABLE, cv, whereClause, whereArgs);
+        if (update == 0) {
+            return false;
+        } else {
+            ArrayList<TransactionGetSet> updatedList = getEveryTransaction();
+            TransactionFragment.transactionadapter.notifyDataSetChanged();
+            TransactionFragment.transactionadapter.setTransactions(updatedList);
+            return true;
+        }
+    }
+
+
+    public ArrayList<TransactionGetSet> getEveryTransaction() {
+
+        ArrayList<TransactionGetSet> returnList = new ArrayList<>();
+
+        // get data from the database
+
+        String queryString = "SELECT * FROM " + TRANSACTION_TABLE;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+            // loop through the cursor, put them in return list
+            do {
+                int transactionID = cursor.getInt(0);
+                String transactionType = cursor.getString(1);
+                String transactionDate = cursor.getString(2);
+                String transactionPartner = cursor.getString(3);
+                int transactionAmount = cursor.getInt(4);
+                String transactionDetails = cursor.getString(5);
+
+
+                TransactionGetSet newTransactions = new TransactionGetSet(transactionID, transactionType, transactionDate, transactionPartner, transactionAmount, transactionDetails);
+                returnList.add(newTransactions);
+
+            } while (cursor.moveToNext());
+
+        } else {
+
+        }
+        cursor.close();
+        return returnList;
+    }
     public boolean addCageNumber() {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();

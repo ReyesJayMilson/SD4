@@ -9,6 +9,7 @@
         android:layout_height="match_parent"
         android:gravity="bottom">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -36,14 +37,26 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/et_TransactionPartner"
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:id="@+id/et_TransactionDate"
             android:layout_below="@+id/spinnerTransact"
             android:layout_centerHorizontal="true"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="16dp"
-            android:hint="Transaction Partner" />
+            android:hint="Transaction Date" />
+
+
+        <EditText
+            android:id="@+id/et_TransactionPartner"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Transaction Partner"
+            android:layout_below="@+id/et_TransactionDate"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="16dp"/>
+
 <!--//date-->
 <!--        //partnet-->
 <!--        //amount-->

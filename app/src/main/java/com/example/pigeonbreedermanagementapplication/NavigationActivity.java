@@ -13,6 +13,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.example.pigeonbreedermanagementapplication.Egg.EggTrackerFragment;
 import com.example.pigeonbreedermanagementapplication.Home.HomeFragment;
 import com.example.pigeonbreedermanagementapplication.Pigeon.PigeonsFragment;
+import com.example.pigeonbreedermanagementapplication.Product.ProductFragment;
+import com.example.pigeonbreedermanagementapplication.Transaction.TransactionFragment;
 import com.google.android.material.navigation.NavigationView;
 
 
@@ -52,22 +54,37 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         switch (item.getItemId()) {
             case R.id.nav_home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+                setTitle("Home");
                 break;
 
             case R.id.nav_mypigeons:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PigeonsFragment()).commit();
+                setTitle("My Pigeons");
                 break;
 
             case R.id.nav_healthcalendar:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HealthCalendarFragment()).commit();
+                setTitle("Health Calendar");
                 break;
 
             case R.id.nav_commondiseaselib:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CommonDiseaseLibFragment()).commit();
+                setTitle("Common Disease Library");
                 break;
 
             case R.id.nav_eggtracker:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new EggTrackerFragment()).commit();
+                setTitle("Egg Monitoring");
+                break;
+
+            case R.id.nav_transactions:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new TransactionFragment()).commit();
+                setTitle("Transactions");
+                break;
+
+            case R.id.nav_products:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProductFragment()).commit();
+                setTitle("Products");
                 break;
         }
 

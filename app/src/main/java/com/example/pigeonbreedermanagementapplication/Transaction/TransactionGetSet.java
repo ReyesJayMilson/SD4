@@ -3,13 +3,15 @@ package com.example.pigeonbreedermanagementapplication.Transaction;
 public class TransactionGetSet {
 
     private int transaction_id;
+    private String transaction_type;
     private String transaction_date;
     private String transaction_partner;
     private int transaction_amount;
     private String transaction_details;
 
-    public TransactionGetSet(int transaction_id, String transaction_date, String transaction_partner, int transaction_amount, String transaction_details) {
+    public TransactionGetSet(int transaction_id, String transaction_type, String transaction_date, String transaction_partner, int transaction_amount, String transaction_details) {
         this.transaction_id = transaction_id;
+        this.transaction_type = transaction_type;
         this.transaction_date = transaction_date;
         this.transaction_partner = transaction_partner;
         this.transaction_amount = transaction_amount;
@@ -20,6 +22,7 @@ public class TransactionGetSet {
     public String toString() {
         return "TransactionGetSet{" +
                 "transaction_id=" + transaction_id +
+                ", transaction_type='" + transaction_type + '\'' +
                 ", transaction_date='" + transaction_date + '\'' +
                 ", transaction_partner='" + transaction_partner + '\'' +
                 ", transaction_amount=" + transaction_amount +
@@ -33,6 +36,14 @@ public class TransactionGetSet {
 
     public void setTransaction_id(int transaction_id) {
         this.transaction_id = transaction_id;
+    }
+
+    public String getTransaction_type() {
+        return transaction_type;
+    }
+
+    public void setTransaction_type(String transaction_type) {
+        this.transaction_type = transaction_type;
     }
 
     public String getTransaction_date() {
