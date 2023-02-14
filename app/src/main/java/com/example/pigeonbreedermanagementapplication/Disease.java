@@ -5,6 +5,8 @@ public class Disease {
     private String name;
     private String desc;
 
+    private String symp;
+
     public int getId(){
         return id;
     }
@@ -27,5 +29,13 @@ public class Disease {
 
     public void setDesc(String desc){
         this.desc = desc;
+    }
+
+    public String getSymp(){
+        return symp;
+    }
+
+    public void setSymp(String desc){
+        this.symp = symp;
     }
 }

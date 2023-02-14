@@ -10,11 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class CommonDiseaseLibFragment extends Fragment {
     private RecyclerView recyclerView;
     ArrayList<Disease> diseaseList;
+    List<Symptom> symptomList;
     private DiseaseAdapter adapter;
 
     private DatabaseHelper databaseHelper;
@@ -26,6 +28,7 @@ public class CommonDiseaseLibFragment extends Fragment {
 
         databaseHelper = new DatabaseHelper(getActivity());
         diseaseList = databaseHelper.getAllDisease();
+
 
         recyclerView = view.findViewById(R.id.Recycler_Library);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

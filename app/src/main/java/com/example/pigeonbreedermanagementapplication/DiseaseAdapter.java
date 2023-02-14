@@ -4,6 +4,7 @@ import static com.google.android.material.internal.ContextUtils.getActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,18 +15,22 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DiseaseAdapter extends RecyclerView.Adapter<DiseaseAdapter.DiseaseViewHolder> {
-    private ArrayList<Disease> diseaseList = new ArrayList<>();
+    private ArrayList<Disease> diseaseList;
+
     private int selectedPos = RecyclerView.NO_POSITION;
     private Context context;
 
     private void add(Disease disease){
         diseaseList.add(disease);
     }
+
     public DiseaseAdapter(ArrayList<Disease> diseaseList){
         this.diseaseList = diseaseList;
     }
+
 
     @NonNull
     @Override
@@ -41,14 +46,18 @@ public class DiseaseAdapter extends RecyclerView.Adapter<DiseaseAdapter.DiseaseV
         holder.textDesc.setText(disease.getDesc());
 
         holder.itemView.setSelected(selectedPos == position);
-//        holder.itemView.setOnClickListener(new View.OnClickListener(){
-//
-//            @Override
-//            public void onClick(View view){
-//          //      Intent intent = new Intent(context)
-//                System.out.print("Clicked");
-//            }
-//        });
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+
+           @Override
+         public void onClick(View view){
+             Intent intent = new Intent(view.getContext(), DiseaseActivity.class);
+               intent.putExtra("disease_name", disease.getName());
+               intent.putExtra("disease_desc", disease.getDesc());
+               intent.putExtra("disease_id", disease.getId());
+
+               view.getContext().startActivity(intent);
+            }
+      });
     }
 
     @Override
@@ -61,7 +70,15 @@ public class DiseaseAdapter extends RecyclerView.Adapter<DiseaseAdapter.DiseaseV
             return 0;
         }
     }
-
+//    public int getItemCount() {
+//        if (symptomList != null) {
+//            return symptomList.size();
+//        } else {
+//
+//            System.out.println("No data");
+//            return 0;
+//        }
+//    }
 
 
     public class DiseaseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
@@ -77,9 +94,9 @@ public class DiseaseAdapter extends RecyclerView.Adapter<DiseaseAdapter.DiseaseV
         }
 
         public void onClick(View view){
-            Toast.makeText(view.getContext(), textName.getText() + " clicked", Toast.LENGTH_SHORT).show();
             selectedPos = getAdapterPosition();
             notifyItemChanged(selectedPos);
+
         }
 
         public boolean onLongClick(View v){
