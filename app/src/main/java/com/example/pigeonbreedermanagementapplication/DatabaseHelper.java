@@ -12,6 +12,8 @@ import com.example.pigeonbreedermanagementapplication.Egg.EggTrackerFragment;
 import com.example.pigeonbreedermanagementapplication.Egg.EggsGetSet;
 import com.example.pigeonbreedermanagementapplication.Pigeon.PigeonsFragment;
 import com.example.pigeonbreedermanagementapplication.Pigeon.PigeonsGetSet;
+import com.example.pigeonbreedermanagementapplication.Product.ProductFragment;
+import com.example.pigeonbreedermanagementapplication.Product.ProductGetSet;
 import com.example.pigeonbreedermanagementapplication.Profile.ProfilesGetSet;
 import com.example.pigeonbreedermanagementapplication.Transaction.TransactionFragment;
 import com.example.pigeonbreedermanagementapplication.Transaction.TransactionGetSet;
@@ -580,6 +582,104 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                 TransactionGetSet newTransactions = new TransactionGetSet(transactionID, transactionType, transactionDate, transactionPartner, transactionAmount, transactionDetails);
                 returnList.add(newTransactions);
+
+            } while (cursor.moveToNext());
+
+        } else {
+
+        }
+        cursor.close();
+        return returnList;
+    }
+    /////////////////////////////////////////////////////////////////
+    //////////////////////PRODUCTS/////////////////////////
+
+    public boolean addProduct(ProductGetSet products) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COLUMN_PRODUCT_NAME, products.getProduct_name());
+        cv.put(COLUMN_PRODUCT_PRICE, products.getProduct_price());
+        cv.put(COLUMN_PRODUCT_QUANTITY, products.getProduct_quantity());
+        cv.put(COLUMN_USE_PER_WEEK, products.getUse_per_week());
+
+
+
+        long insert = db.insert(PRODUCT_TABLE, null, cv);
+
+
+        if (insert == -1) {
+            return false;
+        } else {
+            ArrayList<ProductGetSet> updatedList = getEveryProduct();
+            ProductFragment.productadapter.notifyDataSetChanged();
+            ProductFragment.productadapter.setProducts(updatedList);
+            return true;
+        }
+    }
+
+    public boolean deleteProduct(ProductGetSet products) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String whereClause = COLUMN_PRODUCT_ID + " = ?";
+        String[] whereArgs = {String.valueOf(products.getProduct_id())};
+        int rowsDeleted = db.delete(PRODUCT_TABLE, whereClause, whereArgs);
+
+        if (rowsDeleted > 0) {
+            // update the RecyclerView
+            ArrayList<ProductGetSet> updatedList = getEveryProduct();
+            ProductFragment.productadapter.notifyDataSetChanged();
+            ProductFragment.productadapter.setProducts(updatedList);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean editProduct(ProductGetSet products) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_PRODUCT_ID, products.getProduct_id());
+        cv.put(COLUMN_PRODUCT_NAME, products.getProduct_name());
+        cv.put(COLUMN_PRODUCT_PRICE, products.getProduct_price());
+        cv.put(COLUMN_PRODUCT_QUANTITY, products.getProduct_quantity());
+        cv.put(COLUMN_USE_PER_WEEK, products.getUse_per_week());
+        String whereClause = PRODUCT_TABLE + " = ?";
+        String[] whereArgs = {String.valueOf(products.getProduct_id())};
+        int update = db.update(PRODUCT_TABLE, cv, whereClause, whereArgs);
+        if (update == 0) {
+            return false;
+        } else {
+            ArrayList<ProductGetSet> updatedList = getEveryProduct();
+            ProductFragment.productadapter.notifyDataSetChanged();
+            ProductFragment.productadapter.setProducts(updatedList);
+            return true;
+        }
+    }
+
+
+    public ArrayList<ProductGetSet> getEveryProduct() {
+
+        ArrayList<ProductGetSet> returnList = new ArrayList<>();
+
+        // get data from the database
+
+        String queryString = "SELECT * FROM " + PRODUCT_TABLE;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+            // loop through the cursor, put them in return list
+            do {
+                int productID = cursor.getInt(0);
+                String productName = cursor.getString(1);
+                int productPrice = cursor.getInt(2);
+                String productQuantity = cursor.getString(3);
+                String usePerWeek = cursor.getString(4);
+
+
+                ProductGetSet newProducts = new ProductGetSet(productID, productName, productPrice, productQuantity, usePerWeek);
+                returnList.add(newProducts);
 
             } while (cursor.moveToNext());
 

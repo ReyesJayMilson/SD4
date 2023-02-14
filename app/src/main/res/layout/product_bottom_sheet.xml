@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        android:id="@+id/bsp_product">
+
+        <TextView
+            android:id="@+id/bsv_productid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/bsv_productname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bsv_productid"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/bsv_productprice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bsv_productname"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/bsv_productquantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bsv_productprice"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/bsv_useperweek"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bsv_productquantity"
+            android:text="" />
+
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bsv_deleteproduct"
+            android:text="Delete"
+            android:layout_below="@+id/bsv_useperweek"
+            android:layout_marginRight="10dp">
+
+        </Button>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bsv_editproduct"
+            android:text="Edit"
+            android:layout_below="@+id/bsv_useperweek"
+            android:layout_toRightOf="@+id/bsv_deleteproduct">
+
+        </Button>
+    </RelativeLayout>
+
+
+</RelativeLayout>
