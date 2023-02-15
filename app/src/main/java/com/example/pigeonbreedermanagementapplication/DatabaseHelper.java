@@ -90,83 +90,144 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        //Create Table for Profiles
-        String createProfileTableStatement = "CREATE TABLE " + PROFILE_TABLE + " (" + COLUMN_PROFILE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_PROFILE_NAME + " TEXT)";
-        db.execSQL(createProfileTableStatement);
+            //Create Table for Profiles
+            String createProfileTableStatement = "CREATE TABLE " + PROFILE_TABLE + " (" + COLUMN_PROFILE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_PROFILE_NAME + " TEXT)";
+            db.execSQL(createProfileTableStatement);
 
-        //Create Table for Pigeons
-        String createPigeonTableStatement = "CREATE TABLE " + PIGEON_TABLE + " (" + COLUMN_RING_ID + " TEXT PRIMARY KEY, " + COLUMN_PIGEON_NAME + " TEXT, " + COLUMN_CAGE_NO + " TEXT, " + COLUMN_PIGEON_BIRTH_YEAR + " INTEGER, " + COLUMN_PIGEON_BREED + " TEXT, " + COLUMN_PIGEON_GENDER + " TEXT, " + COLUMN_PIGEON_COLOR + " TEXT," + COLUMN_PIGEON_STATUS + " TEXT, " + COLUMN_PIGEON_NOTES + " TEXT, " + COLUMN_PIGEON_IMAGE + " TEXT, FOREIGN KEY (" + COLUMN_CAGE_NO + ") REFERENCES CAGE_TABLE(" + COLUMN_CAGE_NO + "))";
-        db.execSQL(createPigeonTableStatement);
+            //Create Table for Pigeons
+            String createPigeonTableStatement = "CREATE TABLE " + PIGEON_TABLE + " (" + COLUMN_RING_ID + " TEXT PRIMARY KEY, " + COLUMN_PIGEON_NAME + " TEXT, " + COLUMN_CAGE_NO + " TEXT, " + COLUMN_PIGEON_BIRTH_YEAR + " INTEGER, " + COLUMN_PIGEON_BREED + " TEXT, " + COLUMN_PIGEON_GENDER + " TEXT, " + COLUMN_PIGEON_COLOR + " TEXT," + COLUMN_PIGEON_STATUS + " TEXT, " + COLUMN_PIGEON_NOTES + " TEXT, " + COLUMN_PIGEON_IMAGE + " TEXT, FOREIGN KEY (" + COLUMN_CAGE_NO + ") REFERENCES CAGE_TABLE(" + COLUMN_CAGE_NO + "))";
+            db.execSQL(createPigeonTableStatement);
 
-        //Create Table for Profiles
-        String createEggTrackerTableStatement = "CREATE TABLE " + EGGMONITORING_TABLE + " (" + COLUMN_EGG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_CAGE_NO + " INTEGER, " + COLUMN_NEST_NO + " INTEGER, " + COLUMN_LAYING_DATE + " TEXT, " + COLUMN_HATCHING_DATE + " TEXT, " + COLUMN_FATHER + " TEXT, " + COLUMN_MOTHER + " TEXT)";
-        db.execSQL(createEggTrackerTableStatement);
+            //Create Table for Profiles
+            String createEggTrackerTableStatement = "CREATE TABLE " + EGGMONITORING_TABLE + " (" + COLUMN_EGG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_CAGE_NO + " INTEGER, " + COLUMN_NEST_NO + " INTEGER, " + COLUMN_LAYING_DATE + " TEXT, " + COLUMN_HATCHING_DATE + " TEXT, " + COLUMN_FATHER + " TEXT, " + COLUMN_MOTHER + " TEXT)";
+            db.execSQL(createEggTrackerTableStatement);
 
-        String creatHealthCalendarTableStatement = "CREATE TABLE " + HEALTHCALENDER_TABLE + " (" + COLUMN_HEALTH_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NOTE_DATE + " TEXT, RING_ID , " + COLUMN_NOTE_DESCRIPTION + " TEXT)";
-        db.execSQL(creatHealthCalendarTableStatement);
+            String creatHealthCalendarTableStatement = "CREATE TABLE " + HEALTHCALENDER_TABLE + " (" + COLUMN_HEALTH_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NOTE_DATE + " TEXT, RING_ID , " + COLUMN_NOTE_DESCRIPTION + " TEXT)";
+            db.execSQL(creatHealthCalendarTableStatement);
 
-        //Create Table for Profiles
-        String createTransactionTableStatement = "CREATE TABLE " + TRANSACTION_TABLE + " (" + COLUMN_TRANSACTION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_TRANSACTION_TYPE + " TEXT, " + COLUMN_TRANSACTION_DATE + " TEXT, " + COLUMN_TRANSACTION_PARTNER + " TEXT, " + COLUMN_TRANSACTION_AMOUNT + " INTEGER, " + COLUMN_TRANSACTION_DETAILS + " TEXT)";
-        db.execSQL(createTransactionTableStatement);
+            //Create Table for Profiles
+            String createTransactionTableStatement = "CREATE TABLE " + TRANSACTION_TABLE + " (" + COLUMN_TRANSACTION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_TRANSACTION_TYPE + " TEXT, " + COLUMN_TRANSACTION_DATE + " TEXT, " + COLUMN_TRANSACTION_PARTNER + " TEXT, " + COLUMN_TRANSACTION_AMOUNT + " INTEGER, " + COLUMN_TRANSACTION_DETAILS + " TEXT)";
+            db.execSQL(createTransactionTableStatement);
 
-        //Create Table for Profiles
-        String createProductTableStatement = "CREATE TABLE " + PRODUCT_TABLE + " (" + COLUMN_PRODUCT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_PRODUCT_NAME + " TEXT, " + COLUMN_PRODUCT_PRICE + " INTEGER, " + COLUMN_PRODUCT_QUANTITY + " TEXT, " + COLUMN_USE_PER_WEEK + " TEXT)";
-        db.execSQL(createProductTableStatement);
-
-
-        //Create Table for Images
-
-//                                          "CREATE TABLE " + PIGEON_TABLE + " (" + COLUMN_RING_ID + " TEXT PRIMARY KEY, " + COLUMN_PIGEON_NAME + " TEXT, " + COLUMN_PIGEON_BIRTH_YEAR + " INTEGER, " + COLUMN_PIGEON_BREED + " TEXT, " + COLUMN_PIGEON_GENDER + " TEXT, " + COLUMN_PIGEON_COLOR  + " TEXT,"+COLUMN_PIGEON_STATUS + " TEXT, " + COLUMN_PIGEON_NOTES + " TEXT)";
+            //Create Table for Profiles
+            String createProductTableStatement = "CREATE TABLE " + PRODUCT_TABLE + " (" + COLUMN_PRODUCT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_PRODUCT_NAME + " TEXT, " + COLUMN_PRODUCT_PRICE + " INTEGER, " + COLUMN_PRODUCT_QUANTITY + " TEXT, " + COLUMN_USE_PER_WEEK + " TEXT)";
+            db.execSQL(createProductTableStatement);
 
 
-        //Create table for disease
-        String createDiseasesTableStatement = "CREATE TABLE DISEASES_TABLE ( DISEASE_ID INTEGER PRIMARY KEY AUTOINCREMENT, DISEASE_NAME TEXT NOT NULL, DISEASE_DESCRIPTION TEXT NOT NULL, DISEASE_RECOMMENDATION TEXT NOT NULL)";
-        db.execSQL(createDiseasesTableStatement);
+            //Create Table for Images
 
-        //Create table for SYMPTOMS
-        String createSymptomsTableStatement = "CREATE TABLE SYMPTOMS_TABLE ( SYMPTOM_ID INTEGER PRIMARY KEY AUTOINCREMENT, SYMPTOM_NAME TEXT NOT NULL, DISEASE_ID INTEGER NOT NULL, FOREIGN KEY (DISEASE_ID) REFERENCES DISEASES_TABLE(DISEASE_ID))";
-        db.execSQL(createSymptomsTableStatement);
+    //                                          "CREATE TABLE " + PIGEON_TABLE + " (" + COLUMN_RING_ID + " TEXT PRIMARY KEY, " + COLUMN_PIGEON_NAME + " TEXT, " + COLUMN_PIGEON_BIRTH_YEAR + " INTEGER, " + COLUMN_PIGEON_BREED + " TEXT, " + COLUMN_PIGEON_GENDER + " TEXT, " + COLUMN_PIGEON_COLOR  + " TEXT,"+COLUMN_PIGEON_STATUS + " TEXT, " + COLUMN_PIGEON_NOTES + " TEXT)";
 
 
-        String insertDiseaseStatement = "INSERT INTO DISEASES_TABLE (DISEASE_NAME, DISEASE_DESCRIPTION, DISEASE_RECOMMENDATION) VALUES ('PIGEON CANKER', 'TEST DESC LINE 1 \n\t TEST DESC LINE 2 \n\t TEST DESC LINE 3', 'TEST RECOM LINE 1 \n\t TEST RECOM LINE 2')";
+            //Create table for disease
+            String createDiseasesTableStatement = "CREATE TABLE DISEASES_TABLE ( DISEASE_ID INTEGER PRIMARY KEY AUTOINCREMENT, DISEASE_NAME TEXT NOT NULL, DISEASE_DESCRIPTION TEXT NOT NULL, DISEASE_RECOMMENDATION TEXT NOT NULL)";
+            db.execSQL(createDiseasesTableStatement);
+
+            //Create table for SYMPTOMS
+            String createSymptomsTableStatement = "CREATE TABLE SYMPTOMS_TABLE ( SYMPTOM_ID INTEGER PRIMARY KEY AUTOINCREMENT, SYMPTOM_NAME TEXT NOT NULL, DISEASE_ID INTEGER NOT NULL, FOREIGN KEY (DISEASE_ID) REFERENCES DISEASES_TABLE(DISEASE_ID))";
+            db.execSQL(createSymptomsTableStatement);
+
+
+        String insertDiseaseStatement = "INSERT INTO DISEASES_TABLE (DISEASE_NAME, DISEASE_DESCRIPTION, DISEASE_RECOMMENDATION) VALUES ('PIGEON CANKER', 'Trichomoniasis (pigeon canker) is the most common disease of pigeons. Approximately 80 percent of pigeons are infected with this organism. The organism is a microscopic flagellate classified as a protozoan. Different strains, Trichomonas gallinae or Trichomonas columbae, vary greatly in their ability to cause disease. The disease occurs worldwide in warm climates or during warm weather. It may occur at any time of the year in commercial squab operations. Adult pigeons frequently carry the trichomonads without showing signs of disease. When the adult pigeon is stressed, however, the organisms may multiply profusely. A mild infection can then turn into a serious condition. Stresses include other diseases, parasitic infestations, or overbreeding.', 'Birds can be treated with Ronidazole (Ronnivet-S) in the water for seven days. It has a wide safety margin. Regular re-treatments are advised.\n Pigeons can be treated in a single dose of Carnidazole (Spartrix) and Metronidazole (Flagyl), has been also used in the past orally for 2-10 days. All of these drugs are prescription only, not for sale over the counter.')";
         db.execSQL(insertDiseaseStatement);
-        String insertDiseaseStatement2 = "INSERT INTO DISEASES_TABLE (DISEASE_NAME, DISEASE_DESCRIPTION, DISEASE_RECOMMENDATION) VALUES ('Lagnat', 'TEST DESC LINE 1 \n\t TEST DESC LINE 2 \n\t TEST DESC LINE 3', 'TEST RECOM LINE 1 \n\t TEST RECOM LINE 2')";
+        String insertDiseaseStatement2 = "INSERT INTO DISEASES_TABLE (DISEASE_NAME, DISEASE_DESCRIPTION, DISEASE_RECOMMENDATION) VALUES ('PIGEON WORM', 'There are 3 common worm infestation in pigeons which are: \n1. Roundworms(Ascaris) - Roundworms form the most common worm infestation in pigeons. They are present in the small intestine of the pigeon and in serious cases they can be present in such large quantities that the intestine is almost completely blocked. There are few external symptoms in case of a relatively light infection. Only the racing results will be disappointing in such cases due to the weakened condition. \n\n2. Hairworms(Capillaria) - The hairworms are the smallest (not even visible to the eye), but most annoying type of worms. Just like the roundworm, they reside in the small intestine, but they bore their way into the intestinal wall and the blood vessels in the intestinal wall. This causes an inflammation of the intestines and the pigeons lose weight fast and get sick. \n\n3. Tapeworm - Usually, we see a pigeon with something like a grain of rice hanging from its hindquarters. This is a link of a tapeworm and in many cases, when you pull it very carefully, you can pull out a tapeworm of 30 to 50 cm in length. However, there are usually several tapeworms present in the body and treatment is recommended.', 'TEST RECOM LINE 1 \n\t TEST RECOM LINE 2')";
         db.execSQL(insertDiseaseStatement2);
-        String insertDiseaseStatement3 = "INSERT INTO DISEASES_TABLE (DISEASE_NAME, DISEASE_DESCRIPTION, DISEASE_RECOMMENDATION) VALUES ('Schizophrenia', 'TEST DESC LINE 1 \n\t TEST DESC LINE 2 \n\t TEST DESC LINE 3', 'TEST RECOM LINE 1 \n\t TEST RECOM LINE 2')";
+        String insertDiseaseStatement3 = "INSERT INTO DISEASES_TABLE (DISEASE_NAME, DISEASE_DESCRIPTION, DISEASE_RECOMMENDATION) VALUES ('PIGEON COCCIDIA', 'Coccidia are a group of parasitic organisms that have the amazing ability to reproduce themselves both sexually and asexually in various organs throughout the body. There are lots of different types. Some reproduce in the kidney, others in the liver, some are carried throughout the body in red blood cells, but the common one that infects racing pigeons affects the bowel.\n\nBasically what happens is that the organism releases eggs that come out in the droppings. These have to sit in the environment for at least a couple of days to become infective. They do however become infective quicker in damp conditions. Once infective, if a pigeon accidentally swallows one of these eggs, they move down into the bowel and hatch. In the common type of coccidia in pigeons four “larvae” come out of each egg. These then burrow into the bowel wall where initially they reproduce asexually –essentially they just keep dividing so that two become four become eight etc. After a while these larvae differentiate into males and females. These then reproduce sexually resulting in the formation of eggs. These eggs then rupture back into the bowel before passing out of the body in the droppings. In this way the lifecycle is completed.', 'TEST RECOM LINE 1 \n\t TEST RECOM LINE 2')";
         db.execSQL(insertDiseaseStatement3);
-        String insertDiseaseStatement4 = "INSERT INTO DISEASES_TABLE (DISEASE_NAME, DISEASE_DESCRIPTION, DISEASE_RECOMMENDATION) VALUES ('Dementia', 'TEST DESC LINE 1 \n\t TEST DESC LINE 2 \n\t TEST DESC LINE 3', 'TEST RECOM LINE 1 \n\t TEST RECOM LINE 2')";
+        String insertDiseaseStatement4 = "INSERT INTO DISEASES_TABLE (DISEASE_NAME, DISEASE_DESCRIPTION, DISEASE_RECOMMENDATION) VALUES ('PIGEON HEXAMITA', 'Hexamita meleagridis (pigeons H. columbae) is a protozoan parasite of turkeys, pheasants, pigeons, and some game birds. It is transmitted by faeces, fomites, carriers. Inter-species transmission may occur. In commercial ducks a related parasite Tetratrichomonas can cause poor growth and drops in egg production.', 'TEST RECOM LINE 1 \n\t TEST RECOM LINE 2')";
         db.execSQL(insertDiseaseStatement4);
-        String insertDiseaseStatement5 = "INSERT INTO DISEASES_TABLE (DISEASE_NAME, DISEASE_DESCRIPTION, DISEASE_RECOMMENDATION) VALUES ('Cerebral Palsy', 'TEST DESC LINE 1 \n\t TEST DESC LINE 2 \n\t TEST DESC LINE 3', 'TEST RECOM LINE 1 \n\t TEST RECOM LINE 2')";
+        String insertDiseaseStatement5 = "INSERT INTO DISEASES_TABLE (DISEASE_NAME, DISEASE_DESCRIPTION, DISEASE_RECOMMENDATION) VALUES ('PIGEON MYCOPLASMA', 'Mycoplasma gallisepticum causes respiratory infections in chickens, turkeys, and other avian species. Morbidity is typically high and mortality low in affected flocks, and signs are generally more severe in turkeys. Real-time PCR is becoming the most common test used for diagnosis. Antibiotics may reduce clinical signs and transmission through eggs, but they do not eliminate infection. Control is achieved by good biosecurity and sourcing stock from M gallisepticum-free breeder flocks.', 'TEST RECOM LINE 1 \n\t TEST RECOM LINE 2')";
         db.execSQL(insertDiseaseStatement5);
-        String insertDiseaseStatement6 = "INSERT INTO DISEASES_TABLE (DISEASE_NAME, DISEASE_DESCRIPTION, DISEASE_RECOMMENDATION) VALUES ('Erectile Dysfunction', 'TEST DESC LINE 1 \n\t TEST DESC LINE 2 \n\t TEST DESC LINE 3', 'TEST RECOM LINE 1 \n\t TEST RECOM LINE 2')";
+        String insertDiseaseStatement6 = "INSERT INTO DISEASES_TABLE (DISEASE_NAME, DISEASE_DESCRIPTION, DISEASE_RECOMMENDATION) VALUES ('PIGEON RESPIRATORY INFECTION', 'Clinical respiratory infection in pigeons is the end result of the interplay of a number of factors, but the type of infective organisms involved and the vulnerability of the birds to infection are particularly important. \n\nThe usual organisms involved are Mycoplasma, Chlamydia and a range of bacteria (most commonly, E. coli). Whether or not these organisms actually cause disease in a pigeon, if it is exposed, essentially depends on how well the pigeon is at the time of exposure and also its age and level of immunity. Any factors that cause physiological stress can weaken the bird and make it more vulnerable to developing a respiratory infection. As a general rule, younger pigeons are more susceptible. However, in a bird that is otherwise healthy exposure to the agents that cause respiratory infection does not necessarily make it sick. Exposure to these organisms as the young pigeons grow and develop, rather than cause disease, stimulates immunity to form in a bird that is otherwise healthy.', 'TEST RECOM LINE 1 \n\t TEST RECOM LINE 2')";
         db.execSQL(insertDiseaseStatement6);
-        String insertSymptomStatement1 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Difficulty Swallowing', 1)";
-        db.execSQL(insertSymptomStatement1);
-        String insertSymptomStatement2 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Vomiting', 1)";
-        db.execSQL(insertSymptomStatement2);
-        String insertSymptomStatement3 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Yellow or Whitish Cheesy Growths in Mouth or Throat', 1)";
-        db.execSQL(insertSymptomStatement3);
-        String insertSymptomStatement4 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Weight Loss', 1)";
-        db.execSQL(insertSymptomStatement4);
-        String insertSymptomStatement5 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Puffed Feathers', 1)";
-        db.execSQL(insertSymptomStatement5);
-        String insertSymptomStatement6 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Mucus in Throat', 1)";
-        db.execSQL(insertSymptomStatement6);
+            String insertSymptomStatement1 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Difficulty Swallowing', 1)";
+            db.execSQL(insertSymptomStatement1);
+            String insertSymptomStatement2 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Vomiting', 1)";
+            db.execSQL(insertSymptomStatement2);
+            String insertSymptomStatement3 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Yellow or Whitish Cheesy Growths in Mouth or Throat', 1)";
+            db.execSQL(insertSymptomStatement3);
+            String insertSymptomStatement4 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Weight Loss', 1)";
+            db.execSQL(insertSymptomStatement4);
+            String insertSymptomStatement5 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Puffed Feathers', 1)";
+            db.execSQL(insertSymptomStatement5);
+            String insertSymptomStatement6 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Mucus in Throat', 1)";
+            db.execSQL(insertSymptomStatement6);
+            String insertSymptomStatement7 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Weight Loss', 2)";
+            db.execSQL(insertSymptomStatement7);
+            String insertSymptomStatement8 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Droopiness', 2)";
+            db.execSQL(insertSymptomStatement8);
+            String insertSymptomStatement9 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Diarrhea', 2)";
+            db.execSQL(insertSymptomStatement9);
+            String insertSymptomStatement10 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Huddling', 3)";
+            db.execSQL(insertSymptomStatement10);
+            String insertSymptomStatement11 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Difficulty Eating', 3)";
+            db.execSQL(insertSymptomStatement11);
+            String insertSymptomStatement12 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Diarrhea', 3)";
+            db.execSQL(insertSymptomStatement12);
+            String insertSymptomStatement13 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Bloody Diarrhea', 3)";
+            db.execSQL(insertSymptomStatement13);
+            String insertSymptomStatement14 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Watery', 3)";
+            db.execSQL(insertSymptomStatement14);
+            String insertSymptomStatement15 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Weakness', 3)";
+            db.execSQL(insertSymptomStatement15);
+            String insertSymptomStatement16 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Weight Loss', 3)";
+            db.execSQL(insertSymptomStatement16);
+            String insertSymptomStatement17 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Depression', 3)";
+            db.execSQL(insertSymptomStatement17);
+        String insertSymptomStatement18 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Watery Feces', 4)";
+        db.execSQL(insertSymptomStatement18);
+        String insertSymptomStatement19 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Mucus on Feces', 4)";
+        db.execSQL(insertSymptomStatement19);
+        String insertSymptomStatement20 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Greenish Feces', 4)";
+        db.execSQL(insertSymptomStatement20);
+        String insertSymptomStatement21 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Vomiting', 4)";
+        db.execSQL(insertSymptomStatement21);
+        String insertSymptomStatement22 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Diarrhea', 4)";
+        db.execSQL(insertSymptomStatement22);
+        String insertSymptomStatement23 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Dehydration', 4)";
+        db.execSQL(insertSymptomStatement23);
+        String insertSymptomStatement24 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Weight Loss', 4)";
+        db.execSQL(insertSymptomStatement24);
+        String insertSymptomStatement25 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Weakness', 4)";
+        db.execSQL(insertSymptomStatement25);
+        String insertSymptomStatement26 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Runny Nose', 5)";
+        db.execSQL(insertSymptomStatement26);
+        String insertSymptomStatement27 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Coughing', 5)";
+        db.execSQL(insertSymptomStatement27);
+        String insertSymptomStatement28 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Unuusual Breathing Sounds', 5)";
+        db.execSQL(insertSymptomStatement28);
+        String insertSymptomStatement29 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Swollen Eye', 5)";
+        db.execSQL(insertSymptomStatement29);
+        String insertSymptomStatement30 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Swollen Face', 5)";
+        db.execSQL(insertSymptomStatement30);
+        String insertSymptomStatement31 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Sneezing', 6)";
+        db.execSQL(insertSymptomStatement31);
+        String insertSymptomStatement32 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Eye Discharge', 6)";
+        db.execSQL(insertSymptomStatement32);
+        String insertSymptomStatement33 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Runny Nose', 6)";
+        db.execSQL(insertSymptomStatement33);
+        String insertSymptomStatement34 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Swollen Sinus', 6)";
+        db.execSQL(insertSymptomStatement34);
+        String insertSymptomStatement35 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Yawning', 6)";
+        db.execSQL(insertSymptomStatement35);
+        String insertSymptomStatement36 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Swallowing', 6)";
+        db.execSQL(insertSymptomStatement36);
+        String insertSymptomStatement37 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Stretching of Neck', 6)";
+        db.execSQL(insertSymptomStatement37);
 
 
 
 
+            //Table for Cage
+            String createCageTableStatement = "CREATE TABLE CAGE_TABLE ( CAGE_NO INTEGER PRIMARY KEY AUTOINCREMENT)";
+            db.execSQL(createCageTableStatement);
+            String initializeCageTableStatement = "INSERT INTO CAGE_TABLE (CAGE_NO) VALUES (1)";
+            db.execSQL(initializeCageTableStatement);
 
-        //Table for Cage
-        String createCageTableStatement = "CREATE TABLE CAGE_TABLE ( CAGE_NO INTEGER PRIMARY KEY AUTOINCREMENT)";
-        db.execSQL(createCageTableStatement);
-        String initializeCageTableStatement = "INSERT INTO CAGE_TABLE (CAGE_NO) VALUES (1)";
-        db.execSQL(initializeCageTableStatement);
-
-        String createNestTableStatement = "CREATE TABLE NEST_TABLE ( NEST_NO INTEGER PRIMARY KEY AUTOINCREMENT)";
-        db.execSQL(createNestTableStatement);
-        String initializeNestTableStatement = "INSERT INTO NEST_TABLE (NEST_NO) VALUES (1)";
-        db.execSQL(initializeNestTableStatement);
+            String createNestTableStatement = "CREATE TABLE NEST_TABLE ( NEST_NO INTEGER PRIMARY KEY AUTOINCREMENT)";
+            db.execSQL(createNestTableStatement);
+            String initializeNestTableStatement = "INSERT INTO NEST_TABLE (NEST_NO) VALUES (1)";
+            db.execSQL(initializeNestTableStatement);
     }
 
 
