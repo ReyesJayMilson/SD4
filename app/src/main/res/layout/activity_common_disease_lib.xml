@@ -96,6 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#000000"
+            android:paddingBottom="70dp"
             android:text="Insert Recommended Actions Here"
             android:layout_marginHorizontal="20dp"
             app:layout_constraintEnd_toEndOf="parent"
