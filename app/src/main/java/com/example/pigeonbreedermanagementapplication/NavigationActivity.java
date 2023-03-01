@@ -49,6 +49,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         }
     }
 
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
