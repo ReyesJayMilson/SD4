@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pigeonbreedermanagementapplication.DatabaseHelper;
+import com.example.pigeonbreedermanagementapplication.GlobalVariables;
 import com.example.pigeonbreedermanagementapplication.R;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 
 public class EggTrackerFragment extends Fragment {
 
+    private int profileId = GlobalVariables.profileId;
     private RecyclerView eggRecView;
     public static EggsRecViewAdapter eggadapter;
     private DatabaseHelper dbhelper;
@@ -38,8 +40,8 @@ public class EggTrackerFragment extends Fragment {
         // to pass the context to the databasehelper
 
 
-        eggs = dbhelper.getEveryEgg();
-        Log.d("TAG", "Egglist" + dbhelper.getEveryEgg());
+        eggs = dbhelper.getEveryEgg(profileId);
+        Log.d("TAG", "Egglist" + dbhelper.getEveryEgg(profileId));
         eggadapter = new EggsRecViewAdapter(view.getContext());
         eggadapter.setEggs(eggs);
 

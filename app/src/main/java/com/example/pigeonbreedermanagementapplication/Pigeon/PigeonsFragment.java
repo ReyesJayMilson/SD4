@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.pigeonbreedermanagementapplication.DatabaseHelper;
+import com.example.pigeonbreedermanagementapplication.GlobalVariables;
 import com.example.pigeonbreedermanagementapplication.Home.HomeFragment;
 import com.example.pigeonbreedermanagementapplication.R;
 
@@ -29,12 +30,14 @@ import java.util.ArrayList;
 
 public class PigeonsFragment extends Fragment {
 
+    private int profileId = GlobalVariables.profileId;
     private RecyclerView pigeonsRecView;
     public static PigeonsRecViewAdapter pigeonadapter;
     private DatabaseHelper dbhelper;
     private ArrayList<PigeonsGetSet> pigeons = new ArrayList<>();
     private Button addPigeon;
     private SearchView searchView;
+
 
 
     @Override
@@ -46,8 +49,7 @@ public class PigeonsFragment extends Fragment {
         pigeonsRecView = view.findViewById(R.id.rc_Pigeons);
 
         // to pass the context to the databasehelper
-        pigeons = dbhelper.getEveryPigeon();
-        Log.d("TAG", "Pigeonlist" + dbhelper.getEveryPigeon());
+        pigeons = dbhelper.getEveryPigeon(profileId);
 
         pigeonadapter = new PigeonsRecViewAdapter(view.getContext());
 

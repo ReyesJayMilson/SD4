@@ -8,14 +8,17 @@ public class TransactionGetSet {
     private String transaction_partner;
     private int transaction_amount;
     private String transaction_details;
+    private int profile_id;
 
-    public TransactionGetSet(int transaction_id, String transaction_type, String transaction_date, String transaction_partner, int transaction_amount, String transaction_details) {
+
+    public TransactionGetSet(int transaction_id, String transaction_type, String transaction_date, String transaction_partner, int transaction_amount, String transaction_details, int profile_id) {
         this.transaction_id = transaction_id;
         this.transaction_type = transaction_type;
         this.transaction_date = transaction_date;
         this.transaction_partner = transaction_partner;
         this.transaction_amount = transaction_amount;
         this.transaction_details = transaction_details;
+        this.profile_id = profile_id;
     }
 
     @Override
@@ -27,6 +30,7 @@ public class TransactionGetSet {
                 ", transaction_partner='" + transaction_partner + '\'' +
                 ", transaction_amount=" + transaction_amount +
                 ", transaction_details='" + transaction_details + '\'' +
+                ", profile_id=" + profile_id +
                 '}';
     }
 
@@ -76,5 +80,13 @@ public class TransactionGetSet {
 
     public void setTransaction_details(String transaction_details) {
         this.transaction_details = transaction_details;
+    }
+
+    public int getProfile_id() {
+        return profile_id;
+    }
+
+    public void setProfile_id(int profile_id) {
+        this.profile_id = profile_id;
     }
 }

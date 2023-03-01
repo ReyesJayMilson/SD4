@@ -7,11 +7,15 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.pigeonbreedermanagementapplication.DatabaseHelper;
+import com.example.pigeonbreedermanagementapplication.GlobalVariables;
 import com.example.pigeonbreedermanagementapplication.R;
 
 
 public class HomeFragment extends Fragment {
 
+    private int profileId = GlobalVariables.profileId;
+    private DatabaseHelper dbhelper;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

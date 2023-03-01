@@ -11,11 +11,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pigeonbreedermanagementapplication.DatabaseHelper;
+import com.example.pigeonbreedermanagementapplication.GlobalVariables;
 import com.example.pigeonbreedermanagementapplication.R;
 
 
 public class ProductEditing extends AppCompatActivity {
 
+    private int profileId = GlobalVariables.profileId;
     private Button btSave;
     private EditText etName, etPrice, etQuantity, etUsePerWeek;
     private DatabaseHelper dbhelper;
@@ -70,7 +72,7 @@ public class ProductEditing extends AppCompatActivity {
                 if (name.equals("") || quantity.equals("")){
                     Toast.makeText(ProductEditing.this, "Please input all the fields", Toast.LENGTH_SHORT).show();
                 } else {
-                    ProductGetSet products = new ProductGetSet(oldtproductId, name, price, quantity, useperweek);
+                    ProductGetSet products = new ProductGetSet(oldtproductId, name, price, quantity, useperweek, profileId);
                     boolean success = dbhelper.editProduct(products);
 
                     if (success) {

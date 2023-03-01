@@ -100,17 +100,15 @@ public class CommonDiseaseLibFragment extends Fragment {
 
     }
 
-    private ArrayList<Disease> filter(ArrayList<Disease> pigeons, String query) {
+    private ArrayList<Disease> filter(ArrayList<Disease> diseases, String query) {
         // returns a filtered list based on the search query
-        ArrayList<Disease> filteredDisease = new ArrayList<>();
-        for (Disease disease : diseaseList) {
-            if (disease.getName().toLowerCase().contains(query.toLowerCase())) {
-                filteredDisease.add(disease);
+        ArrayList<Disease> filteredDiseases = new ArrayList<>();
+        for (Disease disease : diseases) {
+            if (disease.getName() != null && disease.getName().toLowerCase().contains(query.toLowerCase())) {
+                filteredDiseases.add(disease);
             }
         }
-
-
-        return filteredDisease;
+        return filteredDiseases;
     }
 
     @Override
