@@ -27,6 +27,8 @@ public class DiseaseActivity extends AppCompatActivity {
     public int diseaseId;
     TextView disName, disDesc, disSymptom;
     private List<Symptom> symptomList;
+
+    private List<Boolean> symptomChecked;
     private DatabaseHelper databaseHelper;
 
     public DiseaseActivity() {

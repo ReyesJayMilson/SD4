@@ -46,7 +46,8 @@
                 <Spinner
                     android:id="@+id/spinSymptom"
                     android:layout_width="170dp"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:spinnerMode="dropdown"/>
 
             </LinearLayout>
 
