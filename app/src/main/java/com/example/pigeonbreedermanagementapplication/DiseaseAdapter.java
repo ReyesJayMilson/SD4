@@ -5,6 +5,7 @@ import static com.google.android.material.internal.ContextUtils.getActivity;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.pigeonbreedermanagementapplication.Pigeon.PigeonsGetSet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,6 +82,12 @@ public class DiseaseAdapter extends RecyclerView.Adapter<DiseaseAdapter.DiseaseV
 //            return 0;
 //        }
 //    }
+
+    //for setting the recycler view when searched
+public void setDisease(ArrayList<Disease> diseases) {
+    this.diseaseList = diseases;
+    notifyDataSetChanged();
+}
 
 
     public class DiseaseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
