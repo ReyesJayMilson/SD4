@@ -22,15 +22,6 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/txtSearch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="Search"
-                    android:inputType="textPersonName" />
-
                 <TextView
                     android:id="@+id/lblFilter"
                     android:layout_width="59dp"
@@ -45,9 +36,10 @@
 
                 <Spinner
                     android:id="@+id/spinSymptom"
-                    android:layout_width="170dp"
+                    android:layout_width="336dp"
                     android:layout_height="match_parent"
-                    android:spinnerMode="dropdown"/>
+                    android:spinnerMode="dropdown"
+                    android:prompt="@string/prompt"/>
 
             </LinearLayout>
 
