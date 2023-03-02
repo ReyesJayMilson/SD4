@@ -38,7 +38,7 @@
                     android:id="@+id/spinSymptom"
                     android:layout_width="336dp"
                     android:layout_height="match_parent"
-                    android:spinnerMode="dropdown"
+                    android:spinnerMode="dialog"
                     android:prompt="@string/prompt"/>
 
             </LinearLayout>
