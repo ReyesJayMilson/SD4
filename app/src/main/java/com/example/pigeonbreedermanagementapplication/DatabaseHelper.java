@@ -431,6 +431,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
+        String ringId = pigeons.getRing_id();
+
+        if (ringId.equals("")) {
+            return 3; // Error code for empty Ring ID
+        }
+
+        if (checkRingIdExists(ringId)) {
+            return 2; // Error code for duplicate Ring ID
+        }
         cv.put(COLUMN_RING_ID, pigeons.getRing_id());
         cv.put(COLUMN_PIGEON_NAME, pigeons.getName());
         cv.put(COLUMN_CAGE_NO, pigeons.getCage_no());
@@ -450,9 +459,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (insert == -1) {
             return 0;
         } else {
-//            ArrayList<PigeonsGetSet> updatedList = getEveryPigeon();
-//            PigeonsFragment.pigeonadapter.notifyDataSetChanged();
-//            PigeonsFragment.pigeonadapter.setPigeons(updatedList);
             return 1;
         }
     }
@@ -540,6 +546,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
+    private boolean checkRingIdExists(String ringId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(PIGEON_TABLE, new String[] {COLUMN_RING_ID}, COLUMN_RING_ID + "=?", new String[] {ringId}, null, null, null);
+        boolean exists = cursor.moveToFirst();
+        cursor.close();
+        return exists;
+    }
     public List<String> getAllRingIds(int profileid) {
         List<String> ringIds = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();

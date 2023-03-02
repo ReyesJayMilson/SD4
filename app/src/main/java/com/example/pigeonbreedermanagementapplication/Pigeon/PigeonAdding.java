@@ -33,6 +33,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -120,7 +121,7 @@ public class PigeonAdding extends AppCompatActivity {
             }
         });
         //adding to cageNo
-        cageNumbers = dbhelper.getAllCageNumbers(profileId);
+        cageNumbers = Collections.singletonList(dbhelper.getAllCageNumbers(profileId).size());
         ArrayAdapter<Integer> cageadapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cageNumbers);
         cageadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spCageNo.setAdapter(cageadapter);
@@ -252,29 +253,37 @@ public class PigeonAdding extends AppCompatActivity {
 
 
 
-                if (ringId.equals("")){
-                    Toast.makeText(PigeonAdding.this, "Please input a Ring ID", Toast.LENGTH_SHORT).show();
-                }
-                else {
+//                if (ringId.equals("")){
+//                    Toast.makeText(PigeonAdding.this, "Ring ID cannot be empty.", Toast.LENGTH_SHORT).show();
+//                }
+//                else {
                     if (filePath != null) {
                         filePath = saveImageToInternalStorage(imageBitmap, ringId);
                     }
                     PigeonsGetSet pigeons = new PigeonsGetSet(ringId, name, selectedCageNo, selectedYear, selectedBreed, selectedGender, color, selectedStatus, notes, filePath, profileId);
 
-                    int result = dbhelper.addPigeon(pigeons);
-
-                    if (result == 1) {
-
-                        Toast.makeText(PigeonAdding.this, "Pigeon added", Toast.LENGTH_SHORT).show();
-//                    int position = MyPigeonsFragment.pigeons.size();
-//                    MyPigeonsFragment.pigeons.add(pigeons);
-//                    MyPigeonsFragment.adapter.notifyItemInserted(position);
-                        finish();
-                    } else {
-                        Toast.makeText(PigeonAdding.this, "Pigeon not added", Toast.LENGTH_SHORT).show();
-                    }
+                int result = dbhelper.addPigeon(pigeons);
+                switch (result) {
+                    case 0:
+                        Toast.makeText(PigeonAdding.this, "Failed to add pigeon", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 1:
+                        Toast.makeText(PigeonAdding.this, "Pigeon added successfully", Toast.LENGTH_SHORT).show();
+                        ArrayList<PigeonsGetSet> updatedList = dbhelper.getEveryPigeon(profileId);
+                        PigeonsFragment.pigeonadapter.notifyDataSetChanged();
+                        break;
+                    case 2:
+                        Toast.makeText(PigeonAdding.this, "Ring ID already exists", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 3:
+                        Toast.makeText(PigeonAdding.this, "Ring ID cannot be empty", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        break;
                 }
-            }
+
+                }
+//            }
         });
     }
 
