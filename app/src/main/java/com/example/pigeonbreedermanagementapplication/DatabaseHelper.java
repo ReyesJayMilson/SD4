@@ -324,8 +324,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             do{
                 Disease disease = new Disease();
                 disease.setId(cursor.getInt(0));
-                disease.setName(cursor.getString(1));
-                disease.setDesc(cursor.getString(2));
+                disease.setImage(cursor.getString(1));
+                disease.setName(cursor.getString(2));
+                disease.setDesc(cursor.getString(3));
                 diseaseList.add(disease);
             } while (cursor.moveToNext());
         }
