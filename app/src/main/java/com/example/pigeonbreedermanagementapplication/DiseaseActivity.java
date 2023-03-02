@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -26,6 +27,7 @@ public class DiseaseActivity extends AppCompatActivity {
     private static final String COLUMN_SYMP_NAME = "SYMPTOM_NAME";
     private static final String COLUMN_DIS_ID = "DISEASE_ID";
     public int diseaseId;
+    ImageView disImage;
     TextView disName, disDesc, disSymptom;
     private List<Symptom> symptomList;
 
@@ -51,6 +53,7 @@ public class DiseaseActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_common_disease_lib);
 
+        disImage = findViewById(R.id.disImage);
         disName = findViewById(R.id.disName);
         disDesc = findViewById(R.id.disDesc);
         disSymptom = findViewById(R.id.disSymptom);
@@ -58,6 +61,7 @@ public class DiseaseActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
+
         int diseaseId = intent.getIntExtra("disease_id", 0);
 
         symptomList = getSymptomsForDisease(diseaseId);
@@ -70,6 +74,11 @@ public class DiseaseActivity extends AppCompatActivity {
         } else {
             disSymptom.setText(symptoms);
         }
+
+        String diseaseImage = intent.getStringExtra("disease_image");
+
+        int resID = this.getResources().getIdentifier(diseaseImage, "mipmap", this.getPackageName());
+        disImage.setImageResource(resID);
 
         String diseaseName = intent.getStringExtra("disease_name");
         disName.setText(diseaseName);

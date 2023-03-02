@@ -185,9 +185,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_PROFILE_ID + " INTEGER, " +
                 "FOREIGN KEY (" + COLUMN_PROFILE_ID + ") REFERENCES " + PROFILE_TABLE + "(" + COLUMN_PROFILE_ID + "))";
         db.execSQL(createCageTableStatement);
-        String initializeCageTableStatement = "INSERT INTO " + CAGE_TABLE +
-                " (" + COLUMN_CAGE_NO + ") VALUES (1)";
-        db.execSQL(initializeCageTableStatement);
+//        String initializeCageTableStatement = "INSERT INTO " + CAGE_TABLE +
+//                " (" + COLUMN_CAGE_NO + ") VALUES (1)";
+//        db.execSQL(initializeCageTableStatement);
 
         //Table for Nest
         String createNestTableStatement = "CREATE TABLE " + NEST_TABLE + " ( " +
@@ -195,10 +195,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_PROFILE_ID + " INTEGER, " +
                 "FOREIGN KEY (" + COLUMN_PROFILE_ID + ") REFERENCES " + PROFILE_TABLE + "(" + COLUMN_PROFILE_ID + "))";
         db.execSQL(createNestTableStatement);
-        String initializeNestTableStatement = "INSERT INTO " + NEST_TABLE + " (" +
-                COLUMN_NEST_NO + ") VALUES (1)";
-
-        db.execSQL(initializeNestTableStatement);
+//        String initializeNestTableStatement = "INSERT INTO " + NEST_TABLE + " (" +
+//                COLUMN_NEST_NO + ") VALUES (1)";
+//
+//        db.execSQL(initializeNestTableStatement);
 
         String insertDiseaseStatement = "INSERT INTO DISEASES_TABLE (DISEASE_IMAGE, DISEASE_NAME, DISEASE_DESCRIPTION, DISEASE_RECOMMENDATION) VALUES ('image_pigeon_canker', 'PIGEON CANKER', 'Trichomoniasis (pigeon canker) is the most common disease of pigeons. Approximately 80 percent of pigeons are infected with this organism. The organism is a microscopic flagellate classified as a protozoan. Different strains, Trichomonas gallinae or Trichomonas columbae, vary greatly in their ability to cause disease. The disease occurs worldwide in warm climates or during warm weather. It may occur at any time of the year in commercial squab operations. Adult pigeons frequently carry the trichomonads without showing signs of disease. When the adult pigeon is stressed, however, the organisms may multiply profusely. A mild infection can then turn into a serious condition. Stresses include other diseases, parasitic infestations, or overbreeding.', 'Birds can be treated with Ronidazole (Ronnivet-S) in the water for seven days. It has a wide safety margin. Regular re-treatments are advised.\n Pigeons can be treated in a single dose of Carnidazole (Spartrix) and Metronidazole (Flagyl), has been also used in the past orally for 2-10 days. All of these drugs are prescription only, not for sale over the counter.')";
         db.execSQL(insertDiseaseStatement);
@@ -324,8 +324,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             do{
                 Disease disease = new Disease();
                 disease.setId(cursor.getInt(0));
-                disease.setName(cursor.getString(1));
-                disease.setDesc(cursor.getString(2));
+                disease.setImage(cursor.getString(1));
+                disease.setName(cursor.getString(2));
+                disease.setDesc(cursor.getString(3));
                 diseaseList.add(disease);
             } while (cursor.moveToNext());
         }
@@ -373,21 +374,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (insert == -1) {
             return false;
         }
-        // query the CAGE_TABLE to get the first available cage number and assign it to the new profile
-        String queryString = "SELECT " + COLUMN_CAGE_NO + " FROM " + CAGE_TABLE +
-                " WHERE " + COLUMN_PROFILE_ID + " IS NULL ORDER BY " + COLUMN_CAGE_NO + " ASC LIMIT 1";
-        Cursor cursor = db.rawQuery(queryString, null);
-        if (cursor.moveToFirst()) {
-            int cageNo = cursor.getInt(0);
-            cv = new ContentValues();
-            cv.put(COLUMN_PROFILE_ID, insert);
-            db.update(CAGE_TABLE, cv, COLUMN_CAGE_NO + " = ?", new String[] { Integer.toString(cageNo) });
-        }
-        cursor.close();
+
 
         return true;
-
-
     }
 
     public boolean DeleteProfile(ProfilesGetSet profiles) {
@@ -466,6 +455,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (insert == -1) {
             return 0;
         } else {
+
             return 1;
         }
     }
@@ -594,7 +584,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
         } else {
 //            ArrayList<EggsGetSet> updatedList = getEveryEgg();
-//            EggTrackerFragment.eggadapter.notifyDataSetChanged();
 //            EggTrackerFragment.eggadapter.setEggs(updatedList);
             return true;
         }
@@ -657,9 +646,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (insert == -1) {
             return false;
         } else {
-//            ArrayList<TransactionGetSet> updatedList = getEveryTransaction();
-//            TransactionFragment.transactionadapter.notifyDataSetChanged();
-//            TransactionFragment.transactionadapter.setTransactions(updatedList);
+
             return true;
         }
     }
@@ -759,9 +746,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (insert == -1) {
             return false;
         } else {
-//            ArrayList<ProductGetSet> updatedList = getEveryProduct();
-//            ProductFragment.productadapter.notifyDataSetChanged();
-//            ProductFragment.productadapter.setProducts(updatedList);
+
             return true;
         }
     }
@@ -838,6 +823,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         return returnList;
+    }
+
+    public void initializeTable(int profileId, String tableName) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_PROFILE_ID, profileId);
+        db.insert(tableName, null, values);
+        db.close();
     }
     public boolean addCageNumber(int profileid) {
         SQLiteDatabase db = this.getWritableDatabase();

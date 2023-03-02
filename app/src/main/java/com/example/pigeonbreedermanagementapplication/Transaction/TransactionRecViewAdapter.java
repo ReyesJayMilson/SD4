@@ -14,6 +14,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pigeonbreedermanagementapplication.DatabaseHelper;
+import com.example.pigeonbreedermanagementapplication.GlobalVariables;
 import com.example.pigeonbreedermanagementapplication.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 
 public class TransactionRecViewAdapter extends RecyclerView.Adapter<TransactionRecViewAdapter.ViewHolder>  {
 
+    private int profileId = GlobalVariables.profileId;
     DatabaseHelper dbhelper;
     private ArrayList<TransactionGetSet> transactions = new ArrayList<>();
 
@@ -82,6 +84,8 @@ public class TransactionRecViewAdapter extends RecyclerView.Adapter<TransactionR
                         boolean success = dbhelper.deleteTransaction(transactions.get(clickedPosition));
 
                         if (success) {
+                            ArrayList<TransactionGetSet> updatedList = dbhelper.getEveryTransaction(profileId);
+                            TransactionFragment.transactionadapter.setTransactions(updatedList);
                             Toast.makeText(view.getContext(), "Transaction deleted successfully", Toast.LENGTH_SHORT).show();
                             bottomSheetDialog.dismiss();
                         } else {

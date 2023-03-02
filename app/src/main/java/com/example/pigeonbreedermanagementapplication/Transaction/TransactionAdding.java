@@ -107,7 +107,8 @@ public class TransactionAdding extends AppCompatActivity {
                     boolean success = dbhelper.addTransactions(transactions);
 
                     if (success) {
-
+                        ArrayList<TransactionGetSet> updatedList = dbhelper.getEveryTransaction(profileId);
+                        TransactionFragment.transactionadapter.setTransactions(updatedList);
                         Toast.makeText(TransactionAdding.this, "Transaction added", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {

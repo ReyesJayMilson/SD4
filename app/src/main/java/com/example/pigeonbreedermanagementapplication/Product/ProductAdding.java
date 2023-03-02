@@ -13,6 +13,8 @@ import com.example.pigeonbreedermanagementapplication.DatabaseHelper;
 import com.example.pigeonbreedermanagementapplication.GlobalVariables;
 import com.example.pigeonbreedermanagementapplication.R;
 
+import java.util.ArrayList;
+
 
 public class ProductAdding extends AppCompatActivity {
 
@@ -62,7 +64,8 @@ public class ProductAdding extends AppCompatActivity {
                     boolean success = dbhelper.addProduct(products);
 
                     if (success) {
-
+                        ArrayList<ProductGetSet> updatedList = dbhelper.getEveryProduct(profileId);
+                        ProductFragment.productadapter.setProducts(updatedList);
                         Toast.makeText(ProductAdding.this, "Product added", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {

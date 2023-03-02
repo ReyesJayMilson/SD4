@@ -20,10 +20,11 @@
     </TextView>
     <!-- TODO: Update blank fragment layout -->
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_below="@+id/tv_SelectProfile"
-        android:id="@+id/rc_Profiles"></androidx.recyclerview.widget.RecyclerView>
+        android:id="@+id/rc_Profiles"
+        android:layout_centerHorizontal="true"></androidx.recyclerview.widget.RecyclerView>
 
     <Button
         android:id="@+id/bt_AddProfile"

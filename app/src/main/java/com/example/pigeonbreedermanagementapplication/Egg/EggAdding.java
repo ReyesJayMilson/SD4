@@ -18,6 +18,7 @@ import com.example.pigeonbreedermanagementapplication.GlobalVariables;
 import com.example.pigeonbreedermanagementapplication.Pigeon.PigeonAdding;
 import com.example.pigeonbreedermanagementapplication.R;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -167,6 +168,8 @@ public class EggAdding extends AppCompatActivity {
                     EggsGetSet eggs = new EggsGetSet(-1, selectedCageNo, selectedNestNo, laydate, hatchdate, selectedFather, selectedMother, profileId);
 
                     dbhelper.addEgg(eggs);
+                                ArrayList<EggsGetSet> updatedList = dbhelper.getEveryEgg(profileId);
+                                EggTrackerFragment.eggadapter.setEggs(updatedList);
                 }
 
                 finish();

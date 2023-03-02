@@ -56,18 +56,17 @@ public class DiseaseAdapter extends RecyclerView.Adapter<DiseaseAdapter.DiseaseV
     @Override
     public void onBindViewHolder(@NonNull DiseaseViewHolder holder, int position) {
         Disease disease = diseaseList.get(position);
-                int resID = context.getResources().getIdentifier(disease.getImage(), "mipmap", context.getPackageName());
+        int resID = context.getResources().getIdentifier(disease.getImage(), "mipmap", context.getPackageName());
         holder.imageView.setImageResource(resID);
         holder.textName.setText(disease.getName());
         holder.textDesc.setText(disease.getDesc());
-        Log.d("string:", disease.getName() );
-
         holder.itemView.setSelected(selectedPos == position);
         holder.itemView.setOnClickListener(new View.OnClickListener(){
 
            @Override
          public void onClick(View view){
              Intent intent = new Intent(view.getContext(), DiseaseActivity.class);
+             intent.putExtra("disease_image", disease.getImage());
                intent.putExtra("disease_name", disease.getName());
                intent.putExtra("disease_desc", disease.getDesc());
                intent.putExtra("disease_id", disease.getId());
