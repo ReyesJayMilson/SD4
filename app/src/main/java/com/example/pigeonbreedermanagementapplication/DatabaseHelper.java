@@ -326,6 +326,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return diseaseList;
     }
 
+
+
 //    List<Symptom> getSymptomsForDisease(int diseaseId) {
 //        List<Symptom> symptomList = new ArrayList<>();
 //

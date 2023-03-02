@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.SearchView;
 import android.widget.Spinner;
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.pigeonbreedermanagementapplication.Pigeon.PigeonsGetSet;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -35,6 +37,8 @@ public class CommonDiseaseLibFragment extends Fragment {
     private DatabaseHelper databaseHelper;
 
     private SearchView searchView;
+
+    private SymptomCheckboxAdapter symptomCheckboxAdapter;
 
     private static final String SYMPTOMS_TABLE = "SYMPTOMS_TABLE";
     private static final String COLUMN_SYMP_NAME = "SYMPTOM_NAME";
@@ -54,16 +58,19 @@ public class CommonDiseaseLibFragment extends Fragment {
         // Fetch all the symptom_name from SymptomsTable and ignore duplicates
         SQLiteDatabase database = databaseHelper.getReadableDatabase();
         Cursor cursor = database.rawQuery("SELECT DISTINCT " + COLUMN_SYMP_NAME + " FROM " + SYMPTOMS_TABLE, null);
-        List<String> symptomNames = new ArrayList<>();
+        List<String> symptomName = new ArrayList<>();
         while (cursor.moveToNext()) {
-            symptomNames.add(cursor.getString(cursor.getColumnIndex(COLUMN_SYMP_NAME)));
+            symptomName.add(cursor.getString(cursor.getColumnIndex(COLUMN_SYMP_NAME)));
         }
         cursor.close();
 
         // Add the symptom names to the spinner
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, symptomNames);
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinSymptom.setAdapter(adapter1);
+//        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, symptomNames);
+//        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        SymptomCheckboxAdapter adapter2 = new SymptomCheckboxAdapter(getActivity(), R.layout.spinner_item_checkbox, symptomName);
+        spinSymptom.setAdapter(adapter2);
+
 
         recyclerView = view.findViewById(R.id.Recycler_Library);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -72,6 +79,8 @@ public class CommonDiseaseLibFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return view;
+
+
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
