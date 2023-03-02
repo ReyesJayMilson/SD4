@@ -14,6 +14,8 @@ import com.example.pigeonbreedermanagementapplication.DatabaseHelper;
 import com.example.pigeonbreedermanagementapplication.GlobalVariables;
 import com.example.pigeonbreedermanagementapplication.R;
 
+import java.util.ArrayList;
+
 
 public class ProductEditing extends AppCompatActivity {
 
@@ -76,7 +78,8 @@ public class ProductEditing extends AppCompatActivity {
                     boolean success = dbhelper.editProduct(products);
 
                     if (success) {
-
+                        ArrayList<ProductGetSet> updatedList = dbhelper.getEveryProduct(profileId);
+                        ProductFragment.productadapter.setProducts(updatedList);
                         Toast.makeText(ProductEditing.this, "Product saved", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {

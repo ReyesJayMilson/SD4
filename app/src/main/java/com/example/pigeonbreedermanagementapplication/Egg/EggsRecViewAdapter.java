@@ -13,12 +13,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pigeonbreedermanagementapplication.DatabaseHelper;
+import com.example.pigeonbreedermanagementapplication.GlobalVariables;
 import com.example.pigeonbreedermanagementapplication.R;
 
 import java.util.ArrayList;
 
 public class EggsRecViewAdapter extends RecyclerView.Adapter<EggsRecViewAdapter.ViewHolder> {
 
+    private int profileId = GlobalVariables.profileId;
     DatabaseHelper dbhelper;
     private ArrayList<EggsGetSet> eggs = new ArrayList<>();
 

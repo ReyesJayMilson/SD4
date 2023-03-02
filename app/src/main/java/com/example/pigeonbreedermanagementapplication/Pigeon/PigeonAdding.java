@@ -121,7 +121,7 @@ public class PigeonAdding extends AppCompatActivity {
             }
         });
         //adding to cageNo
-        cageNumbers = Collections.singletonList(dbhelper.getAllCageNumbers(profileId).size());
+        cageNumbers = dbhelper.getAllCageNumbers(profileId);
         ArrayAdapter<Integer> cageadapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cageNumbers);
         cageadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spCageNo.setAdapter(cageadapter);
@@ -270,7 +270,8 @@ public class PigeonAdding extends AppCompatActivity {
                     case 1:
                         Toast.makeText(PigeonAdding.this, "Pigeon added successfully", Toast.LENGTH_SHORT).show();
                         ArrayList<PigeonsGetSet> updatedList = dbhelper.getEveryPigeon(profileId);
-                        PigeonsFragment.pigeonadapter.notifyDataSetChanged();
+                        PigeonsFragment.pigeonadapter.setPigeons(updatedList);
+                        finish();
                         break;
                     case 2:
                         Toast.makeText(PigeonAdding.this, "Ring ID already exists", Toast.LENGTH_SHORT).show();

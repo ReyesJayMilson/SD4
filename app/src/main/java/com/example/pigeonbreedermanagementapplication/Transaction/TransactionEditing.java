@@ -126,7 +126,8 @@ public class TransactionEditing extends AppCompatActivity {
                     boolean success = dbhelper.editTransaction(transactions);
 
                     if (success) {
-
+                        ArrayList<TransactionGetSet> updatedList = dbhelper.getEveryTransaction(profileId);
+                        TransactionFragment.transactionadapter.setTransactions(updatedList);
                         Toast.makeText(TransactionEditing.this, "Transaction saved", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {

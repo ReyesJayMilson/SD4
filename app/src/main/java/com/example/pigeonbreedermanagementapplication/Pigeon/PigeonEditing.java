@@ -301,22 +301,14 @@ public class PigeonEditing extends AppCompatActivity {
                 } else {
                     filePath = image;
                 }
-                Log.d("TAG", "ring" + ringId);
-                Log.d("TAG", "name" + name);
-                Log.d("TAG", "cageno" + selectedCageNo);
-                Log.d("TAG", "year" + selectedYear);
-                Log.d("TAG", "breed" + selectedBreed);
-                Log.d("TAG", "color" + color);
-                Log.d("TAG", "status" + selectedStatus);
-                Log.d("TAG", "notes" + notes);
-                Log.d("TAG", "filepath" + filePath);
-                Log.d("TAG", "filepathimage " + image);
                     PigeonsGetSet pigeons = new PigeonsGetSet(ringId, name, selectedCageNo, selectedYear, selectedBreed, selectedGender, color, selectedStatus, notes, filePath, profileId);
 
 
                     boolean success = dbhelper.editPigeon(pigeons);
 
                     if (success) {
+                        ArrayList<PigeonsGetSet> updatedList = dbhelper.getEveryPigeon(profileId);
+                        PigeonsFragment.pigeonadapter.setPigeons(updatedList);
                         Toast.makeText(PigeonEditing.this, "Pigeon saved", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
