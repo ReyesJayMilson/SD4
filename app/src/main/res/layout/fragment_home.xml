@@ -4,4 +4,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#36A1EBF1"
-    tools:context=".Home.HomeFragment" />
+    tools:context=".Home.HomeFragment"
+    android:layout_margin="10dp"
+    android:id="@+id/xml_homefragment">
+
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:elevation="4dp">
+
+        <TextView
+            android:id="@+id/tv_welcome_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Welcome to Pigeon Breeder Management. You currently have"
+            android:textSize="24sp"
+            android:padding="16dp" />
+
+        <TextView
+            android:id="@+id/tv_pigeon_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="number placeholder"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_welcome_message2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="number placeholder"
+            android:textSize="20sp"
+            />
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rc_Home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+    <FrameLayout
+        android:id="@+id/bs_Pigeon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
+
+</RelativeLayout>

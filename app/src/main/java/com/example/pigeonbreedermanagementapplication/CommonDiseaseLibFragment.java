@@ -1,6 +1,7 @@
 package com.example.pigeonbreedermanagementapplication;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -59,6 +60,7 @@ public class CommonDiseaseLibFragment extends Fragment {
         databaseHelper = new DatabaseHelper(getActivity());
         diseaseList = databaseHelper.getAllDisease();
 
+
         // Fetch all the symptom_name from SymptomsTable and ignore duplicates
         SQLiteDatabase database = databaseHelper.getReadableDatabase();
         Cursor cursor = database.rawQuery("SELECT DISTINCT " + COLUMN_SYMP_NAME + " FROM " + SYMPTOMS_TABLE, null);
@@ -78,7 +80,7 @@ public class CommonDiseaseLibFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.Recycler_Library);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new DiseaseAdapter(diseaseList);
+        adapter = new DiseaseAdapter(diseaseList, getActivity());
         recyclerView.setAdapter(adapter);
 
         // Inflate the layout for this fragment
