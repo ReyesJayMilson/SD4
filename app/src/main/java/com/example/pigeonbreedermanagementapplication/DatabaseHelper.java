@@ -83,6 +83,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_PIGEON_IMAGE = "PIGEON_IMAGE";
     public static final String CAGE_TABLE = "CAGE_TABLE";
     public static final String NEST_TABLE = "NEST_TABLE";
+    public static final String COLUMN_EGG_STATUS = "EGG_STATUS";
     private Context context;
 
 
@@ -121,6 +122,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_NEST_NO + " INTEGER, " +
                 COLUMN_LAYING_DATE + " TEXT, " +
                 COLUMN_HATCHING_DATE + " TEXT, " +
+                COLUMN_EGG_STATUS + " TEXT, " +
                 COLUMN_FATHER + " TEXT, " +
                 COLUMN_MOTHER + " TEXT, " +
                 COLUMN_PROFILE_ID + " INTEGER NOT NULL, " +
@@ -542,6 +544,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return returnList;
     }
+    public int getTotalPigeons(int profileid) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String queryString = "SELECT COUNT(*) FROM " + PIGEON_TABLE + " WHERE " + COLUMN_PROFILE_ID + " = ?";
+        String[] selectionArgs = { String.valueOf(profileid) };
+
+        Cursor cursor = db.rawQuery(queryString, selectionArgs);
+
+        int totalPigeons = 0;
+        if (cursor.moveToFirst()) {
+            totalPigeons = cursor.getInt(0);
+        }
+
+        cursor.close();
+        return totalPigeons;
+    }
 
     private boolean checkRingIdExists(String ringId) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -572,6 +590,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_NEST_NO, eggs.getNest_number());
         cv.put(COLUMN_LAYING_DATE, eggs.getLaying_date());
         cv.put(COLUMN_HATCHING_DATE, eggs.getHatching_date());
+        cv.put(COLUMN_EGG_STATUS, eggs.getEgg_status());
         cv.put(COLUMN_FATHER, eggs.getFather());
         cv.put(COLUMN_MOTHER, eggs.getMother());
         cv.put(COLUMN_PROFILE_ID, eggs.getProfile_id());
@@ -609,11 +628,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 int nestNumber = cursor.getInt(2);
                 String layDate = cursor.getString(3);
                 String hatchDate = cursor.getString(4);
-                String father = cursor.getString(5);
-                String mother = cursor.getString(6);
-                int profileId = cursor.getInt(7);
+                String eggStatus = cursor.getString(5);
+                String father = cursor.getString(6);
+                String mother = cursor.getString(7);
+                int profileId = cursor.getInt(8);
 
-                EggsGetSet newEggs = new EggsGetSet(eggID, cageNumber, nestNumber, layDate, hatchDate, father, mother, profileId);
+                EggsGetSet newEggs = new EggsGetSet(eggID, cageNumber, nestNumber, layDate, hatchDate, eggStatus, father, mother, profileId);
                 returnList.add(newEggs);
 
             } while (cursor.moveToNext());
@@ -625,7 +645,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return returnList;
     }
+    public boolean updateEggStatus(int eggId, String newStatus) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_EGG_STATUS, newStatus);
+        String whereClause = COLUMN_EGG_ID + " = ?";
+        String[] whereArgs = { String.valueOf(eggId) };
+        int rowsUpdated = db.update(EGGMONITORING_TABLE, values, whereClause, whereArgs);
+        return rowsUpdated > 0;
+    }
 
+    public int getHatchedEggCount(int profileId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String countQuery = "SELECT COUNT(*) FROM " + EGGMONITORING_TABLE + " WHERE " + COLUMN_PROFILE_ID + " = " + profileId + " AND " + COLUMN_EGG_STATUS + " = 'Hatched'";
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int count = 0;
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0);
+        }
+        cursor.close();
+        return count;
+    }
     //////////////////////TRANSACTIONS/////////////////////////
 
     public boolean addTransactions(TransactionGetSet transactions) {

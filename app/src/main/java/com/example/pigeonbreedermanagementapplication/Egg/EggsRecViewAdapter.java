@@ -1,15 +1,19 @@
 package com.example.pigeonbreedermanagementapplication.Egg;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pigeonbreedermanagementapplication.DatabaseHelper;
@@ -43,12 +47,62 @@ public class EggsRecViewAdapter extends RecyclerView.Adapter<EggsRecViewAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String replace = "Egg no. " + Integer.toString(eggs.get(position).getEgg_id());
         holder.ph.setText(replace);
+        String eggStatus = eggs.get(position).getEgg_status();
+        if (eggStatus != null) {
+            switch (eggStatus) {
+                case "Laid":
+                    holder.egg.setImageResource(R.mipmap.egg);
+                    break;
+                case "Hatched":
+                    holder.egg.setImageResource(R.mipmap.hatched_egg);
+                    break;
+                case "Unhatched":
+                    holder.egg.setImageResource(R.mipmap.unhatched_egg);
+                    break;
+            }
+        }
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int clickedPosition = holder.getAdapterPosition();
+
+
+
+
                 Toast.makeText(context, "egg no. "+ eggs.get(clickedPosition).getEgg_id() + " clicked", Toast.LENGTH_SHORT).show();
-//
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Hatch Egg")
+                        .setMessage("Did this egg hatch successfully?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Do something if the egg hatched successfully
+                                boolean success = dbhelper.updateEggStatus(eggs.get(clickedPosition).getEgg_id(), "Hatched");
+                                if (success) {
+                                    holder.egg.setImageResource(R.mipmap.hatched_egg);
+                                    Toast.makeText(context, "Egg hatched successfully", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(context, "Egg status not updated", Toast.LENGTH_SHORT).show();
+                                }
+                                dialog.dismiss();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Do something if the egg didn't hatch successfully
+                                boolean success = dbhelper.updateEggStatus(eggs.get(clickedPosition).getEgg_id(), "Unhatched");
+                                if (success) {
+                                    holder.egg.setImageResource(R.mipmap.unhatched_egg);
+                                    Toast.makeText(context, "Egg failed to hatch", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(context, "Egg status not updated", Toast.LENGTH_SHORT).show();
+                                }
+                                dialog.dismiss();
+                            }
+                        })
+                        .create()
+                        .show();
 //                View bottomSheetView = LayoutInflater.from(context).inflate(R.layout.pigeons_bottom_sheet, null);
 
                 //Set the contents of the bottom sheet
@@ -127,7 +181,7 @@ public class EggsRecViewAdapter extends RecyclerView.Adapter<EggsRecViewAdapter.
 
     @Override
     public int getItemCount() {
-        Log.d("TAG", "pigeonssize:" + eggs.size() );
+
         return eggs.size();
     }
 
@@ -138,14 +192,15 @@ public class EggsRecViewAdapter extends RecyclerView.Adapter<EggsRecViewAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        private ImageView egg;
         private TextView ph;
-        private RelativeLayout parent;
+        private CardView parent;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            egg = itemView.findViewById(R.id.iv_placeholder_egg);
             ph = itemView.findViewById(R.id.idplaceholder_egg);
             parent = itemView.findViewById(R.id.parent_egg);
-
 
         }
     }

@@ -37,6 +37,7 @@ public class EggAdding extends AppCompatActivity {
     private List<Integer> cageNumbers;
     private List<Integer> nestNumbers;
 
+
     private void showDatePickerDialog(final EditText et) {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 EggAdding.this,
@@ -123,13 +124,13 @@ public class EggAdding extends AppCompatActivity {
             public void onClick(View v) {
                 boolean success = dbhelper.addNestNumber(profileId);
                 if (success) {
-                    Toast.makeText(EggAdding.this, "Cage Number added", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EggAdding.this, "New Nest added", Toast.LENGTH_SHORT).show();
 
                 } else {
-                    Toast.makeText(EggAdding.this, "Cage Number not added", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EggAdding.this, "New Nest not added", Toast.LENGTH_SHORT).show();
                 }
                 nestNumbers = dbhelper.getAllNestNumbers(profileId);
-                ArrayAdapter<Integer> nestadapter = new ArrayAdapter<>(EggAdding.this, android.R.layout.simple_spinner_item, cageNumbers);
+                ArrayAdapter<Integer> nestadapter = new ArrayAdapter<>(EggAdding.this, android.R.layout.simple_spinner_item, nestNumbers);
                 nestadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 nestadapter.notifyDataSetChanged();
                 spNestNo.setAdapter(nestadapter);
@@ -151,6 +152,7 @@ public class EggAdding extends AppCompatActivity {
         spMother.setAdapter(ringIdsAdapter);
 
 
+
         btSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -159,30 +161,30 @@ public class EggAdding extends AppCompatActivity {
 
                 String laydate = etLayDate.getText().toString();
                 String hatchdate = etLayDate.getText().toString();
+                String eggStatus = "Laid";
 
                 selectedFather = spFather.getSelectedItem().toString();
                 selectedMother = spMother.getSelectedItem().toString();
 
                 int quantity = Integer.parseInt(etQuantity.getText().toString());
-                for (int i = 0; i < quantity; i++) {
-                    EggsGetSet eggs = new EggsGetSet(-1, selectedCageNo, selectedNestNo, laydate, hatchdate, selectedFather, selectedMother, profileId);
 
-                    dbhelper.addEgg(eggs);
-                                ArrayList<EggsGetSet> updatedList = dbhelper.getEveryEgg(profileId);
-                                EggTrackerFragment.eggadapter.setEggs(updatedList);
+                // Check if father and mother are not empty before adding eggs
+                if (!selectedFather.isEmpty() && !selectedMother.isEmpty()) {
+                    for (int i = 0; i < quantity; i++) {
+                        EggsGetSet eggs = new EggsGetSet(-1, selectedCageNo, selectedNestNo, laydate, hatchdate, eggStatus, selectedFather, selectedMother, profileId);
+
+                        dbhelper.addEgg(eggs);
+                        ArrayList<EggsGetSet> updatedList = dbhelper.getEveryEgg(profileId);
+                        EggTrackerFragment.eggadapter.setEggs(updatedList);
+                    }
+
+                    finish();
+                } else {
+                    // Show an error message if father and/or mother is missing
+                    Toast.makeText(getApplicationContext(), "Please select a father and a mother", Toast.LENGTH_SHORT).show();
                 }
-
-                finish();
-//                if (success) {
-//                    Toast.makeText(PigeonAdding.this, "Pigeon added", Toast.LENGTH_SHORT).show();
-////                    int position = MyPigeonsFragment.pigeons.size();
-////                    MyPigeonsFragment.pigeons.add(pigeons);
-////                    MyPigeonsFragment.adapter.notifyItemInserted(position);
-//                    finish();
-//                } else {
-//                    Toast.makeText(PigeonAdding.this, "Pigeon not added", Toast.LENGTH_SHORT).show();
-//                }
             }
         });
+
     }
 }

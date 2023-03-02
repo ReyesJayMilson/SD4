@@ -44,7 +44,7 @@
         android:text="Here are some recommendations by experts on mixing your feeds of the pigeon."
         android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:textSize="12sp" />
+        android:textSize="12dp" />
 
     <TextView
         android:id="@+id/textView3"
@@ -72,7 +72,7 @@
         android:layout_marginBottom="351dp"
         android:fontFamily="serif"
         android:text="It is ideal as a base corn when racing or ideally suited to getting your pigeons in top condition for breeding. So here's an exmaple of breeding mix:\n\nFrench \nMaize \nYellow and Blue Peas \nMaple Peas \nRed and White Dari \nSafflower \nTares \nWheat"
-        android:textSize="10sp" />
+        android:textSize="10dp" />
 
     <TextView
         android:id="@+id/textView5"
@@ -98,6 +98,6 @@
         android:layout_marginBottom="146dp"
         android:fontFamily="serif"
         android:text="Heavy mixes are those that contain more protein than the Light mixes, and definitely more carbohydrates for the production of fat. For longer races, the addition of some high-fat grains and seeds to the Heavy mix toward shipping day seems to make sense. And here's an example of a racing heavy mix:\n\nPeas \nMaize (corn)\nWheat \nLivestock/poultry pellets \nProtein \nSafflower"
-        android:textSize="10sp"/>
+        android:textSize="10dp" />
 
 </RelativeLayout>

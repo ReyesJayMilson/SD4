@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#36A1EBF1"
     tools:context=".Home.HomeFragment"
     android:layout_margin="10dp"
@@ -12,56 +13,91 @@
     <!-- TODO: Update blank fragment layout -->
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cv_home_banner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:elevation="4dp">
+        android:padding="10dp"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="5dp"
+        android:layout_margin="5dp">
 
-        <TextView
-            android:id="@+id/tv_welcome_message"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Welcome to Pigeon Breeder Management. You currently have"
-            android:textSize="24sp"
-            android:padding="16dp" />
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tv_pigeon_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="number placeholder"
-            android:textSize="20sp"
-            />
+            <TextView
+                android:id="@+id/idplaceholder_banner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Placeholder message"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:padding="16dp"
+                />
 
-        <TextView
-            android:id="@+id/tv_welcome_message2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="number placeholder"
-            android:textSize="20sp"
-            />
 
+
+
+
+
+
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 
-
-
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rc_Home"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_nest_statistics"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cv_home_banner"
+        android:padding="10dp"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="5dp"
+        android:layout_margin="5dp"
         >
-    </androidx.recyclerview.widget.RecyclerView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/idplaceholder_hatchedeggs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Placeholder message"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:padding="16dp" />
+
+            <TextView
+                android:id="@+id/idplaceholder_nestdescr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idplaceholder_hatchedeggs"
+                android:text="Placeholder stats"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:padding="16dp"
+                />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/rc_Home"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        >-->
+<!--    </androidx.recyclerview.widget.RecyclerView>-->
 
 
-    <FrameLayout
-        android:id="@+id/bs_Pigeon"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </FrameLayout>
+<!--    <FrameLayout-->
+<!--        android:id="@+id/bs_Pigeon"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
+<!---->
+<!--    </FrameLayout>-->
 
 
 </RelativeLayout>
