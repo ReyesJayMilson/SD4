@@ -2,40 +2,50 @@ package com.example.pigeonbreedermanagementapplication;
 
 public class Disease {
     private int id;
+    private String image;
     private String name;
     private String desc;
 
     private String symp;
 
-    public int getId(){
+
+    public int getId() {
         return id;
     }
 
-    public void setId(int id){
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getName(){
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getName() {
         return name;
     }
 
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getDesc(){
+    public String getDesc() {
         return desc;
     }
 
-    public void setDesc(String desc){
+    public void setDesc(String desc) {
         this.desc = desc;
     }
 
-    public String getSymp(){
+    public String getSymp() {
         return symp;
     }
 
-    public void setSymp(String desc){
+    public void setSymp(String symp) {
         this.symp = symp;
     }
 }

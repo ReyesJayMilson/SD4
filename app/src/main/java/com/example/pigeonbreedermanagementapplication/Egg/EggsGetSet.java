@@ -1,7 +1,6 @@
 package com.example.pigeonbreedermanagementapplication.Egg;
 
-public class EggsGetSet
-{
+public class EggsGetSet {
     private int egg_id;
     private int cage_number;
     private int nest_number;
@@ -9,8 +8,9 @@ public class EggsGetSet
     private String hatching_date;
     private String father;
     private String mother;
+    private int profile_id;
 
-    public EggsGetSet(int egg_id, int cage_number, int nest_number, String laying_date, String hatching_date, String father, String mother) {
+    public EggsGetSet(int egg_id, int cage_number, int nest_number, String laying_date, String hatching_date, String father, String mother, int profile_id) {
         this.egg_id = egg_id;
         this.cage_number = cage_number;
         this.nest_number = nest_number;
@@ -18,6 +18,7 @@ public class EggsGetSet
         this.hatching_date = hatching_date;
         this.father = father;
         this.mother = mother;
+        this.profile_id = profile_id;
     }
 
     @Override
@@ -30,6 +31,7 @@ public class EggsGetSet
                 ", hatching_date='" + hatching_date + '\'' +
                 ", father='" + father + '\'' +
                 ", mother='" + mother + '\'' +
+                ", profile_id=" + profile_id +
                 '}';
     }
 
@@ -87,5 +89,13 @@ public class EggsGetSet
 
     public void setMother(String mother) {
         this.mother = mother;
+    }
+
+    public int getProfile_id() {
+        return profile_id;
+    }
+
+    public void setProfile_id(int profile_id) {
+        this.profile_id = profile_id;
     }
 }

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pigeonbreedermanagementapplication.DatabaseHelper;
+import com.example.pigeonbreedermanagementapplication.GlobalVariables;
 import com.example.pigeonbreedermanagementapplication.R;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 
 public class ProductFragment extends Fragment {
 
+    private int profileId = GlobalVariables.profileId;
     private RecyclerView productRecView;
     public static ProductRecViewAdapter productadapter;
     private DatabaseHelper dbhelper;
@@ -39,7 +41,7 @@ public class ProductFragment extends Fragment {
         // to pass the context to the databasehelper
 
 
-        products = dbhelper.getEveryProduct();
+        products = dbhelper.getEveryProduct(profileId);
 
         productadapter = new ProductRecViewAdapter(view.getContext());
 

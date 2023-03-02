@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pigeonbreedermanagementapplication.DatabaseHelper;
+import com.example.pigeonbreedermanagementapplication.GlobalVariables;
 import com.example.pigeonbreedermanagementapplication.R;
 import com.example.pigeonbreedermanagementapplication.Transaction.TransactionAdding;
 import com.example.pigeonbreedermanagementapplication.Transaction.TransactionGetSet;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 
 public class TransactionFragment extends Fragment {
 
+    private int profileId = GlobalVariables.profileId;
     private RecyclerView transactionRecView;
     public static TransactionRecViewAdapter transactionadapter;
     private DatabaseHelper dbhelper;
@@ -41,7 +43,7 @@ public class TransactionFragment extends Fragment {
         // to pass the context to the databasehelper
 
 
-        transactions = dbhelper.getEveryTransaction();
+        transactions = dbhelper.getEveryTransaction(profileId);
 
         transactionadapter = new TransactionRecViewAdapter(view.getContext());
 

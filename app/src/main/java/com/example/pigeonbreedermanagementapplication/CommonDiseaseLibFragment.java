@@ -1,6 +1,7 @@
 package com.example.pigeonbreedermanagementapplication;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.Spinner;
 
@@ -38,6 +40,8 @@ public class CommonDiseaseLibFragment extends Fragment {
 
     private SearchView searchView;
 
+    private ImageView imageView;
+
     private SymptomCheckboxAdapter symptomCheckboxAdapter;
 
     private static final String SYMPTOMS_TABLE = "SYMPTOMS_TABLE";
@@ -52,8 +56,10 @@ public class CommonDiseaseLibFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_common_disease_lib, container, false);
 
         spinSymptom = view.findViewById(R.id.spinSymptom);
+
         databaseHelper = new DatabaseHelper(getActivity());
         diseaseList = databaseHelper.getAllDisease();
+
 
         // Fetch all the symptom_name from SymptomsTable and ignore duplicates
         SQLiteDatabase database = databaseHelper.getReadableDatabase();
@@ -74,7 +80,7 @@ public class CommonDiseaseLibFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.Recycler_Library);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new DiseaseAdapter(diseaseList);
+        adapter = new DiseaseAdapter(diseaseList, getActivity());
         recyclerView.setAdapter(adapter);
 
         // Inflate the layout for this fragment
@@ -109,17 +115,15 @@ public class CommonDiseaseLibFragment extends Fragment {
 
     }
 
-    private ArrayList<Disease> filter(ArrayList<Disease> pigeons, String query) {
+    private ArrayList<Disease> filter(ArrayList<Disease> diseases, String query) {
         // returns a filtered list based on the search query
-        ArrayList<Disease> filteredDisease = new ArrayList<>();
-        for (Disease disease : diseaseList) {
-            if (disease.getName().toLowerCase().contains(query.toLowerCase())) {
-                filteredDisease.add(disease);
+        ArrayList<Disease> filteredDiseases = new ArrayList<>();
+        for (Disease disease : diseases) {
+            if (disease.getName() != null && disease.getName().toLowerCase().contains(query.toLowerCase())) {
+                filteredDiseases.add(disease);
             }
         }
-
-
-        return filteredDisease;
+        return filteredDiseases;
     }
 
     @Override
