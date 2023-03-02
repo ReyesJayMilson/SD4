@@ -37,7 +37,7 @@
                         android:id="@+id/ivcanker"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@mipmap/image_pigeon_crank" />
+                        android:src="@mipmap/image_pigeon_canker" />
 
 
                     <LinearLayout
@@ -151,7 +151,7 @@
                         android:id="@+id/ivcoccidia"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@mipmap/image_pigeon_coccida" />
+                        android:src="@mipmap/image_pigeon_coccidia" />
 
 
                     <LinearLayout

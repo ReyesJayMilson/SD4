@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.Spinner;
 
@@ -38,6 +39,8 @@ public class CommonDiseaseLibFragment extends Fragment {
 
     private SearchView searchView;
 
+    private ImageView imageView;
+
     private SymptomCheckboxAdapter symptomCheckboxAdapter;
 
     private static final String SYMPTOMS_TABLE = "SYMPTOMS_TABLE";
@@ -52,6 +55,7 @@ public class CommonDiseaseLibFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_common_disease_lib, container, false);
 
         spinSymptom = view.findViewById(R.id.spinSymptom);
+
         databaseHelper = new DatabaseHelper(getActivity());
         diseaseList = databaseHelper.getAllDisease();
 

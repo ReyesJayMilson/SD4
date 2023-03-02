@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,7 @@ public class DiseaseAdapter extends RecyclerView.Adapter<DiseaseAdapter.DiseaseV
     @Override
     public void onBindViewHolder(@NonNull DiseaseViewHolder holder, int position) {
         Disease disease = diseaseList.get(position);
+       //holder.imageView.setImageBitmap(get);
         holder.textName.setText(disease.getName());
         holder.textDesc.setText(disease.getDesc());
 
@@ -95,11 +97,15 @@ public void setDisease(ArrayList<Disease> diseases) {
 
     public class DiseaseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         TextView textName, textDesc;
+        ImageView imageView;
 
         DiseaseViewHolder(@NonNull View itemView){
             super(itemView);
+
+            imageView = itemView.findViewById(R.id.imageView);
             textName = itemView.findViewById(R.id.textName);
             textDesc = itemView.findViewById(R.id.textDesc);
+
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
