@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BreederManagementSystem">
         <activity
-            android:name=".MainActivity"
+            android:name=".Profile.ProfilesActivity"
             android:windowSoftInputMode="adjustResize"
             android:exported="true">
             <intent-filter>

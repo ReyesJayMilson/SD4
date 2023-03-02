@@ -2,18 +2,21 @@ package com.example.pigeonbreedermanagementapplication.Product;
 
 public class ProductGetSet {
 
-    int product_id;
-    String product_name;
-    int product_price;
-    String product_quantity;
-    String use_per_week;
+    private int product_id;
+    private String product_name;
+    private int product_price;
+    private String product_quantity;
+    private String use_per_week;
+    private int profile_id;
 
-    public ProductGetSet(int product_id, String product_name, int product_price, String product_quantity, String use_per_week) {
+
+    public ProductGetSet(int product_id, String product_name, int product_price, String product_quantity, String use_per_week, int profile_id) {
         this.product_id = product_id;
         this.product_name = product_name;
         this.product_price = product_price;
         this.product_quantity = product_quantity;
         this.use_per_week = use_per_week;
+        this.profile_id = profile_id;
     }
 
     @Override
@@ -24,6 +27,7 @@ public class ProductGetSet {
                 ", product_price=" + product_price +
                 ", product_quantity='" + product_quantity + '\'' +
                 ", use_per_week='" + use_per_week + '\'' +
+                ", profile_id=" + profile_id +
                 '}';
     }
 
@@ -65,5 +69,13 @@ public class ProductGetSet {
 
     public void setUse_per_week(String use_per_week) {
         this.use_per_week = use_per_week;
+    }
+
+    public int getProfile_id() {
+        return profile_id;
+    }
+
+    public void setProfile_id(int profile_id) {
+        this.profile_id = profile_id;
     }
 }

@@ -29,6 +29,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pigeonbreedermanagementapplication.DatabaseHelper;
+import com.example.pigeonbreedermanagementapplication.GlobalVariables;
 import com.example.pigeonbreedermanagementapplication.R;
 
 import java.io.ByteArrayOutputStream;
@@ -42,6 +43,7 @@ import java.util.List;
 
 public class PigeonEditing extends AppCompatActivity {
 
+    private int profileId = GlobalVariables.profileId;
     private Button btSave;
     private Button btAddCage;
     private ImageView ivAddImage;
@@ -131,7 +133,7 @@ public class PigeonEditing extends AppCompatActivity {
         });
 
         //adding to cageNo
-        List<Integer> cageNumbers = dbhelper.getAllCageNumbers();
+        List<Integer> cageNumbers = dbhelper.getAllCageNumbers(profileId);
         ArrayAdapter<Integer> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cageNumbers);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spCageNo.setAdapter(adapter);
@@ -139,14 +141,14 @@ public class PigeonEditing extends AppCompatActivity {
         btAddCage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean success = dbhelper.addCageNumber();
+                boolean success = dbhelper.addCageNumber(profileId);
                 if (success) {
                     Toast.makeText(PigeonEditing.this, "Cage Number added", Toast.LENGTH_SHORT).show();
 
                 } else {
                     Toast.makeText(PigeonEditing.this, "Cage Number not added", Toast.LENGTH_SHORT).show();
                 }
-                List<Integer> cageNumbers = dbhelper.getAllCageNumbers();
+                List<Integer> cageNumbers = dbhelper.getAllCageNumbers(profileId);
                 ArrayAdapter<Integer> adapter = new ArrayAdapter<>(PigeonEditing.this, android.R.layout.simple_spinner_item, cageNumbers);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 adapter.notifyDataSetChanged();
@@ -309,7 +311,7 @@ public class PigeonEditing extends AppCompatActivity {
                 Log.d("TAG", "notes" + notes);
                 Log.d("TAG", "filepath" + filePath);
                 Log.d("TAG", "filepathimage " + image);
-                    PigeonsGetSet pigeons = new PigeonsGetSet(ringId, name, selectedCageNo, selectedYear, selectedBreed, selectedGender, color, selectedStatus, notes, filePath);
+                    PigeonsGetSet pigeons = new PigeonsGetSet(ringId, name, selectedCageNo, selectedYear, selectedBreed, selectedGender, color, selectedStatus, notes, filePath, profileId);
 
 
                     boolean success = dbhelper.editPigeon(pigeons);

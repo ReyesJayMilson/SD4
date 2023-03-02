@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pigeonbreedermanagementapplication.DatabaseHelper;
+import com.example.pigeonbreedermanagementapplication.GlobalVariables;
 import com.example.pigeonbreedermanagementapplication.R;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import java.util.List;
 
 public class TransactionAdding extends AppCompatActivity {
 
+    private int profileId = GlobalVariables.profileId;
     private Button btSave;
     private EditText etDetails, etAmount, etDate, etPartner;
     private Spinner spType;
@@ -101,7 +103,7 @@ public class TransactionAdding extends AppCompatActivity {
                 if (date.equals("") || partner.equals("")  || details.equals("")){
                     Toast.makeText(TransactionAdding.this, "Please input all the fields", Toast.LENGTH_SHORT).show();
                 } else {
-                        TransactionGetSet transactions = new TransactionGetSet(-1, selectedType, date, partner, amount, details);
+                        TransactionGetSet transactions = new TransactionGetSet(-1, selectedType, date, partner, amount, details, profileId);
                     boolean success = dbhelper.addTransactions(transactions);
 
                     if (success) {

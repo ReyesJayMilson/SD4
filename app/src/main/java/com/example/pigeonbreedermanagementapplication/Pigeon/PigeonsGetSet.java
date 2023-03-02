@@ -15,8 +15,9 @@ public class PigeonsGetSet {
     private String status;
     private String notes;
     private String image;
+    private int profile_id;
 
-    public PigeonsGetSet(String ring_id, String name, int cage_no, int birth_year, String breed, String gender, String color, String status, String notes, String image) {
+    public PigeonsGetSet(String ring_id, String name, int cage_no, int birth_year, String breed, String gender, String color, String status, String notes, String image, int profile_id) {
         this.ring_id = ring_id;
         this.name = name;
         this.cage_no = cage_no;
@@ -27,6 +28,24 @@ public class PigeonsGetSet {
         this.status = status;
         this.notes = notes;
         this.image = image;
+        this.profile_id = profile_id;
+    }
+
+    @Override
+    public String toString() {
+        return "PigeonsGetSet{" +
+                "ring_id='" + ring_id + '\'' +
+                ", name='" + name + '\'' +
+                ", cage_no=" + cage_no +
+                ", birth_year=" + birth_year +
+                ", breed='" + breed + '\'' +
+                ", gender='" + gender + '\'' +
+                ", color='" + color + '\'' +
+                ", status='" + status + '\'' +
+                ", notes='" + notes + '\'' +
+                ", image='" + image + '\'' +
+                ", profile_id=" + profile_id +
+                '}';
     }
 
     public String getRing_id() {
@@ -109,19 +128,11 @@ public class PigeonsGetSet {
         this.image = image;
     }
 
-    @Override
-    public String toString() {
-        return "PigeonsGetSet{" +
-                "ring_id='" + ring_id + '\'' +
-                ", name='" + name + '\'' +
-                ", cage_no=" + cage_no +
-                ", birth_year=" + birth_year +
-                ", breed='" + breed + '\'' +
-                ", gender='" + gender + '\'' +
-                ", color='" + color + '\'' +
-                ", status='" + status + '\'' +
-                ", notes='" + notes + '\'' +
-                ", image='" + image + '\'' +
-                '}';
+    public int getProfile_id() {
+        return profile_id;
+    }
+
+    public void setProfile_id(int profile_id) {
+        this.profile_id = profile_id;
     }
 }
