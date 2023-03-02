@@ -4,10 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#36A1EBF1"
-    tools:context=".Home.HomeFragment" />
+    tools:context=".Home.HomeFragment"
     android:layout_margin="10dp"
-    android:id="@+id/xml_homefragment"
-    tools:context=".Home.HomeFragment">
+    android:id="@+id/xml_homefragment">
 
 
     <!-- TODO: Update blank fragment layout -->
@@ -53,7 +52,6 @@
         android:id="@+id/rc_Home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@=id/tv_welcome_message"
         >
     </androidx.recyclerview.widget.RecyclerView>
 

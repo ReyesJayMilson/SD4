@@ -5,6 +5,11 @@ import static com.google.android.material.internal.ContextUtils.getActivity;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,8 +39,10 @@ public class DiseaseAdapter extends RecyclerView.Adapter<DiseaseAdapter.DiseaseV
         diseaseList.add(disease);
     }
 
-    public DiseaseAdapter(ArrayList<Disease> diseaseList){
+    public DiseaseAdapter(ArrayList<Disease> diseaseList, Context context){
         this.diseaseList = diseaseList;
+        this.context = context;
+
     }
 
 
@@ -49,9 +56,11 @@ public class DiseaseAdapter extends RecyclerView.Adapter<DiseaseAdapter.DiseaseV
     @Override
     public void onBindViewHolder(@NonNull DiseaseViewHolder holder, int position) {
         Disease disease = diseaseList.get(position);
-       //holder.imageView.setImageBitmap(get);
+                int resID = context.getResources().getIdentifier(disease.getImage(), "mipmap", context.getPackageName());
+        holder.imageView.setImageResource(resID);
         holder.textName.setText(disease.getName());
         holder.textDesc.setText(disease.getDesc());
+        Log.d("string:", disease.getName() );
 
         holder.itemView.setSelected(selectedPos == position);
         holder.itemView.setOnClickListener(new View.OnClickListener(){
@@ -124,4 +133,7 @@ public void setDisease(ArrayList<Disease> diseases) {
             return true;
         }
     }
+
+
+
 }
