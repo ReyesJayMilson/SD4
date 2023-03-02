@@ -20,5 +20,9 @@
     <color name="light_gold">#FFD756</color>
     <color name="transparent">#00000000</color>
     <color name="opaque">#33000000</color>
-
+    <color name="theme_dark_grey">#353535</color>
+    <color name="theme_green">#3C6E71</color>
+    <color name="theme_white">#FFFFFF</color>
+    <color name="theme_grey">#D9D9D9</color>
+    <color name="theme_royal_blue">#284B63</color>
 </resources>
