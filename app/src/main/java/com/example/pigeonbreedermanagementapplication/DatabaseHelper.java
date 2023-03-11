@@ -738,7 +738,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // get data from the database
 
-        String queryString = "SELECT * FROM " + EGGMONITORING_TABLE + " WHERE " + COLUMN_PROFILE_ID + " = " + profileid;
+        String queryString = "SELECT * FROM " + TRANSACTION_TABLE + " WHERE " + COLUMN_PROFILE_ID + " = " + profileid;
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.rawQuery(queryString, null);
