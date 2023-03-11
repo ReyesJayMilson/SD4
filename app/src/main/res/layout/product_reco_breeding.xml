@@ -71,7 +71,7 @@
         android:layout_marginEnd="201dp"
         android:layout_marginBottom="351dp"
         android:fontFamily="serif"
-        android:text="It is ideal as a base corn when racing or ideally suited to getting your pigeons in top condition for breeding. So here's an exmaple of breeding mix:\n\nFrench \nMaize \nYellow & Blue Peas \nMaple Peas \nRed & White Dari \nSafflower \nTares \nWheat"
+        android:text="It is ideal as a base corn when racing or ideally suited to getting your pigeons in top condition for breeding. So here's an exmaple of breeding mix:\n\nFrench \nMaize \nYellow and Blue Peas \nMaple Peas \nRed and White Dari \nSafflower \nTares \nWheat"
         android:textSize="10dp" />
 
     <TextView

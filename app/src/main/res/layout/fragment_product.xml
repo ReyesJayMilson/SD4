@@ -16,9 +16,13 @@
         android:id="@+id/bt_AddProduct"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="20dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="96dp"
+        android:layout_marginEnd="97dp"
+        android:layout_marginBottom="26dp"
         android:background="@drawable/rectangular_border"
         android:backgroundTint="@color/teal_200"
         android:text="Add Product"
@@ -28,9 +32,9 @@
     <FrameLayout
         android:id="@+id/bs_Product"
         android:layout_width="match_parent"
-        android:layout_height="425dp"
+        android:layout_height="606dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="232dp">
+        android:layout_marginBottom="51dp">
 
     </FrameLayout>
 

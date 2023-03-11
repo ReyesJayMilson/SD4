@@ -19,6 +19,7 @@
             android:id="@+id/iv_placeholder_profile"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:scaleType="centerCrop"
             android:src="@mipmap/defaultprofile_background"
             android:layout_alignParentStart="true"
             android:layout_marginEnd="10dp"
