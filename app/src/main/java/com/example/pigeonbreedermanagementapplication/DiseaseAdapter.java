@@ -3,6 +3,7 @@ package com.example.pigeonbreedermanagementapplication;
 import static com.google.android.material.internal.ContextUtils.getActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pigeonbreedermanagementapplication.Pigeon.PigeonsGetSet;
@@ -50,6 +52,7 @@ public class DiseaseAdapter extends RecyclerView.Adapter<DiseaseAdapter.DiseaseV
     @Override
     public DiseaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_disease, parent, false);
+
         return new DiseaseViewHolder(view);
     }
 
@@ -59,7 +62,8 @@ public class DiseaseAdapter extends RecyclerView.Adapter<DiseaseAdapter.DiseaseV
         int resID = context.getResources().getIdentifier(disease.getImage(), "mipmap", context.getPackageName());
         holder.imageView.setImageResource(resID);
         holder.textName.setText(disease.getName());
-        holder.textDesc.setText(disease.getDesc());
+
+
         holder.itemView.setSelected(selectedPos == position);
         holder.itemView.setOnClickListener(new View.OnClickListener(){
 
@@ -112,7 +116,6 @@ public void setDisease(ArrayList<Disease> diseases) {
 
             imageView = itemView.findViewById(R.id.imageView);
             textName = itemView.findViewById(R.id.textName);
-            textDesc = itemView.findViewById(R.id.textDesc);
 
 
             itemView.setOnClickListener(this);

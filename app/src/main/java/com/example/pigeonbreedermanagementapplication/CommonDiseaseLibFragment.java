@@ -42,7 +42,6 @@ public class CommonDiseaseLibFragment extends Fragment {
 
     private ImageView imageView;
 
-    private SymptomCheckboxAdapter symptomCheckboxAdapter;
 
     private static final String SYMPTOMS_TABLE = "SYMPTOMS_TABLE";
     private static final String COLUMN_SYMP_NAME = "SYMPTOM_NAME";
@@ -55,28 +54,9 @@ public class CommonDiseaseLibFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_common_disease_lib, container, false);
 
-        spinSymptom = view.findViewById(R.id.spinSymptom);
 
         databaseHelper = new DatabaseHelper(getActivity());
         diseaseList = databaseHelper.getAllDisease();
-
-
-        // Fetch all the symptom_name from SymptomsTable and ignore duplicates
-        SQLiteDatabase database = databaseHelper.getReadableDatabase();
-        Cursor cursor = database.rawQuery("SELECT DISTINCT " + COLUMN_SYMP_NAME + " FROM " + SYMPTOMS_TABLE, null);
-        List<String> symptomName = new ArrayList<>();
-        while (cursor.moveToNext()) {
-            symptomName.add(cursor.getString(cursor.getColumnIndex(COLUMN_SYMP_NAME)));
-        }
-        cursor.close();
-
-        // Add the symptom names to the spinner
-//        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, symptomNames);
-//        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        SymptomCheckboxAdapter adapter2 = new SymptomCheckboxAdapter(getActivity(), R.layout.spinner_item_checkbox, symptomName);
-        spinSymptom.setAdapter(adapter2);
-
 
         recyclerView = view.findViewById(R.id.Recycler_Library);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

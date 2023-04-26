@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".Egg.EggTrackerFragment"
     android:padding="10dp"
+    android:background="#1D2538"
     android:id="@+id/xml_pigeonfragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -23,7 +24,7 @@
         android:background="@drawable/rectangular_border"
         android:backgroundTint="@color/teal_200"
         android:text="Add Eggs"
-        android:textColor="@color/black"
+        android:textColor="#DBDBDB"
         android:textSize="20sp" />
 
     <FrameLayout
