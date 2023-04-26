@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,7 +82,14 @@ public class DiseaseActivity extends AppCompatActivity {
         disImage.setImageResource(resID);
 
         String diseaseName = intent.getStringExtra("disease_name");
-        disName.setText(diseaseName);
+        String[] words = diseaseName.split("\\s+");
+        StringBuilder sentenceCaseName = new StringBuilder();
+        for (String word : words) {
+            sentenceCaseName.append(Character.toUpperCase(word.charAt(0)))
+                    .append(word.substring(1).toLowerCase())
+                    .append(" ");
+        }
+        disName.setText(sentenceCaseName.toString().trim());
 
         String diseaseDesc = intent.getStringExtra("disease_desc");
         disDesc.setText(diseaseDesc);

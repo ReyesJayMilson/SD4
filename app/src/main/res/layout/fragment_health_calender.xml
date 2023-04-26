@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HealthCalendarFragment">
+    tools:context=".HealthCalendarFragment"
+    android:background="#1D2538">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -12,6 +13,6 @@
         android:text="Health Calendar Fragment"
         android:textSize="30sp"
         android:layout_centerInParent="true"
-        android:textColor="@color/black" />
+        android:textColor="#DBDBDB" />
 
 </RelativeLayout>

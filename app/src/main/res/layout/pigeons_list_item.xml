@@ -7,17 +7,20 @@
     android:padding="10dp"
     app:cardElevation="5dp"
     app:cardCornerRadius="5dp"
-    android:layout_margin="5dp">
+    android:layout_margin="5dp"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#121723">
 
         <TextView
             android:id="@+id/idplaceholder_pigeon"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:text="Placeholder ID"
+            android:textColor="#DBDBDB"
             android:layout_centerHorizontal="true"
             android:textStyle="bold" />
 

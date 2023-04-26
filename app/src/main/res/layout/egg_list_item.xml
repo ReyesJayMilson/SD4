@@ -17,17 +17,17 @@
             android:id="@+id/idplaceholder_egg"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:text="Placeholder ID"
             android:layout_centerHorizontal="true"
+            android:text="Placeholder ID"
             android:textStyle="bold" />
 
         <ImageView
+            android:id="@+id/iv_placeholder_egg"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:id="@+id/iv_placeholder_egg"
-            android:scaleType="centerCrop"
             android:layout_below="@id/idplaceholder_egg"
-            android:layout_centerHorizontal="true">
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerCrop">
 
         </ImageView>
 
