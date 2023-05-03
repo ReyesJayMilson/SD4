@@ -46,6 +46,18 @@ public class TransactionRecViewAdapter extends RecyclerView.Adapter<TransactionR
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.ph.setText(transactions.get(position).getTransaction_details());
+        holder.tdate.setText(transactions.get(position).getTransaction_date());
+        holder.ttype.setText(transactions.get(position).getTransaction_type());
+        int transactionAmount = transactions.get(position).getTransaction_amount();
+        if (transactions.get(position).getTransaction_type().equals("Buy")) {
+            holder.tamount.setTextColor(context.getResources().getColor(android.R.color.holo_red_dark));
+            holder.tamount.setText("- ₱" + Integer.toString(transactionAmount));
+        }else{
+            holder.tamount.setTextColor(context.getResources().getColor(android.R.color.holo_green_light));
+            holder.tamount.setText("+ ₱" + Integer.toString(transactionAmount));
+        }
+
+
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,11 +141,15 @@ public class TransactionRecViewAdapter extends RecyclerView.Adapter<TransactionR
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView ph;
+        private TextView ph, tdate, tamount, ttype;
+
         private CardView parent;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ph = itemView.findViewById(R.id.idplaceholder_transaction);
+            ttype = itemView.findViewById(R.id.typeplaceholder_transaction);
+            tdate = itemView.findViewById(R.id.dateplaceholder_transaction);
+            tamount = itemView.findViewById(R.id.amountplaceholder_transaction);
             parent = itemView.findViewById(R.id.parent_transaction);
         }
     }

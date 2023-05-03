@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:backgroundTint="#1D2538"
+    android:backgroundTint="#121723"
     app:cardElevation="0dp"
-
     >
 
 
@@ -15,7 +14,6 @@
         android:layout_height="90dp">
 
         <ImageView
-
             android:id="@+id/imageView"
             android:layout_width="75dp"
             android:layout_height="75dp"
@@ -50,7 +48,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:backgroundTint="#1D2538"
+            android:backgroundTint="#121723"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:layout_editor_absoluteX="-16dp">
 
