@@ -11,15 +11,17 @@
     >
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="match_parent"
-        android:background="#121723">
+        android:background="@drawable/egg_border">
 
         <TextView
             android:id="@+id/idplaceholder_pigeon"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="20dp"
             android:text="Placeholder ID"
+            android:background="#4FACA1"
+            android:gravity="center"
             android:textColor="#DBDBDB"
             android:layout_centerHorizontal="true"
             android:textStyle="bold" />
