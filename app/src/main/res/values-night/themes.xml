@@ -5,6 +5,7 @@
         <item name="colorPrimary">#28595E</item>
         <item name="colorPrimaryVariant">#28595E</item>
         <item name="colorOnPrimary">@color/white</item>
+
         <!-- Secondary brand color. -->
         <item name="colorSecondary">#28595E</item>
         <item name="colorSecondaryVariant">#28595E</item>
@@ -12,5 +13,25 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:navigationBarColor">@color/black</item>
+        <item name="android:elevation">0dp</item>
     </style>
+
+    <style name="Theme.BreederManagementSystem.Dark.NoActionBar" parent="Theme.AppCompat.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">#28595E</item>
+        <item name="colorPrimaryVariant">#28595E</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">#28595E</item>
+        <item name="colorSecondaryVariant">#28595E</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@color/black</item>
+        <!-- Customize your theme here. -->
+        <item name="android:navigationBarColor">@color/black</item>
+
+    </style>
+
 </resources>

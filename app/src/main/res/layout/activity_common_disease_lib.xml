@@ -74,7 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="54dp"
             android:layout_marginTop="20dp"
-            android:backgroundTint="#28595E"
+            android:backgroundTint=" #4FACA1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -107,7 +107,7 @@
 
         <TextView
             android:id="@+id/disSymptom"
-            android:layout_width="296dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="20dp"

@@ -12,8 +12,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="106dp"
-        >
+        android:layout_height="90dp">
 
         <ImageView
 
@@ -28,7 +27,7 @@
             app:layout_constraintHorizontal_bias="0.047"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_bias="0.72"
             app:srcCompat="@drawable/baseline_home_24" />
 
         <TextView
@@ -50,11 +49,17 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@drawable/border"
-            android:backgroundTint="#333462"
+            android:layout_height="3dp"
+            android:backgroundTint="#1D2538"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:layout_editor_absoluteX="-16dp" />
+            tools:layout_editor_absoluteX="-16dp">
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/dashed_new_10px_4d8g" />
+        </androidx.cardview.widget.CardView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
