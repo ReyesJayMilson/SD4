@@ -15,12 +15,14 @@
         android:background="@drawable/egg_border">
 
         <TextView
+            android:background="#7E88A3"
             android:id="@+id/idplaceholder_egg"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:gravity="center"
             android:text="Placeholder ID"
+            android:layout_marginBottom="3.5dp"
             android:textStyle="bold" />
 
         <ImageView

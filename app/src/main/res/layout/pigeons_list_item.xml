@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:text="Placeholder ID"
-            android:background="#4FACA1"
+            android:background="#7E88A3"
             android:gravity="center"
             android:textColor="#DBDBDB"
             android:layout_centerHorizontal="true"
