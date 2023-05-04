@@ -7,12 +7,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.BreederManagementSystem.Dark.NoActionBar">
+        android:theme="@style/Theme.BreederManagementSystem.Dark">
         <activity
             android:name=".Profile.ProfilesActivity"
             android:windowSoftInputMode="adjustResize"
             android:exported="true"
-            android:theme="@style/Theme.BreederManagementSystem.Dark">
+            android:theme="@style/Theme.AppCompat.DayNight">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -21,7 +21,7 @@
         <activity
             android:name=".NavigationActivity"
             android:windowSoftInputMode="adjustPan"
-            android:theme="@style/Theme.BreederManagementSystem.Dark.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
         <activity
             android:name=".Pigeon.PigeonAdding"
             android:windowSoftInputMode="adjustPan"
