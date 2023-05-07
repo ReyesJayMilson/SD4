@@ -46,19 +46,21 @@ public class HomeFragment extends Fragment {
         nestDesc = view.findViewById(R.id.idplaceholder_nestdescr);
         dbhelper = new DatabaseHelper(getActivity());
 
+        displayDashboad();
+
+
+        // Inflate the layout for this fragment
+        return view;
+    }
+
+    private void displayDashboad() {
         String pigeon_count = String.valueOf(dbhelper.getTotalPigeons(profileId));
-
-
         banner.setText("Welcome to Pigeon Breeder Management. You currently have " + pigeon_count +
                 " pigeons in your flock. Keep track of your breeding progress and elevate your " +
                 "pigeon breeding process with Pigeon Breeder Management.");
-
         nestTitle.setText("Nest Statistics");
 
         String hatchcount = String.valueOf(dbhelper.getHatchedEggCount(profileId));
         nestDesc.setText("Successfully Hatched Eggs: " + hatchcount);
-
-        // Inflate the layout for this fragment
-        return view;
     }
 }

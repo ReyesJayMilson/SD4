@@ -3,16 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HealthCalendarFragment"
+    android:id="@+id/xml_hcalendarfragment"
+    tools:context=".HealthCalendar.HealthCalendarFragment"
     android:background="#1D2538">
 
+
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Health Calendar Fragment"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"
-        android:textColor="#DBDBDB" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rc_HCalendar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+
+
+    <FrameLayout
+        android:id="@+id/bs_HCalendar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
 
 </RelativeLayout>

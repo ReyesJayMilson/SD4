@@ -54,6 +54,10 @@
             android:name=".Product.ProductEditing"
             android:windowSoftInputMode="adjustPan"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity
+            android:name=".HealthCalendar.HCalendarActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
 
         <meta-data
             android:name="preloaded_fonts"

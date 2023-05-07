@@ -137,8 +137,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_NOTE_DATE + " TEXT, " +
                 COLUMN_RING_ID + " TEXT, " +
                 COLUMN_NOTE_DESCRIPTION + " TEXT, " +
+                COLUMN_SYMPTOM_ID + " TEXT, " +
+                COLUMN_DISEASE_ID + " TEXT, " +
                 COLUMN_PROFILE_ID + " INTEGER NOT NULL, " +
-                "FOREIGN KEY (" + COLUMN_PROFILE_ID + ") REFERENCES " + PROFILE_TABLE + "(" + COLUMN_PROFILE_ID + "))";
+                "FOREIGN KEY (" + COLUMN_PROFILE_ID + ") REFERENCES " + PROFILE_TABLE + "(" + COLUMN_PROFILE_ID + "), " +
+                "FOREIGN KEY (" + COLUMN_SYMPTOM_ID + ") REFERENCES " + SYMPTOMS_TABLE + "(" + COLUMN_SYMPTOM_ID + "), " +
+                "FOREIGN KEY (" + COLUMN_DISEASE_ID + ") REFERENCES " + DISEASES_TABLE + "(" + COLUMN_DISEASE_ID + "))";
         db.execSQL(createHealthCalendarTableStatement);
 
 //Create Table for Transactions
