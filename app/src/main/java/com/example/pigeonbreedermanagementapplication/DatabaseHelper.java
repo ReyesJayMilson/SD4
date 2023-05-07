@@ -338,32 +338,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
-//    List<Symptom> getSymptomsForDisease(int diseaseId) {
-//        List<Symptom> symptomList = new ArrayList<>();
-//
-//        // Connect to the database and fetch the data
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        String selectQuery = "SELECT * FROM " + TABLE_SYMPTOMS + " WHERE " + COLUMN_SYMPTOM_DISEASE_ID + " = " + diseaseId;
-//        Cursor cursor = db.rawQuery(selectQuery, null);
-//
-//        // Iterate through the cursor and add each symptom to the list
-//        if (cursor.moveToFirst()) {
-//            do {
-//                @SuppressLint("Range") int symptomId = cursor.getInt(cursor.getColumnIndex(COLUMN_SYMPTOM_ID));
-//                @SuppressLint("Range") String symptomName = cursor.getString(cursor.getColumnIndex(COLUMN_SYMPTOM_NAME));
-//
-//                Symptom symptom = new Symptom(symptomId, symptomName);
-//                symptomList.add(symptom);
-//            } while (cursor.moveToNext());
-//        }
-//
-//        cursor.close();
-//        db.close();
-//
-//        return symptomList;
-//    }
-
-
     ///////////////////////PROFILES//////////////////////////////
     public boolean addProfile(ProfilesGetSet profiles) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -658,6 +632,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public int getHatchedEggCount(int profileId) {
         SQLiteDatabase db = this.getReadableDatabase();
         String countQuery = "SELECT COUNT(*) FROM " + EGGMONITORING_TABLE + " WHERE " + COLUMN_PROFILE_ID + " = " + profileId + " AND " + COLUMN_EGG_STATUS + " = 'Hatched'";
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int count = 0;
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0);
+        }
+        cursor.close();
+        return count;
+    }
+
+    public int getBotchedEggCount(int profileId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String countQuery = "SELECT COUNT(*) FROM " + EGGMONITORING_TABLE + " WHERE " + COLUMN_PROFILE_ID + " = " + profileId + " AND " + COLUMN_EGG_STATUS + " = 'Unhatched'";
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int count = 0;
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0);
+        }
+        cursor.close();
+        return count;
+    }
+
+    public int getLaidEggCount(int profileId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String countQuery = "SELECT COUNT(*) FROM " + EGGMONITORING_TABLE + " WHERE " + COLUMN_PROFILE_ID + " = " + profileId + " AND " + COLUMN_EGG_STATUS + " = 'Laid'";
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int count = 0;
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0);
+        }
+        cursor.close();
+        return count;
+    }
+
+    public int getEggCount(int profileId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String countQuery = "SELECT COUNT(*) FROM " + EGGMONITORING_TABLE + " WHERE " + COLUMN_PROFILE_ID + " = " + profileId;
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = 0;
         if (cursor.moveToFirst()) {
