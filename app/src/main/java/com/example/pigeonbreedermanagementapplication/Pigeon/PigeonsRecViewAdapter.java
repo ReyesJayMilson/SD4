@@ -49,9 +49,7 @@ public class PigeonsRecViewAdapter extends RecyclerView.Adapter<PigeonsRecViewAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.ph.setText(pigeons.get(position).getRing_id());
-        if (pigeons.get(position).getImage() != null) {
-            holder.imageph.setImageBitmap(BitmapFactory.decodeFile(pigeons.get(position).getImage()));
-        }
+
 
         Log.d("TAG", "Pigeons:" + pigeons);
         holder.parent.setOnClickListener(new View.OnClickListener() {
@@ -158,7 +156,6 @@ public class PigeonsRecViewAdapter extends RecyclerView.Adapter<PigeonsRecViewAd
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            Log.d("TAG", "Debug message" + itemView);
             ph = itemView.findViewById(R.id.idplaceholder_pigeon);
             imageph = itemView.findViewById(R.id.iv_placeholder_pigeon);
             parent = itemView.findViewById(R.id.parent_pigeon);

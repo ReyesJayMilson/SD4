@@ -1,6 +1,7 @@
 package com.example.pigeonbreedermanagementapplication;
 
 public class Disease {
+
     private int id;
     private String image;
     private String name;

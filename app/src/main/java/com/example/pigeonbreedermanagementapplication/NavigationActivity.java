@@ -11,6 +11,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.pigeonbreedermanagementapplication.Egg.EggTrackerFragment;
+import com.example.pigeonbreedermanagementapplication.HealthCalendar.HealthCalendarFragment;
 import com.example.pigeonbreedermanagementapplication.Home.HomeFragment;
 import com.example.pigeonbreedermanagementapplication.Pigeon.PigeonsFragment;
 import com.example.pigeonbreedermanagementapplication.Product.ProductFragment;
