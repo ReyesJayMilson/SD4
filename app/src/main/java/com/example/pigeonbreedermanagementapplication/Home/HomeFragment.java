@@ -65,10 +65,10 @@ public class HomeFragment extends Fragment {
         nestTitle.setText("Hatched Eggs");
 
         String hatchcount = String.valueOf(dbhelper.getHatchedEggCount(profileId));
-        nestDesc.setText("Successfully Hatched Eggs: " + hatchcount);
+        nestDesc.setText("Successfully Hatched Eggs: \n" + hatchcount);
 
         String failcount = String.valueOf(dbhelper.getBotchedEggCount(profileId));
-        eggFailed.setText("Unsuccessfully Hatched Eggs:" + failcount);
+        eggFailed.setText("Unsuccessfully Hatched Eggs: \n" + failcount);
 
         eggTitle.setText("Success Rate");
 
@@ -81,6 +81,7 @@ public class HomeFragment extends Fragment {
         if(hatched ==0 && unhatched ==0){
             nestDesc.setText("Successfully Hatched Eggs: \nNone Hatched Yet");
             eggFailed.setText("Unsuccessfully Hatched Eggs: \nNone Hatched Yet");
+            eggDesc.setText("Success Rate: \nNone Hatched Yet");
             eggRating.setText("None Hatched Yet");
         }else {
             if (hatchRateDecimal >= 90) {
