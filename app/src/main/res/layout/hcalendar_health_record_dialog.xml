@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/detailsEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Details/Description"
+        android:inputType="textMultiLine" />
+
+    <RadioGroup
+        android:id="@+id/healthRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/detailsEditText"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/radioHealthy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Healthy"
+            android:checked="true" />
+
+        <RadioButton
+            android:id="@+id/radioHasSymptoms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Has Symptoms" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/radioHasSymptoms">
+
+            <Spinner
+                android:id="@+id/symptomsSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="32dp"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+        <RadioButton
+            android:id="@+id/radioContractedDisease"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contracted Disease" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/radioContractedDisease">
+
+            <Spinner
+                android:id="@+id/diseaseSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="32dp"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/medicationsEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/healthRadioGroup"
+        android:hint="Medications/Supplements"
+        android:inputType="textMultiLine" />
+
+</RelativeLayout>

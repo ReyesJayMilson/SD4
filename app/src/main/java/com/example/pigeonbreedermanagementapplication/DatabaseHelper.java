@@ -49,6 +49,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_HEALTH_ID = "HEALTH_ID";
     public static final String COLUMN_NOTE_DATE = "NOTE_DATE";
     public static final String COLUMN_NOTE_DESCRIPTION = "NOTE_DESCRIPTION";
+    public static final String COLUMN_NOTE_MEDICATION = "NOTE_MEDICATION";
     public static final String TRANSACTION_TABLE = "TRANSACTION_TABLE";
     public static final String COLUMN_TRANSACTION_ID = "TRANSACTION_ID";
     public static final String COLUMN_TRANSACTION_TYPE = "TRANSACTION_TYPE";
@@ -84,6 +85,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String CAGE_TABLE = "CAGE_TABLE";
     public static final String NEST_TABLE = "NEST_TABLE";
     public static final String COLUMN_EGG_STATUS = "EGG_STATUS";
+
     private Context context;
 
 
@@ -137,6 +139,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_NOTE_DATE + " TEXT, " +
                 COLUMN_RING_ID + " TEXT, " +
                 COLUMN_NOTE_DESCRIPTION + " TEXT, " +
+                COLUMN_NOTE_MEDICATION + " TEXT, " +
                 COLUMN_SYMPTOM_ID + " TEXT, " +
                 COLUMN_DISEASE_ID + " TEXT, " +
                 COLUMN_PROFILE_ID + " INTEGER NOT NULL, " +
@@ -1001,4 +1004,43 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public ArrayList<String> getEverySymptomNames() {
+        ArrayList<String> returnList = new ArrayList<>();
+
+        // get data from the database
+        String queryString = "SELECT SYMPTOM_NAME FROM " + SYMPTOMS_TABLE;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+            // loop through the cursor, put them in return list
+            do {
+                String symptomName = cursor.getString(0);
+                returnList.add(symptomName);
+            } while (cursor.moveToNext());
+        }
+
+        return returnList;
+    }
+
+    public ArrayList<String> getEveryDiseaseNames() {
+        ArrayList<String> returnList = new ArrayList<>();
+
+        // get data from the database
+        String queryString = "SELECT DISEASE_NAME FROM " + DISEASES_TABLE;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+            // loop through the cursor, put them in return list
+            do {
+                String diseaseName = cursor.getString(0);
+                returnList.add(diseaseName);
+            } while (cursor.moveToNext());
+        }
+
+        return returnList;
+    }
 }

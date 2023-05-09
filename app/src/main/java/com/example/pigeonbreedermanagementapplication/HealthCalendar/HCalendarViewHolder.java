@@ -24,7 +24,5 @@ public class HCalendarViewHolder extends RecyclerView.ViewHolder implements View
     @Override
     public void onClick(View v) {
         onItemListener.onItemClick(getAdapterPosition(), (String) dayOfMonth.getText());
-        int color = ContextCompat.getColor(itemView.getContext(), R.color.green);
-        itemView.setBackgroundColor(color);
     }
 }
