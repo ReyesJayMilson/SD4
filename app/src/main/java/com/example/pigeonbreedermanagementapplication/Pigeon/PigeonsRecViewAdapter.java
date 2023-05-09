@@ -2,6 +2,7 @@ package com.example.pigeonbreedermanagementapplication.Pigeon;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,8 +18,10 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pigeonbreedermanagementapplication.DatabaseHelper;
+import com.example.pigeonbreedermanagementapplication.DiseaseActivity;
 import com.example.pigeonbreedermanagementapplication.GlobalVariables;
 import com.example.pigeonbreedermanagementapplication.R;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
@@ -85,6 +88,10 @@ public class PigeonsRecViewAdapter extends RecyclerView.Adapter<PigeonsRecViewAd
 
                 TextView notesTextView = bottomSheetView.findViewById(R.id.bsv_notes);
                 notesTextView.setText("Notes: " + pigeons.get(clickedPosition).getNotes());
+
+
+//                ImageView pigeonImage = bottomSheetView.findViewById(R.id.pigeonplaceholder_image);
+//                pigeonImage.setImageResource();
 
                 //Create a new BottomSheetDialog
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);

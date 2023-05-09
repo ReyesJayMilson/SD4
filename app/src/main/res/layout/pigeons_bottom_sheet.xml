@@ -1,105 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#121723">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bsp_rlone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="20dp"
-        android:id="@+id/bsp_rlone">
+        android:padding="20dp">
 
-        <TextView
-            android:id="@+id/bsv_ringid"
+        <ImageView
+            android:id="@+id/pigeonplaceholder_image"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/pigeon_transformed" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_pigeon_ringid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ring ID: "
-            android:textColor="#DBDBDB" />
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pigeonplaceholder_image">
 
-        <TextView
-            android:id="@+id/bsv_name"
+            <TextView
+                android:id="@+id/bsv_ringid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ring ID: "
+                android:textColor="#DBDBDB" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_pigeon_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/bsv_ringid"
-            android:text="Name: "
-            android:textColor="#DBDBDB" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_pigeon_ringid">
 
-        <TextView
-            android:id="@+id/bsv_cagenumber"
+            <TextView
+                android:id="@+id/bsv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name: "
+                android:textColor="#DBDBDB" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_pigeon_cagenumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/bsv_name"
-            android:text="Cage No.: "
-            android:textColor="#DBDBDB" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_pigeon_name">
 
-        <TextView
-            android:id="@+id/bsv_birthyear"
+            <TextView
+                android:id="@+id/bsv_cagenumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cage No.: "
+                android:textColor="#DBDBDB" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_pigeon_birthyear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/bsv_cagenumber"
-            android:text="Birth Year: "
-            android:textColor="#DBDBDB" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_pigeon_cagenumber">
 
-        <TextView
-            android:id="@+id/bsv_breed"
+            <TextView
+                android:id="@+id/bsv_birthyear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Birth Year: "
+                android:textColor="#DBDBDB" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_pigeon_breed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/bsv_birthyear"
-            android:text="Breed: "
-            android:textColor="#DBDBDB" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_pigeon_birthyear">
 
-        <TextView
-            android:id="@+id/bsv_gender"
+            <TextView
+                android:id="@+id/bsv_breed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Breed: "
+                android:textColor="#DBDBDB" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_pigeon_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/bsv_breed"
-            android:text="Gender: "
-            android:textColor="#DBDBDB" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_pigeon_breed">
 
-        <TextView
-            android:id="@+id/bsv_color"
+            <TextView
+                android:id="@+id/bsv_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Gender: "
+                android:textColor="#DBDBDB" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_pigeon_color"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/bsv_gender"
-            android:text="Color: "
-            android:textColor="#DBDBDB" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_pigeon_gender">
 
-        <TextView
-            android:id="@+id/bsv_status"
+            <TextView
+                android:id="@+id/bsv_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Color: "
+                android:textColor="#DBDBDB" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_pigeon_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/bsv_color"
-            android:text="Status: "
-            android:textColor="#DBDBDB" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_pigeon_color">
 
-        <TextView
-            android:id="@+id/bsv_notes"
+            <TextView
+                android:id="@+id/bsv_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Status: "
+                android:textColor="#DBDBDB" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_pigeon_notes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/bsv_status"
-            android:text="Notes: "
-            android:textColor="#DBDBDB" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_pigeon_status">
+
+            <TextView
+                android:id="@+id/bsv_notes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Notes: "
+                android:textColor="#DBDBDB" />
+        </androidx.cardview.widget.CardView>
 
         <Button
+            android:id="@+id/bsv_deletepigeon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/bsv_deletepigeon"
+            android:layout_marginStart="76dp"
+            android:layout_marginTop="16dp"
             android:text="Delete"
             android:textColor="#DBDBDB"
-            android:layout_below="@+id/bsv_notes"
-            android:layout_marginRight="10dp">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_pigeon_notes">
 
         </Button>
 
         <Button
+            android:id="@+id/bsv_editpigeon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/bsv_editpigeon"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="120dp"
             android:text="Edit"
-            android:layout_below="@+id/bsv_notes"
-            android:layout_toRightOf="@+id/bsv_deletepigeon"></Button>
-    </RelativeLayout>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/bsv_deletepigeon"
+            app:layout_constraintTop_toBottomOf="@+id/cv_pigeon_notes"></Button>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </RelativeLayout>
