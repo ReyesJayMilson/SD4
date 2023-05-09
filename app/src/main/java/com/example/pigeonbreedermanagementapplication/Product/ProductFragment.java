@@ -49,7 +49,7 @@ public class ProductFragment extends Fragment {
 
         productRecView.setAdapter(productadapter);
 
-        productRecView.setLayoutManager(new GridLayoutManager(view.getContext(), 2));
+        productRecView.setLayoutManager(new GridLayoutManager(view.getContext(), 1));
         addProduct = view.findViewById(R.id.bt_AddProduct);
         addProduct.setOnClickListener(new View.OnClickListener() {
             @Override

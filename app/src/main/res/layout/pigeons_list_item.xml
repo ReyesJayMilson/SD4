@@ -11,7 +11,7 @@
     >
 
     <RelativeLayout
-        android:layout_width="100dp"
+        android:layout_width="125dp"
         android:layout_height="match_parent"
         android:background="@drawable/egg_border">
 
@@ -33,7 +33,9 @@
             android:scaleType="centerCrop"
             android:layout_below="@id/idplaceholder_pigeon"
             android:layout_centerHorizontal="true"
-            android:src="@mipmap/pigeon_image_foreground">
+            android:src="@mipmap/pigeon_image_foreground"
+            android:background="@color/red"
+            android:layout_marginBottom="1dp">
 
         </ImageView>
 

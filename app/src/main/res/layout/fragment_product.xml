@@ -11,7 +11,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rc_Product"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
 
     <Button
         android:id="@+id/bt_AddProduct"
@@ -33,7 +33,7 @@
     <FrameLayout
         android:id="@+id/bs_Product"
         android:layout_width="match_parent"
-        android:layout_height="606dp"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="51dp">
 

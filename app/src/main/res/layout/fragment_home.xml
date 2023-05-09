@@ -11,250 +11,386 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_home_banner"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:padding="10dp"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="5dp">
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#121723">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/idplaceholder_banner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="Placeholder Pigeon count"
-                android:textColor="#DBDBDB"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-
-        </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_egg_statistics"
-        android:layout_width="198dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/cv_home_banner"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginEnd="3dp"
-        android:layout_marginBottom="5dp"
-        android:padding="10dp"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="5dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#121723">
-
-            <TextView
-                android:id="@+id/title_egg_statistics"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_home_banner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#28595E"
-                android:gravity="center"
-                android:paddingTop="5dp"
-                android:paddingBottom="3dp"
-                android:text="Egg Statistics"
-                android:textColor="#DBDBDB"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:padding="10dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
 
-            <TextView
-                android:id="@+id/idplaceholder_eggcounttitle"
-                android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#121723">
+
+                    <TextView
+                        android:id="@+id/idplaceholder_banner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="Placeholder Pigeon count"
+                        android:textColor="#DBDBDB"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_egg_statistics"
+                android:layout_width="198dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/title_egg_statistics"
-                android:layout_marginTop="0dp"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="10dp"
-                android:text="Egg Count"
-                android:textColor="#DBDBDB"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:layout_below="@+id/cv_home_banner"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="5dp"
+                android:padding="200dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
 
-            <TextView
-                android:id="@+id/idplaceholder_eggtotal"
-                android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#121723">
+
+                    <TextView
+                        android:id="@+id/title_egg_statistics"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#28595E"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="3dp"
+                        android:text="Egg Statistics"
+                        android:textColor="#DBDBDB"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/idplaceholder_eggcounttitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/title_egg_statistics"
+
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="10dp"
+                        android:text="Egg Count"
+                        android:textColor="#DBDBDB"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/idplaceholder_eggtotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/idplaceholder_eggcounttitle"
+                        android:paddingHorizontal="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="Total Eggs Placehholder"
+                        android:textColor="#DBDBDB"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/idplaceholder_eggcurrent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/idplaceholder_eggtotal"
+                        android:layout_marginTop="0dp"
+                        android:paddingHorizontal="10dp"
+                        android:paddingBottom="15dp"
+                        android:text="Current Eggs Placeholder"
+                        android:textColor="#DBDBDB"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="3dp"
+                        android:layout_below="@+id/idplaceholder_eggcurrent"
+                        android:src="@drawable/dashed_new_10px_4d8g" />
+
+                    <TextView
+                        android:id="@+id/idplaceholder_hatchedeggs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imageView9"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="10dp"
+                        android:text="hatch Statistics"
+                        android:textColor="#DBDBDB"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/idplaceholder_nestdescr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/idplaceholder_hatchedeggs"
+                        android:paddingHorizontal="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="Hatched eggs Placeholder"
+                        android:textColor="#DBDBDB"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/idplaceholder_failedegg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/idplaceholder_nestdescr"
+                        android:paddingHorizontal="10dp"
+                        android:paddingBottom="15dp"
+                        android:text="Unhatched Eggs Placeholder"
+                        android:textColor="#DBDBDB"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="3dp"
+                        android:layout_below="@+id/idplaceholder_failedegg"
+                        android:layout_marginTop="0dp"
+                        android:src="@drawable/dashed_new_10px_4d8g" />
+
+                    <TextView
+                        android:id="@+id/idplaceholder_eggrate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imageView8"
+                        android:layout_marginTop="0dp"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="10dp"
+                        android:text="placeholder rate"
+                        android:textColor="#DBDBDB"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/idplaceholder_eggdesc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/idplaceholder_eggrate"
+                        android:layout_marginTop="0dp"
+                        android:paddingHorizontal="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="Egg Success Rate"
+                        android:textColor="#DBDBDB"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/idplaceholder_eggrating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/idplaceholder_eggdesc"
+                        android:paddingHorizontal="10dp"
+                        android:text="Success Rating:"
+                        android:textColor="#DBDBDB"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/idplaceholder_rate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/idplaceholder_eggrating"
+                        android:paddingHorizontal="10dp"
+                        android:paddingBottom="15dp"
+                        android:text="Rating"
+                        android:textColor="#DBDBDB"
+                        android:textSize="12sp" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_cage_statistics"
+                android:layout_width="198dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/idplaceholder_eggcounttitle"
-                android:paddingHorizontal="10dp"
-                android:paddingBottom="10dp"
-                android:text="Total Eggs Placehholder"
-                android:textColor="#DBDBDB"
-                android:textSize="12sp" />
+                android:layout_below="@+id/cv_home_banner"
+                android:layout_marginStart="2.5dp"
+                android:layout_marginTop="3dp"
+                android:layout_toEndOf="@+id/cv_egg_statistics"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
 
-            <TextView
-                android:id="@+id/idplaceholder_eggcurrent"
-                android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#121723">
+
+                    <TextView
+                        android:id="@+id/idplaceholder_cagetitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#28595E"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="3dp"
+                        android:text="Cage Statistics"
+                        android:textColor="#DBDBDB"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+
+                    <RelativeLayout
+                        android:id="@+id/container_cagestats"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/idplaceholder_cagetitle">
+
+                        <TextView
+                            android:id="@+id/idplaceholder_cagecount_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="10dp"
+                            android:text="Cage Count"
+                            android:textColor="#DBDBDB"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/idplaceholder_cagetotal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/idplaceholder_cagecount_title"
+                            android:paddingHorizontal="10dp"
+                            android:paddingBottom="10dp"
+                            android:text="Total Cages \nPlaceholder"
+                            android:textColor="#DBDBDB"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/idplaceholder_cagecurrent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/idplaceholder_cagetotal"
+                            android:paddingHorizontal="10dp"
+                            android:paddingBottom="15dp"
+                            android:text="Cages in use \nplaceholder"
+                            android:textColor="#DBDBDB"
+                            android:textSize="12sp" />
+
+                        <ImageView
+                            android:id="@+id/imageView7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="3dp"
+                            android:layout_below="@+id/idplaceholder_cagecurrent"
+                            android:src="@drawable/dashed_new_10px_4d8g" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/container_neststats"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/container_cagestats">
+
+                        <TextView
+                            android:id="@+id/idplaceholder_nesttitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="10dp"
+                            android:text="Nest Count"
+                            android:textColor="#DBDBDB"
+                            android:textSize="16sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/idplaceholder_nesttotal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/idplaceholder_nesttitle"
+                            android:paddingHorizontal="10dp"
+                            android:paddingBottom="10dp"
+                            android:text="Total Nests \nplaceholder"
+                            android:textColor="#DBDBDB"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/idplaceholder_nestcurrent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/idplaceholder_nesttotal"
+                            android:paddingHorizontal="10dp"
+                            android:paddingBottom="15dp"
+                            android:text="Nests in use \nplaceholder"
+                            android:textColor="#DBDBDB"
+                            android:textSize="12sp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_transactions"
+                android:layout_width="198dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/idplaceholder_eggtotal"
-                android:layout_marginTop="0dp"
-                android:paddingHorizontal="10dp"
-                android:paddingBottom="15dp"
-                android:text="Current Eggs Placeholder"
-                android:textColor="#DBDBDB"
-                android:textSize="12sp" />
+                android:layout_below="@+id/cv_cage_statistics"
+                app:cardCornerRadius="5dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="8dp"
+                android:layout_toEndOf="@+id/cv_egg_statistics"
+                app:cardElevation="5dp">
 
-            <ImageView
-                android:id="@+id/imageView9"
-                android:layout_width="wrap_content"
-                android:layout_height="3dp"
-                android:layout_below="@+id/idplaceholder_eggcurrent"
-                android:src="@drawable/dashed_new_10px_4d8g" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#121723">
 
-            <TextView
-                android:id="@+id/idplaceholder_hatchedeggs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/imageView9"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="10dp"
-                android:text="hatch Statistics"
-                android:textColor="#DBDBDB"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/idplaceholder_transtitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#28595E"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="3dp"
+                        android:text="Transaction Statistics"
+                        android:textColor="#DBDBDB"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
 
-            <TextView
-                android:id="@+id/idplaceholder_nestdescr"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/idplaceholder_hatchedeggs"
-                android:paddingHorizontal="10dp"
-                android:paddingBottom="10dp"
-                android:text="Hatched eggs Placeholder"
-                android:textColor="#DBDBDB"
-                android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/idplaceholder_transbuy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/idplaceholder_transtitle"
+                        android:paddingHorizontal="10dp"
+                        android:paddingTop="7dp"
+                        android:paddingBottom="10dp"
+                        android:text="Buy Amount \nplaceholder"
+                        android:textColor="#DBDBDB"
+                        android:textSize="12sp"/>
 
-            <TextView
-                android:id="@+id/idplaceholder_failedegg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/idplaceholder_nestdescr"
-                android:text="Unhatched Eggs Placeholder"
-                android:paddingHorizontal="10dp"
-                android:paddingBottom="15dp"
-                android:textColor="#DBDBDB"
-                android:textSize="12sp" />
-
-            <ImageView
-                android:id="@+id/imageView8"
-                android:layout_width="wrap_content"
-                android:layout_height="3dp"
-                android:layout_below="@+id/idplaceholder_failedegg"
-                android:layout_marginTop="0dp"
-                android:src="@drawable/dashed_new_10px_4d8g" />
-
-            <TextView
-                android:id="@+id/idplaceholder_eggrate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/imageView8"
-                android:layout_marginTop="0dp"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="10dp"
-                android:text="placeholder rate"
-                android:textColor="#DBDBDB"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/idplaceholder_eggdesc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/idplaceholder_eggrate"
-                android:layout_marginTop="0dp"
-                android:paddingHorizontal="10dp"
-                android:paddingBottom="10dp"
-                android:text="Egg Success Rate"
-                android:textColor="#DBDBDB"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/idplaceholder_eggrating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/idplaceholder_eggdesc"
-                android:paddingHorizontal="10dp"
-                android:text="Success Rating:"
-                android:textColor="#DBDBDB"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/idplaceholder_rate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/idplaceholder_eggrating"
-                android:paddingHorizontal="10dp"
-                android:paddingBottom="15dp"
-                android:text="Rating"
-                android:textColor="#DBDBDB"
-                android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/idplaceholder_transsell"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/idplaceholder_transbuy"
+                        android:paddingHorizontal="10dp"
+                        android:paddingBottom="17dp"
+                        android:text="Sell Amount \nplaceholder"
+                        android:textColor="#DBDBDB"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
 
         </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_eggrate"
-        android:layout_width="198dp"
-        android:layout_height="400dp"
-        android:layout_below="@+id/cv_home_banner"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_toEndOf="@+id/cv_egg_statistics"
-        android:padding="10dp"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="5dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#121723">
-
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_nestcount"
-        android:layout_width="195dp"
-        android:layout_height="200dp"
-        android:layout_below="@+id/cv_egg_statistics"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
-        android:padding="10dp"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="5dp">
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_laideggs"
-        android:layout_width="195dp"
-        android:layout_height="200dp"
-        android:layout_below="@+id/cv_eggrate"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_toEndOf="@+id/cv_nestcount"
-        android:padding="10dp"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="5dp" />
+    </ScrollView>
 
     <!--    <androidx.recyclerview.widget.RecyclerView-->
     <!--        android:id="@+id/rc_Home"-->

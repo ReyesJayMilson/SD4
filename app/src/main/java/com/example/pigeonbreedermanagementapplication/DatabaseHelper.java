@@ -680,6 +680,58 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return count;
     }
+
+    public int getCageCount(int profileId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String countQuery = "SELECT COUNT(*) FROM " + CAGE_TABLE + " WHERE " + COLUMN_PROFILE_ID + " = " + profileId;
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int count = 0;
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0);
+        }
+        cursor.close();
+        return count;
+    }
+
+    public int getNestCount(int profileId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String countQuery = "SELECT COUNT(*) FROM " + NEST_TABLE + " WHERE " + COLUMN_PROFILE_ID + " = " + profileId;
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int count = 0;
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0);
+        }
+        cursor.close();
+        return count;
+    }
+
+    public int getBuyTotal(int profileId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = { "SUM(TRANSACTION_AMOUNT)"};
+        String selection = "TRANSACTION_TYPE=?";
+        String[] selectionArgs = { "Buy" };
+        Cursor cursor = db.query("TRANSACTION_TABLE", columns, selection, selectionArgs, null, null, null);
+        int totalAmount = 0;
+        if (cursor.moveToFirst()) {
+            totalAmount = cursor.getInt(0);
+        }
+        cursor.close();
+        return totalAmount;
+    }
+
+    public int getSellTotal(int profileId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = { "SUM(TRANSACTION_AMOUNT)"};
+        String selection = "TRANSACTION_TYPE=?";
+        String[] selectionArgs = { "Sell" };
+        Cursor cursor = db.query("TRANSACTION_TABLE", columns, selection, selectionArgs, null, null, null);
+        int totalAmount = 0;
+        if (cursor.moveToFirst()) {
+            totalAmount = cursor.getInt(0);
+        }
+        cursor.close();
+        return totalAmount;
+    }
     //////////////////////TRANSACTIONS/////////////////////////
 
     public boolean addTransactions(TransactionGetSet transactions) {

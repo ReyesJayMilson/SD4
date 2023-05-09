@@ -21,7 +21,7 @@ public class HomeFragment extends Fragment {
 
     private int profileId = GlobalVariables.profileId;
     private DatabaseHelper dbhelper;
-    private TextView banner, nestTitle, nestDesc, eggTitle, eggDesc, eggFailed, eggRating, eggTotal, eggCurrent;
+    private TextView banner, nestTitle, nestDesc, eggTitle, eggDesc, eggFailed, eggRating, eggTotal, eggCurrent, cageTotal, cageCurrent, nestTotal, nestCurrent, buyTotal, sellTotal;
 
     @Override
     public void onResume() {
@@ -45,6 +45,12 @@ public class HomeFragment extends Fragment {
         eggRating = view.findViewById(R.id.idplaceholder_rate);
         eggTotal = view.findViewById(R.id.idplaceholder_eggtotal);
         eggCurrent = view.findViewById(R.id.idplaceholder_eggcurrent);
+        cageTotal = view.findViewById(R.id.idplaceholder_cagetotal);
+        cageCurrent = view.findViewById(R.id.idplaceholder_cagecurrent);
+        nestTotal = view.findViewById(R.id.idplaceholder_nesttotal);
+        nestCurrent = view.findViewById(R.id.idplaceholder_nestcurrent);
+        buyTotal = view.findViewById(R.id.idplaceholder_transbuy);
+        sellTotal = view.findViewById(R.id.idplaceholder_transsell);
 
 
         dbhelper = new DatabaseHelper(getActivity());
@@ -56,8 +62,8 @@ public class HomeFragment extends Fragment {
                 " pigeons in your flock. Keep track of your breeding progress and elevate your " +
                 "pigeon breeding process with Pigeon Breeder Management.");
 
-        String totalcount = String.valueOf(dbhelper.getEggCount(profileId));
-        eggTotal.setText("Total Eggs: \n" + totalcount);
+        String eggtotalcount = String.valueOf(dbhelper.getEggCount(profileId));
+        eggTotal.setText("Total Eggs: \n" + eggtotalcount);
 
         String laidcount = String.valueOf(dbhelper.getLaidEggCount(profileId));
         eggCurrent.setText("Current Unhatched Eggs: \n" + laidcount);
@@ -69,6 +75,22 @@ public class HomeFragment extends Fragment {
 
         String failcount = String.valueOf(dbhelper.getBotchedEggCount(profileId));
         eggFailed.setText("Unsuccessfully Hatched Eggs: \n" + failcount);
+
+        String cagetotal = String.valueOf(dbhelper.getCageCount(profileId));
+        cageTotal.setText("Total Cages: \n" + cagetotal);
+
+        cageCurrent.setText("Cages in Use: \nPlaceholder");
+
+        String nesttotal = String.valueOf(dbhelper.getNestCount(profileId));
+        nestTotal.setText("Total Nests: \n" + nesttotal);
+
+        nestCurrent.setText("Nests in Use: \nPlaceholder");
+
+        String buytotal = String.valueOf(dbhelper.getBuyTotal(profileId));
+        buyTotal.setText("Total Buy Amount: \n₱" + buytotal);
+
+        String selltotal = String.valueOf(dbhelper.getSellTotal(profileId));
+        sellTotal.setText("Total Sell Amount: \n₱" + selltotal);
 
         eggTitle.setText("Success Rate");
 
@@ -86,14 +108,14 @@ public class HomeFragment extends Fragment {
         }else {
             if (hatchRateDecimal >= 90) {
                 eggRating.setText("Exceptional");
-                eggRating.setTextColor(Color.parseColor("#00ed01"));
+                eggRating.setTextColor(Color.parseColor("#0000FF"));
             } else if (hatchRateDecimal > 70) {
                 eggRating.setText("Great");
-                eggRating.setTextColor(Color.YELLOW);
-            } else if (hatchRateDecimal > 51) {
+                eggRating.setTextColor(Color.GREEN);
+            } else if (hatchRateDecimal > 50) {
                 eggRating.setText("Concerning");
-                eggRating.setTextColor(Color.parseColor("#FFA500"));
-            } else if (hatchRateDecimal > 31) {
+                eggRating.setTextColor(Color.YELLOW);
+            } else if (hatchRateDecimal > 30) {
                 eggRating.setText("Poor");
                 eggRating.setTextColor(Color.parseColor("#ff4500"));
             } else {
