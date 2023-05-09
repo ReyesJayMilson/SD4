@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1D2538">
+
+    <LinearLayout
+        android:id="@+id/linear_about"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="166dp"
+            android:layout_marginTop="80dp"
+            android:src="@drawable/pigeon_icon_new_stroke_white" />
+
+        <TextView
+            android:id="@+id/txtAboutApp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:text="Lance Basa \nKim Malicdem \nJay Reyes"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/textViewAboutApp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Contact Email:"
+            android:textSize="18dp"
+            android:textAlignment="center"
+            android:textColor="@color/pink"/>
+
+        <TextView
+            android:id="@+id/textViewAboutApp2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="kimmalicdem7@gmail.com"
+            android:textSize="18dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
