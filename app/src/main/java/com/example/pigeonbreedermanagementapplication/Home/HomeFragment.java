@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -79,12 +80,14 @@ public class HomeFragment extends Fragment {
         String cagetotal = String.valueOf(dbhelper.getCageCount(profileId));
         cageTotal.setText("Total Cages: \n" + cagetotal);
 
-        cageCurrent.setText("Cages in Use: \nPlaceholder");
+        String cagecurrent = String.valueOf(dbhelper.getCageCurrent(profileId));
+        cageCurrent.setText("Cages in Use: \n" + cagecurrent);
 
         String nesttotal = String.valueOf(dbhelper.getNestCount(profileId));
         nestTotal.setText("Total Nests: \n" + nesttotal);
 
-        nestCurrent.setText("Nests in Use: \nPlaceholder");
+        String nestcurrent = String.valueOf(dbhelper.countNestsPerCage(profileId));
+        nestCurrent.setText("Nests in Use: \n" + nestcurrent);
 
         String buytotal = String.valueOf(dbhelper.getBuyTotal(profileId));
         buyTotal.setText("Total Buy Amount: \n₱" + buytotal);
@@ -129,6 +132,32 @@ public class HomeFragment extends Fragment {
 
         // Set an OnClickListener on the textview to display Egg Rating Chart
         eggRating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Inflate the popup layout as a view
+                View popupView = getLayoutInflater().inflate(R.layout.popup_success_rating, null);
+
+                // Create a new PopupWindow instance
+                PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+                Button closeButton = popupView.findViewById(R.id.closeButton);
+
+                // Set an OnClickListener on the close button
+                closeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // Dismiss the popup window
+                        popupWindow.dismiss();
+                    }
+                });
+
+                // Show the popup window
+                popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+            }
+        });
+
+        ImageView ratingQuestion = view.findViewById(R.id.image_question);
+        ratingQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Inflate the popup layout as a view

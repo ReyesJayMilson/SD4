@@ -562,6 +562,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return ringIds;
     }
 
+    public List<String> getAllRingMale(int profileid) {
+        List<String> ringIdsMale = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(PIGEON_TABLE, new String[] { COLUMN_RING_ID }, COLUMN_PROFILE_ID + " = ? AND " + COLUMN_PIGEON_GENDER + " = ?", new String[] { String.valueOf(profileid), "Male" }, null, null, null);
+        if (cursor.moveToFirst()) {
+            do {
+                ringIdsMale.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return ringIdsMale;
+    }
+
+    public List<String> getAllRingFemale(int profileid) {
+        List<String> ringIdsFemale = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(PIGEON_TABLE, new String[] { COLUMN_RING_ID }, COLUMN_PROFILE_ID + " = ? AND " + COLUMN_PIGEON_GENDER + " = ?", new String[] { String.valueOf(profileid), "Female" }, null, null, null);
+        if (cursor.moveToFirst()) {
+            do {
+                ringIdsFemale.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return ringIdsFemale;
+    }
+
     ///////////////////////EGGS//////////////////////////////
     public boolean addEgg(EggsGetSet eggs) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -684,6 +710,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return count;
     }
 
+    public int getBuyTotal(int profileId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT SUM(TRANSACTION_AMOUNT) FROM " + TRANSACTION_TABLE + " WHERE " +COLUMN_PROFILE_ID  + " = ? AND " + COLUMN_TRANSACTION_TYPE + "= ?";
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{String.valueOf(profileId), "Buy"});
+        int totalAmount = 0;
+        if (cursor.moveToFirst()) {
+            totalAmount = cursor.getInt(0);
+        }
+
+        cursor.close();
+        db.close();
+
+        return totalAmount;
+    }
+
+    public int getSellTotal(int profileId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT SUM(TRANSACTION_AMOUNT) FROM " + TRANSACTION_TABLE + " WHERE " +COLUMN_PROFILE_ID  + " = ? AND " + COLUMN_TRANSACTION_TYPE + "= ?";
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{String.valueOf(profileId), "Sell"});
+        int totalAmount = 0;
+        if (cursor.moveToFirst()) {
+            totalAmount = cursor.getInt(0);
+        }
+        cursor.close();
+        db.close();
+        return totalAmount;
+    }
+
     public int getCageCount(int profileId) {
         SQLiteDatabase db = this.getReadableDatabase();
         String countQuery = "SELECT COUNT(*) FROM " + CAGE_TABLE + " WHERE " + COLUMN_PROFILE_ID + " = " + profileId;
@@ -698,42 +752,59 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public int getNestCount(int profileId) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String countQuery = "SELECT COUNT(*) FROM " + NEST_TABLE + " WHERE " + COLUMN_PROFILE_ID + " = " + profileId;
-        Cursor cursor = db.rawQuery(countQuery, null);
-        int count = 0;
+        String[] columns = {"COUNT(DISTINCT NEST_NO) AS count"};
+        String selection = "PROFILE_ID=?";
+        String[] selectionArgs = {String.valueOf(profileId)};
+        String groupBy = "CAGE_NO";
+        Cursor cursor = db.query("EGGMONITORING_TABLE", columns, selection, selectionArgs, groupBy, null, null);
+        int totalNests = 0;
         if (cursor.moveToFirst()) {
-            count = cursor.getInt(0);
+            int columnIndex = cursor.getColumnIndex("count");
+            if (columnIndex != -1) {
+                do {
+                    totalNests += cursor.getInt(columnIndex);
+                } while (cursor.moveToNext());
+            } else {
+                // Handle error: column not found
+            }
         }
         cursor.close();
-        return count;
+        return totalNests;
     }
 
-    public int getBuyTotal(int profileId) {
+    public int getCageCurrent(int profileId) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns = { "SUM(TRANSACTION_AMOUNT)"};
-        String selection = "TRANSACTION_TYPE=?";
-        String[] selectionArgs = { "Buy" };
-        Cursor cursor = db.query("TRANSACTION_TABLE", columns, selection, selectionArgs, null, null, null);
-        int totalAmount = 0;
+        String selectQuery = "SELECT COUNT(DISTINCT CAGE_NO) FROM " + PIGEON_TABLE + " WHERE "+ COLUMN_PROFILE_ID +" = ? AND "+ COLUMN_PIGEON_STATUS +" = ?";
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{String.valueOf(profileId), "Alive"});
+        int currentCage = 0;
         if (cursor.moveToFirst()) {
-            totalAmount = cursor.getInt(0);
+            currentCage = cursor.getInt(0);
         }
         cursor.close();
-        return totalAmount;
+        db.close();
+        return currentCage;
     }
 
-    public int getSellTotal(int profileId) {
+    public int countNestsPerCage(int profileId) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns = { "SUM(TRANSACTION_AMOUNT)"};
-        String selection = "TRANSACTION_TYPE=?";
-        String[] selectionArgs = { "Sell" };
-        Cursor cursor = db.query("TRANSACTION_TABLE", columns, selection, selectionArgs, null, null, null);
-        int totalAmount = 0;
+        String[] columns = {"COUNT(DISTINCT NEST_NO) AS count"};
+        String selection = "PROFILE_ID=? AND EGG_STATUS IN (?, ?)";
+        String[] selectionArgs = {String.valueOf(profileId), "Laid", "Hatched"};
+        String groupBy = "CAGE_NO";
+        Cursor cursor = db.query("EGGMONITORING_TABLE", columns, selection, selectionArgs, groupBy, null, null);
+        int totalNests = 0;
         if (cursor.moveToFirst()) {
-            totalAmount = cursor.getInt(0);
+            int columnIndex = cursor.getColumnIndex("count");
+            if (columnIndex != -1) {
+                do {
+                    totalNests += cursor.getInt(columnIndex);
+                } while (cursor.moveToNext());
+            } else {
+                // Handle error: column not found
+            }
         }
         cursor.close();
-        return totalAmount;
+        return totalNests;
     }
     //////////////////////TRANSACTIONS/////////////////////////
 

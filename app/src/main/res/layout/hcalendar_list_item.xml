@@ -13,11 +13,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="1.3dp"
+        android:paddingHorizontal="1.3dp"
         android:background="@drawable/egg_border">
 
         <TextView
             android:id="@+id/idplaceholder_hcalendarpigeon"
             android:layout_width="match_parent"
+            android:paddingHorizontal="2dp"
             android:layout_height="20dp"
             android:text="Placeholder ID"
             android:background="#7E88A3"
@@ -32,7 +35,8 @@
             android:id="@+id/iv_placeholder_hcalendarpigeon"
             android:scaleType="centerCrop"
             android:layout_below="@id/idplaceholder_hcalendarpigeon"
-            android:src="@mipmap/pigeon_image_foreground">
+            android:src="@mipmap/pigeon_image_foreground"
+            android:background="@drawable/pigeon_image_placeholder_bg">
 
         </ImageView>
 

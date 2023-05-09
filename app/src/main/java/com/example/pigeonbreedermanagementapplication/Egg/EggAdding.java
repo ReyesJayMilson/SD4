@@ -145,11 +145,18 @@ public class EggAdding extends AppCompatActivity {
             }
         });
         //adding the resources to the birthyear
-        List<String> ringIds = dbhelper.getAllRingIds(profileId);
-        ArrayAdapter<String> ringIdsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ringIds);
-        ringIdsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spFather.setAdapter(ringIdsAdapter);
-        spMother.setAdapter(ringIdsAdapter);
+        List<String> ringIdsMale = dbhelper.getAllRingMale(profileId);
+        ArrayAdapter<String> ringIdsAdapterMale = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ringIdsMale);
+        ringIdsAdapterMale.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        List<String> ringIdsFemale = dbhelper.getAllRingFemale(profileId);
+        ArrayAdapter<String> ringIdsAdapterFemale = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ringIdsFemale);
+        ringIdsAdapterFemale.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+//        List<String> ringIds = dbhelper.getAllRingIds(profileId);
+//        ArrayAdapter<String> ringIdsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ringIds);
+//        ringIdsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spFather.setAdapter(ringIdsAdapterMale);
+        spMother.setAdapter(ringIdsAdapterFemale);
 
 
 

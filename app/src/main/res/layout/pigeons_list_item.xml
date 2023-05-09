@@ -18,7 +18,7 @@
         <TextView
             android:id="@+id/idplaceholder_pigeon"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="30dp"
             android:text="Placeholder ID"
             android:background="#7E88A3"
             android:gravity="center"
@@ -34,8 +34,7 @@
             android:layout_below="@id/idplaceholder_pigeon"
             android:layout_centerHorizontal="true"
             android:src="@mipmap/pigeon_image_foreground"
-            android:background="@color/red"
-            android:layout_marginBottom="1dp">
+            android:layout_marginBottom="2dp">
 
         </ImageView>
 
