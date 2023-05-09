@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1D2538">
+    android:background="#28595E">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -78,7 +78,9 @@
                     android:layout_marginLeft="10dp"
                     android:text="+"
                     android:layout_centerHorizontal="true"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/pigeon_image_placeholder_bg"
+                    />
 
             </LinearLayout>
 
@@ -246,7 +248,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/rectangular_border"
-        android:backgroundTint="@color/teal_200"
+        android:backgroundTint="#333462"
         android:text="Save"
         android:textColor="@color/black"
         android:textSize="20sp" />

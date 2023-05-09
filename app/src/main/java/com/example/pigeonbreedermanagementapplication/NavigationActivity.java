@@ -1,5 +1,6 @@
 package com.example.pigeonbreedermanagementapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -10,11 +11,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.pigeonbreedermanagementapplication.About.AboutFragment;
 import com.example.pigeonbreedermanagementapplication.Egg.EggTrackerFragment;
 import com.example.pigeonbreedermanagementapplication.HealthCalendar.HealthCalendarFragment;
 import com.example.pigeonbreedermanagementapplication.Home.HomeFragment;
 import com.example.pigeonbreedermanagementapplication.Pigeon.PigeonsFragment;
 import com.example.pigeonbreedermanagementapplication.Product.ProductFragment;
+import com.example.pigeonbreedermanagementapplication.Profile.ProfilesActivity;
 import com.example.pigeonbreedermanagementapplication.Transaction.TransactionFragment;
 import com.google.android.material.navigation.NavigationView;
 
@@ -45,8 +48,8 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         toggle.syncState();
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PigeonsFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_mypigeons);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+            navigationView.setCheckedItem(R.id.nav_home);
         }
     }
 
@@ -88,6 +91,19 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProductFragment()).commit();
                 setTitle("Products");
                 break;
+
+            case R.id.nav_about:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AboutFragment()).commit();
+                setTitle("About");
+                break;
+
+            case R.id.nav_changeprofile:
+                Intent intent = new Intent(NavigationActivity.this, ProfilesActivity.class);
+                startActivity(intent);
+                break;
+
+
+
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);

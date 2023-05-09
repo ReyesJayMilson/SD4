@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
-            android:text="Lance Basa \nKim Malicdem \nJay Reyes"
+            android:text="Lance Evander Basa \nKim Oliver Malicdem \nJay Milson Reyes"
             android:textAlignment="center"
             android:textSize="20dp"
             android:textColor="@color/white"/>
@@ -34,13 +34,13 @@
             android:text="Contact Email:"
             android:textSize="18dp"
             android:textAlignment="center"
-            android:textColor="@color/pink"/>
+            android:textColor="#4FACA1"/>
 
         <TextView
             android:id="@+id/textViewAboutApp2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="kimmalicdem7@gmail.com"
+            android:text="evanlancelot@rocketmail.com \n kimmalicdem7@gmail.com \n jmcreyes@bpsu.edu.ph"
             android:textSize="18dp"
             android:textAlignment="center"
             android:textColor="@color/white"/>
