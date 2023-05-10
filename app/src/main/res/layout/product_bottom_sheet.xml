@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#28595E">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,35 +15,35 @@
             android:id="@+id/bsv_productid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="" />
+            android:text="id" />
 
         <TextView
             android:id="@+id/bsv_productname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/bsv_productid"
-            android:text="" />
+            android:text="name" />
 
         <TextView
             android:id="@+id/bsv_productprice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/bsv_productname"
-            android:text="" />
+            android:text="price" />
 
         <TextView
             android:id="@+id/bsv_productquantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/bsv_productprice"
-            android:text="" />
+            android:text="quantity" />
 
         <TextView
             android:id="@+id/bsv_useperweek"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/bsv_productquantity"
-            android:text="" />
+            android:text="use" />
 
 
 
