@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Exceptional: 90% - 100% Successfully Hatched"
-            android:textColor="#0000FF" />
+            android:textColor="#39FFFF" />
 
         <TextView
             android:layout_width="wrap_content"

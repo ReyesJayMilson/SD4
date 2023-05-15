@@ -111,7 +111,7 @@ public class HomeFragment extends Fragment {
         }else {
             if (hatchRateDecimal >= 90) {
                 eggRating.setText("Exceptional");
-                eggRating.setTextColor(Color.parseColor("#0000FF"));
+                eggRating.setTextColor(Color.parseColor("#39FFFF"));
             } else if (hatchRateDecimal > 70) {
                 eggRating.setText("Great");
                 eggRating.setTextColor(Color.GREEN);
