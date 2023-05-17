@@ -366,9 +366,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, new String[]{String.valueOf(diseaseId)});
 
         if (cursor != null && cursor.moveToFirst()) {
+            int symptomIdIndex = cursor.getColumnIndexOrThrow(COLUMN_SYMPTOM_ID);
+            int symptomNameIndex = cursor.getColumnIndexOrThrow(COLUMN_SYMPTOM_NAME);
+
             do {
-                int symptomId = cursor.getInt(cursor.getColumnIndex(COLUMN_SYMPTOM_ID));
-                String symptomName = cursor.getString(cursor.getColumnIndex(COLUMN_SYMPTOM_NAME));
+                int symptomId = cursor.getInt(symptomIdIndex);
+                String symptomName = cursor.getString(symptomNameIndex);
 
                 Symptom symptom = new Symptom(symptomId, symptomName);
                 symptoms.add(symptom);
@@ -379,8 +382,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Log.d("DatabaseHelper", "No symptoms found for diseaseId: " + diseaseId);
         }
 
+        // Debug statement to log the diseaseId
+        Log.d("DatabaseHelper", "Disease ID: " + diseaseId);
+
         return symptoms;
     }
+
 
 
     ///////////////////////PROFILES//////////////////////////////
