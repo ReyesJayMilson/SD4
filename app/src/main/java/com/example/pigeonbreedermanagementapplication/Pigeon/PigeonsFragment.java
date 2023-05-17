@@ -107,22 +107,16 @@ public class PigeonsFragment extends Fragment {
             if (pigeon.getName().toLowerCase().contains(query.toLowerCase())) {
                 filteredPigeons.add(pigeon);
             }
-        }
-
-        for (PigeonsGetSet pigeon : pigeons) {
-            if (pigeon.getRing_id().toLowerCase().contains(query.toLowerCase())) {
+            else if (pigeon.getRing_id().toLowerCase().contains(query.toLowerCase())) {
                 filteredPigeons.add(pigeon);
             }
-        }
-
-        for (PigeonsGetSet pigeon : pigeons) {
-            if (pigeon.getBreed().toLowerCase().contains(query.toLowerCase())) {
+            else if (pigeon.getBreed().toLowerCase().contains(query.toLowerCase())) {
                 filteredPigeons.add(pigeon);
             }
-        }
-
-        for (PigeonsGetSet pigeon : pigeons) {
-            if (pigeon.getGender().toLowerCase().contains(query.toLowerCase())) {
+            else if (pigeon.getGender().toLowerCase().contains(query.toLowerCase())) {
+                filteredPigeons.add(pigeon);
+            }
+            else if (pigeon.getColor().toLowerCase().contains(query.toLowerCase())) {
                 filteredPigeons.add(pigeon);
             }
         }
