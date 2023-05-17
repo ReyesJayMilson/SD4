@@ -652,6 +652,118 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return returnList;
     }
+
+    public ArrayList<EggsGetSet> getLaidEgg(int profileid) {
+
+        ArrayList<EggsGetSet> returnList = new ArrayList<>();
+
+        // get data from the database
+
+        String queryString = "SELECT * FROM " + EGGMONITORING_TABLE + " WHERE " + COLUMN_PROFILE_ID + " = " + profileid + " AND " + COLUMN_EGG_STATUS + " =?";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, new String[]{"Laid"});
+
+        if (cursor.moveToFirst()) {
+            // loop through the cursor, put them in return list
+            do {
+                int eggID = cursor.getInt(0);
+                int cageNumber = cursor.getInt(1);
+                int nestNumber = cursor.getInt(2);
+                String layDate = cursor.getString(3);
+                String hatchDate = cursor.getString(4);
+                String eggStatus = cursor.getString(5);
+                String father = cursor.getString(6);
+                String mother = cursor.getString(7);
+                int profileId = cursor.getInt(8);
+
+                EggsGetSet newEggs = new EggsGetSet(eggID, cageNumber, nestNumber, layDate, hatchDate, eggStatus, father, mother, profileId);
+                returnList.add(newEggs);
+
+            } while (cursor.moveToNext());
+
+        } else {
+
+        }
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
+    public ArrayList<EggsGetSet> getHatchedEgg(int profileid) {
+
+        ArrayList<EggsGetSet> returnList = new ArrayList<>();
+
+        // get data from the database
+
+        String queryString = "SELECT * FROM " + EGGMONITORING_TABLE + " WHERE " + COLUMN_PROFILE_ID + " = " + profileid + " AND " + COLUMN_EGG_STATUS + " =?";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, new String[]{"Hatched"});
+
+        if (cursor.moveToFirst()) {
+            // loop through the cursor, put them in return list
+            do {
+                int eggID = cursor.getInt(0);
+                int cageNumber = cursor.getInt(1);
+                int nestNumber = cursor.getInt(2);
+                String layDate = cursor.getString(3);
+                String hatchDate = cursor.getString(4);
+                String eggStatus = cursor.getString(5);
+                String father = cursor.getString(6);
+                String mother = cursor.getString(7);
+                int profileId = cursor.getInt(8);
+
+                EggsGetSet newEggs = new EggsGetSet(eggID, cageNumber, nestNumber, layDate, hatchDate, eggStatus, father, mother, profileId);
+                returnList.add(newEggs);
+
+            } while (cursor.moveToNext());
+
+        } else {
+
+        }
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
+    public ArrayList<EggsGetSet> getUnhatchedEgg(int profileid) {
+
+        ArrayList<EggsGetSet> returnList = new ArrayList<>();
+
+        // get data from the database
+
+        String queryString = "SELECT * FROM " + EGGMONITORING_TABLE + " WHERE " + COLUMN_PROFILE_ID + " = " + profileid + " AND " + COLUMN_EGG_STATUS + " =?";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, new String[]{"Unhatched"});
+
+        if (cursor.moveToFirst()) {
+            // loop through the cursor, put them in return list
+            do {
+                int eggID = cursor.getInt(0);
+                int cageNumber = cursor.getInt(1);
+                int nestNumber = cursor.getInt(2);
+                String layDate = cursor.getString(3);
+                String hatchDate = cursor.getString(4);
+                String eggStatus = cursor.getString(5);
+                String father = cursor.getString(6);
+                String mother = cursor.getString(7);
+                int profileId = cursor.getInt(8);
+
+                EggsGetSet newEggs = new EggsGetSet(eggID, cageNumber, nestNumber, layDate, hatchDate, eggStatus, father, mother, profileId);
+                returnList.add(newEggs);
+
+            } while (cursor.moveToNext());
+
+        } else {
+
+        }
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
     public boolean updateEggStatus(int eggId, String newStatus) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
