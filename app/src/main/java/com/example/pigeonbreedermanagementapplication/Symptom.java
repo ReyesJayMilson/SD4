@@ -9,6 +9,14 @@ public class Symptom {
         this.symptomName = symptomName;
     }
 
+    @Override
+    public String toString() {
+        return "Symptom{" +
+                "symptomId=" + symptomId +
+                ", symptomName='" + symptomName + '\'' +
+                '}';
+    }
+
     public int getSymptomId() {
         return symptomId;
     }
@@ -17,4 +25,11 @@ public class Symptom {
         return symptomName;
     }
 
+    public void setSymptomId(int symptomId) {
+        this.symptomId = symptomId;
+    }
+
+    public void setSymptomName(String symptomName) {
+        this.symptomName = symptomName;
+    }
 }
