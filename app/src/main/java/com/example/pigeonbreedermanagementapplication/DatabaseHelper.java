@@ -1,22 +1,16 @@
 package com.example.pigeonbreedermanagementapplication;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.pigeonbreedermanagementapplication.Egg.EggTrackerFragment;
 import com.example.pigeonbreedermanagementapplication.Egg.EggsGetSet;
-import com.example.pigeonbreedermanagementapplication.Pigeon.PigeonsFragment;
 import com.example.pigeonbreedermanagementapplication.Pigeon.PigeonsGetSet;
-import com.example.pigeonbreedermanagementapplication.Product.ProductFragment;
 import com.example.pigeonbreedermanagementapplication.Product.ProductGetSet;
 import com.example.pigeonbreedermanagementapplication.Profile.ProfilesGetSet;
-import com.example.pigeonbreedermanagementapplication.Transaction.TransactionFragment;
 import com.example.pigeonbreedermanagementapplication.Transaction.TransactionGetSet;
 
 import java.util.ArrayList;
@@ -343,6 +337,50 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return diseaseList;
     }
 
+    public ArrayList<Symptom> getAllSymptoms(){
+        ArrayList<Symptom> symptomsList = new ArrayList<>();
+        String selectQuery = "SELECT * FROM " + SYMPTOMS_TABLE;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()){
+            do{
+
+                int sympid = cursor.getInt(0);
+                String sympname = cursor.getString(1);
+
+                Symptom symptom = new Symptom(sympid, sympname);
+                symptomsList.add(symptom);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return symptomsList;
+    }
+
+    public List<Symptom> getDiseaseSymptoms(int diseaseId) {
+        List<Symptom> symptoms = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT " + COLUMN_SYMPTOM_ID + ", " + COLUMN_SYMPTOM_NAME +
+                " FROM " + SYMPTOMS_TABLE +
+                " WHERE " + COLUMN_SYMPTOM_DISEASE_ID + " = ?";
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{String.valueOf(diseaseId)});
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                int symptomId = cursor.getInt(cursor.getColumnIndex(COLUMN_SYMPTOM_ID));
+                String symptomName = cursor.getString(cursor.getColumnIndex(COLUMN_SYMPTOM_NAME));
+
+                Symptom symptom = new Symptom(symptomId, symptomName);
+                symptoms.add(symptom);
+            } while (cursor.moveToNext());
+
+            cursor.close();
+        } else {
+            Log.d("DatabaseHelper", "No symptoms found for diseaseId: " + diseaseId);
+        }
+
+        return symptoms;
+    }
 
 
     ///////////////////////PROFILES//////////////////////////////

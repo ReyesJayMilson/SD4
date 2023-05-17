@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -32,8 +33,10 @@ public class CommonDiseaseLibFragment extends Fragment {
     private RecyclerView recyclerView;
 
     private Spinner spinSymptom;
+    private TextView txtSelectedSymptoms;
+    private ArrayList<String> selectedSymptoms = new ArrayList<>();
     ArrayList<Disease> diseaseList;
-    List<Symptom> symptomList;
+    ArrayList<String> symptomNameList;
     private DiseaseAdapter adapter;
 
     private DatabaseHelper databaseHelper;
@@ -63,11 +66,62 @@ public class CommonDiseaseLibFragment extends Fragment {
         adapter = new DiseaseAdapter(diseaseList, getActivity());
         recyclerView.setAdapter(adapter);
 
+        spinSymptom = view.findViewById(R.id.spinSymptom);
+        symptomNameList = databaseHelper.getEverySymptomNames();
+        ArrayAdapter<String> symptomAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, symptomNameList);
+        symptomAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinSymptom.setAdapter(symptomAdapter);
+
+        txtSelectedSymptoms = view.findViewById(R.id.txtSelectedSymptoms);
+
+        spinSymptom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedSymptom = parent.getItemAtPosition(position).toString();
+                if (!selectedSymptoms.contains(selectedSymptom)) {
+                    selectedSymptoms.add(selectedSymptom);
+                    updateSelectedSymptomsTextView();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Do nothing
+            }
+        });
+
+        txtSelectedSymptoms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Remove the clicked symptom from the selected symptoms list
+                String clickedSymptom = ((TextView) v).getText().toString().replace("Selected Symptoms: ", "");
+                selectedSymptoms.remove(clickedSymptom);
+                updateSelectedSymptomsTextView();
+            }
+        });
+
+
+
+
         // Inflate the layout for this fragment
         return view;
 
 
     }
+
+
+    private void updateSelectedSymptomsTextView() {
+        StringBuilder sb = new StringBuilder("Selected Symptoms: ");
+        for (String symptom : selectedSymptoms) {
+            sb.append(symptom).append(", ");
+        }
+        // Remove the last comma and space
+        if (sb.length() > 2) {
+            sb.delete(sb.length() - 2, sb.length());
+        }
+        txtSelectedSymptoms.setText(sb.toString());
+    }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.actions_menu, menu);
@@ -90,6 +144,8 @@ public class CommonDiseaseLibFragment extends Fragment {
                 return true;
             }
         });
+
+
 
 
 

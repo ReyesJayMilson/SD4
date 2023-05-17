@@ -11,5 +11,12 @@
         app:actionViewClass="android.widget.SearchView"
         />
 
+    <item
+        android:id="@+id/action_filter_sort"
+        android:icon="@drawable/baseline_filter_list_24"
+        android:title="Sort"
+        android:visible="false"
+        app:showAsAction="always" />
+
 
 </menu>
