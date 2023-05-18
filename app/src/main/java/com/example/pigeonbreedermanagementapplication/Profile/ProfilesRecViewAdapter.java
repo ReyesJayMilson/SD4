@@ -59,9 +59,13 @@ public class ProfilesRecViewAdapter extends RecyclerView.Adapter<ProfilesRecView
                 int clickedPosition = holder.getAdapterPosition();
                 int profileId = profiles.get(clickedPosition).getId();
                 GlobalVariables.profileId = profileId;
-                // insert initial values for cage and nest tables
-                dbhelper.initializeTable(profileId, "CAGE_TABLE");
-                dbhelper.initializeTable(profileId, "NEST_TABLE");
+                // Check if initialization is needed for cage and nest tables
+                if (!dbhelper.isProfileInitialized(profileId, "CAGE_TABLE")) {
+                    dbhelper.initializeTable(profileId, "CAGE_TABLE");
+                }
+                if (!dbhelper.isProfileInitialized(profileId, "NEST_TABLE")) {
+                    dbhelper.initializeTable(profileId, "NEST_TABLE");
+                }
                 Intent intent = new Intent(context, NavigationActivity.class);
                 context.startActivity(intent);
 

@@ -192,9 +192,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_PROFILE_ID + " INTEGER, " +
                 "FOREIGN KEY (" + COLUMN_PROFILE_ID + ") REFERENCES " + PROFILE_TABLE + "(" + COLUMN_PROFILE_ID + "))";
         db.execSQL(createCageTableStatement);
-//        String initializeCageTableStatement = "INSERT INTO " + CAGE_TABLE +
-//                " (" + COLUMN_CAGE_NO + ") VALUES (1)";
-//        db.execSQL(initializeCageTableStatement);
+
 
         //Table for Nest
         String createNestTableStatement = "CREATE TABLE " + NEST_TABLE + " ( " +
@@ -395,6 +393,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     ///////////////////////PROFILES//////////////////////////////
+    public boolean isProfileInitialized(int profileId, String tableName) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + tableName + " WHERE " + COLUMN_PROFILE_ID + " = " + profileId;
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.moveToFirst()) {  // if cursor moves to first, that means record exists
+            cursor.close();
+            return true;
+        } else {
+            cursor.close();
+            return false;
+        }
+    }
+
+
     public boolean addProfile(ProfilesGetSet profiles) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
