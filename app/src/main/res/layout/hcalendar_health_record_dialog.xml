@@ -44,6 +44,13 @@
                 android:layout_marginStart="32dp"
                 android:visibility="gone" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/symptomslistTextView"
+                android:layout_below="@+id/symptomsSpinner"
+                android:visibility="gone"/>
+
         </RelativeLayout>
 
         <RadioButton
@@ -69,12 +76,14 @@
 
     </RadioGroup>
 
+
+
     <EditText
         android:id="@+id/medicationsEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/healthRadioGroup"
         android:hint="Medications/Supplements"
+        android:layout_below="@id/healthRadioGroup"
         android:inputType="textMultiLine" />
 
 </RelativeLayout>

@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.pigeonbreedermanagementapplication.Egg.EggsGetSet;
+import com.example.pigeonbreedermanagementapplication.HealthCalendar.HCalendarGetSet;
 import com.example.pigeonbreedermanagementapplication.Pigeon.PigeonsGetSet;
 import com.example.pigeonbreedermanagementapplication.Product.ProductGetSet;
 import com.example.pigeonbreedermanagementapplication.Profile.ProfilesGetSet;
@@ -43,7 +44,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_HEALTH_ID = "HEALTH_ID";
     public static final String COLUMN_NOTE_DATE = "NOTE_DATE";
     public static final String COLUMN_NOTE_DESCRIPTION = "NOTE_DESCRIPTION";
+    public static final String COLUMN_HEALTH_STATUS = "HEALTH_STATUS";
     public static final String COLUMN_NOTE_MEDICATION = "NOTE_MEDICATION";
+    public static final String COLUMN_SYMPTOMS_LIST = "SYMPTOMS_LIST";
     public static final String TRANSACTION_TABLE = "TRANSACTION_TABLE";
     public static final String COLUMN_TRANSACTION_ID = "TRANSACTION_ID";
     public static final String COLUMN_TRANSACTION_TYPE = "TRANSACTION_TYPE";
@@ -74,6 +77,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_SYMPTOM_ID = "SYMPTOM_ID";
 
     public static final String COLUMN_SYMPTOM_NAME = "SYMPTOM_NAME";
+
 
     public static final String COLUMN_PIGEON_IMAGE = "PIGEON_IMAGE";
     public static final String CAGE_TABLE = "CAGE_TABLE";
@@ -133,12 +137,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_NOTE_DATE + " TEXT, " +
                 COLUMN_RING_ID + " TEXT, " +
                 COLUMN_NOTE_DESCRIPTION + " TEXT, " +
+                COLUMN_HEALTH_STATUS + " TEXT, " +
                 COLUMN_NOTE_MEDICATION + " TEXT, " +
-                COLUMN_SYMPTOM_ID + " TEXT, " +
-                COLUMN_DISEASE_ID + " TEXT, " +
+                COLUMN_SYMPTOMS_LIST + " TEXT, " +
+                COLUMN_DISEASE_ID + " INTEGER, " +
                 COLUMN_PROFILE_ID + " INTEGER NOT NULL, " +
                 "FOREIGN KEY (" + COLUMN_PROFILE_ID + ") REFERENCES " + PROFILE_TABLE + "(" + COLUMN_PROFILE_ID + "), " +
-                "FOREIGN KEY (" + COLUMN_SYMPTOM_ID + ") REFERENCES " + SYMPTOMS_TABLE + "(" + COLUMN_SYMPTOM_ID + "), " +
                 "FOREIGN KEY (" + COLUMN_DISEASE_ID + ") REFERENCES " + DISEASES_TABLE + "(" + COLUMN_DISEASE_ID + "))";
         db.execSQL(createHealthCalendarTableStatement);
 
@@ -1271,4 +1275,161 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return returnList;
     }
+
+    ///////////////////////HEALTH CALENDAR//////////////////////////////
+    public boolean addHealth(HCalendarGetSet hcalendar) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COLUMN_NOTE_DATE, hcalendar.getNote_date());
+        cv.put(COLUMN_RING_ID, hcalendar.getRing_id());
+        cv.put(COLUMN_NOTE_DESCRIPTION, hcalendar.getNote_description());
+        cv.put(COLUMN_HEALTH_STATUS, hcalendar.getHealth_status());
+        cv.put(COLUMN_NOTE_MEDICATION, hcalendar.getNote_medication());
+        cv.put(COLUMN_SYMPTOMS_LIST, hcalendar.getSymptoms_list());
+        cv.put(COLUMN_DISEASE_ID, hcalendar.getDisease_id());
+        cv.put(COLUMN_PROFILE_ID, hcalendar.getProfile_id());
+
+
+        long insert = db.insert(HEALTHCALENDAR_TABLE, null, cv);
+
+
+        if (insert == -1) {
+            return false;
+        } else {
+
+            return true;
+        }
+    }
+
+    public boolean deleteHealth(HCalendarGetSet hcalendar) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String whereClause = COLUMN_HEALTH_ID + " = ?";
+        String[] whereArgs = {String.valueOf(hcalendar.getHealth_id())};
+        int rowsDeleted = db.delete(PIGEON_TABLE, whereClause, whereArgs);
+
+        if (rowsDeleted > 0) {
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean editHealth(HCalendarGetSet hcalendar) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COLUMN_HEALTH_ID, hcalendar.getHealth_id());
+        cv.put(COLUMN_NOTE_DATE, hcalendar.getNote_date());
+        cv.put(COLUMN_RING_ID, hcalendar.getRing_id());
+        cv.put(COLUMN_NOTE_DESCRIPTION, hcalendar.getNote_description());
+        cv.put(COLUMN_HEALTH_STATUS, hcalendar.getHealth_status());
+        cv.put(COLUMN_NOTE_MEDICATION, hcalendar.getNote_medication());
+        cv.put(COLUMN_SYMPTOMS_LIST, hcalendar.getSymptoms_list());
+        cv.put(COLUMN_DISEASE_ID, hcalendar.getDisease_id());
+        cv.put(COLUMN_PROFILE_ID, hcalendar.getProfile_id());
+        String whereClause = COLUMN_HEALTH_ID + " = ?";
+        String[] whereArgs = {String.valueOf(hcalendar.getHealth_id())};
+        int update = db.update(HEALTHCALENDAR_TABLE, cv, whereClause, whereArgs);
+        if (update == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+    public ArrayList<HCalendarGetSet> getEveryHealth(int profileid) {
+
+        ArrayList<HCalendarGetSet> returnList = new ArrayList<>();
+
+        // get data from the database
+
+        String queryString = "SELECT * FROM " + HEALTHCALENDAR_TABLE + " WHERE " + COLUMN_HEALTH_ID + " = " + profileid;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+            // loop through the cursor, put them in return list
+            do {
+                int healthID = cursor.getInt(0);
+                String noteDate = cursor.getString(1);
+                String ringID = cursor.getString(2);
+                String noteDescription = cursor.getString(3);
+                String healthStatus = cursor.getString(4);
+                String noteMedication = cursor.getString(5);
+                String symptomsList = cursor.getString(6);
+                int diseaseID = cursor.getInt(7);
+                int profileID = cursor.getInt(8);
+
+
+
+                HCalendarGetSet newHealth = new HCalendarGetSet(healthID, noteDate, ringID, noteDescription, healthStatus, noteMedication, symptomsList,diseaseID,profileID);
+                returnList.add(newHealth);
+
+            } while (cursor.moveToNext());
+
+        } else {
+
+        }
+        cursor.close();
+        return returnList;
+    }
+
+    public HCalendarGetSet getHealthData(String date, String ring_id) {
+        HCalendarGetSet healthData = null;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String queryString = "SELECT * FROM " + HEALTHCALENDAR_TABLE
+                + " WHERE " + COLUMN_NOTE_DATE + " = ? AND "
+                + COLUMN_RING_ID + " = ?";
+        Cursor cursor = db.rawQuery(queryString, new String[] {date, ring_id});
+
+        if (cursor.moveToFirst()) {
+            int healthID = cursor.getInt(0);
+            String noteDate = cursor.getString(1);
+            String ringID = cursor.getString(2);
+            String noteDescription = cursor.getString(3);
+            String healthStatus = cursor.getString(4);
+            String noteMedication = cursor.getString(5);
+            String symptomsList = cursor.getString(6);
+            int diseaseID = cursor.getInt(7);
+            int profileID = cursor.getInt(8);
+
+            healthData = new HCalendarGetSet(healthID, noteDate, ringID, noteDescription, healthStatus, noteMedication, symptomsList, diseaseID, profileID);
+        }
+
+        cursor.close();
+        return healthData;
+    }
+
+
+    public int getDiseaseIdByName(String diseaseName) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        int diseaseId = -1;
+
+        // Define the table name and column names
+        String tableName = DISEASES_TABLE;
+        String[] columns = {COLUMN_DISEASE_ID};
+
+        // Specify the selection criteria
+        String selection = "DISEASE_NAME = ?";
+        String[] selectionArgs = {diseaseName};
+
+        // Execute the query
+        Cursor cursor = db.query(tableName, columns, selection, selectionArgs, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            int columnIndex = cursor.getColumnIndex("DISEASE_ID");
+            if (columnIndex != -1) {
+                // Retrieve the disease ID from the cursor
+                diseaseId = cursor.getInt(columnIndex);
+            }
+        }
+        cursor.close();
+        return diseaseId;
+    }
+
 }
