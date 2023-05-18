@@ -15,7 +15,7 @@ import com.example.pigeonbreedermanagementapplication.R;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
+import java.util.Locale;
 public class HCalendarAdapter extends RecyclerView.Adapter<HCalendarViewHolder> {
 
     private DatabaseHelper dbhelper;
@@ -46,17 +46,28 @@ public class HCalendarAdapter extends RecyclerView.Adapter<HCalendarViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull HCalendarViewHolder holder, int position) {
         String date = daysOfMonth.get(position);
+        if (date.isEmpty()) {
+            holder.dayOfMonth.setText("");
+            return;
+        }
+
+        // Add leading zero to single digit day numbers.
+        date = String.format("%02d", Integer.parseInt(date));
         holder.dayOfMonth.setText(date);
 
         String fullDateString = monthYear + "/" + date;
-        Log.d("Date: ", fullDateString);
-        // Convert the date to MM/dd/yyyy format
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-//        fullDateString = fullDate.format(formatter);
+        Log.d("Date:", fullDateString);
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy/dd");
+        LocalDate localDate = LocalDate.parse(fullDateString, formatter);
 
-        // Fetch the health status for the current date and pigeon
-        HCalendarGetSet healthData = dbhelper.getHealthData(date, ring_id);
+        // Convert the LocalDate to a formatted String
+        String formattedDateString = localDate.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+
+        Log.d("Formatted Date:", formattedDateString);
+
+// Fetch the health status for the current date and pigeon
+        HCalendarGetSet healthData = dbhelper.getHealthData(formattedDateString, ring_id);
 
         if (healthData != null) {
             String healthStatus = healthData.getHealth_status();
@@ -74,6 +85,7 @@ public class HCalendarAdapter extends RecyclerView.Adapter<HCalendarViewHolder> 
                 default:
                     break;
             }
+
         }
     }
 

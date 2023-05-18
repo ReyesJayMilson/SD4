@@ -257,9 +257,9 @@ public class PigeonAdding extends AppCompatActivity {
 //                    Toast.makeText(PigeonAdding.this, "Ring ID cannot be empty.", Toast.LENGTH_SHORT).show();
 //                }
 //                else {
-                    if (filePath != null) {
-                        filePath = saveImageToInternalStorage(imageBitmap, ringId);
-                    }
+
+                filePath = saveImageToInternalStorage(imageBitmap, ringId);
+
                     PigeonsGetSet pigeons = new PigeonsGetSet(ringId, name, selectedCageNo, selectedYear, selectedBreed, selectedGender, color, selectedStatus, notes, filePath, profileId);
 
                 int result = dbhelper.addPigeon(pigeons);

@@ -1306,7 +1306,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String whereClause = COLUMN_HEALTH_ID + " = ?";
         String[] whereArgs = {String.valueOf(hcalendar.getHealth_id())};
-        int rowsDeleted = db.delete(PIGEON_TABLE, whereClause, whereArgs);
+        int rowsDeleted = db.delete(HEALTHCALENDAR_TABLE, whereClause, whereArgs);
 
         if (rowsDeleted > 0) {
 
@@ -1430,6 +1430,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         return diseaseId;
+    }
+    public String getDiseaseNameById(int diseaseId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String diseaseName = "";
+
+        // Define the table name and column names
+        String tableName = DISEASES_TABLE;
+        String[] columns = {COLUMN_DISEASE_NAME};
+
+        // Specify the selection criteria
+        String selection = "DISEASE_ID = ?";
+        String[] selectionArgs = {String.valueOf(diseaseId)};
+
+        // Execute the query
+        Cursor cursor = db.query(tableName, columns, selection, selectionArgs, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            int columnIndex = cursor.getColumnIndex("DISEASE_NAME");
+            if (columnIndex != -1) {
+                // Retrieve the disease name from the cursor
+                diseaseName = cursor.getString(columnIndex);
+            }
+        }
+        cursor.close();
+        return diseaseName;
     }
 
 }

@@ -28,12 +28,14 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 public class HCalendarActivity extends AppCompatActivity implements HCalendarAdapter.OnItemListener{
 
     private int profileId = GlobalVariables.profileId;
+    private HCalendarAdapter calendarAdapter;
     DatabaseHelper dbhelper;
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
@@ -42,6 +44,7 @@ public class HCalendarActivity extends AppCompatActivity implements HCalendarAda
     private Set<String> selectedSymptoms = new HashSet<>();
     private String ringId;
     private RadioButton rbStatus;
+    private String initialSymptoms;
 
 
 
@@ -67,8 +70,7 @@ public class HCalendarActivity extends AppCompatActivity implements HCalendarAda
     private void setMonthView() {
         monthYearText.setText(monthYearFromDate(selectedDate));
         ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
-
-        HCalendarAdapter calendarAdapter = new HCalendarAdapter(dbhelper, daysInMonth, this, ringId, monthYearFromDate(selectedDate));
+        calendarAdapter = new HCalendarAdapter(dbhelper, daysInMonth, this, ringId, monthYearFromDate(selectedDate));
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(calendarAdapter);
@@ -126,11 +128,13 @@ public class HCalendarActivity extends AppCompatActivity implements HCalendarAda
     public void onItemClick(int position, String dayText) {
         if (!dayText.equals("")) {
             // Inflate the custom layout
+            selectedSymptoms.clear();
             LayoutInflater inflater = getLayoutInflater();
             View dialogView = inflater.inflate(R.layout.hcalendar_health_record_dialog, null);
 
             // Calculate the actual date from the clicked item
             LocalDate clickedDate = selectedDate.withDayOfMonth(Integer.parseInt(dayText));
+
 
             // Get references to the views in the layout
 //            TextView dateTextView = dialogView.findViewById(R.id.dateTextView);
@@ -219,70 +223,133 @@ public class HCalendarActivity extends AppCompatActivity implements HCalendarAda
                 }
             });
 
+            HCalendarGetSet existingHealth = dbhelper.getHealthData(standardFormatDate(clickedDate), ringId);
+            boolean dataExists = (existingHealth != null);
 
+            String initialDetails = "", initialMedications = "", initialDisease = "";
+            initialSymptoms = "";
+            int initialHealthStatusId = R.id.radioHealthy;
 
-
-            // Create an AlertDialog builder
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-            // Set the custom view for the builder
-            builder.setView(dialogView);
-
-            // Set the title
-            builder.setTitle(formalFormatDate(clickedDate));
-
-            // Add a positive button and set its click listener
-            builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                    int diseaseId=0;
-                    // Get the selected radio button ID from the RadioGroup
-                    int selectedRadioButtonId = healthRadioGroup.getCheckedRadioButtonId();
-                    rbStatus = dialogView.findViewById(selectedRadioButtonId);
-                    String selectedStatus = rbStatus.getText().toString();
-
-                    // Get the selected spinner values
-                    String selectedSymptomsString = "";
-                    String selectedDisease = "";
-                    if (selectedRadioButtonId == R.id.radioHasSymptoms) {
-                        selectedSymptomsString = getSelectedSymptomsString();
-                    } else if (selectedRadioButtonId == R.id.radioContractedDisease) {
-                        selectedDisease = diseasesSpinner.getSelectedItem().toString();
-                        diseaseId = getDiseaseId(selectedDisease);
-
+            if (dataExists) {
+                // Populate the dialog fields with the existing data
+                initialDetails = existingHealth.getNote_description();
+                initialMedications = existingHealth.getNote_medication();
+                initialSymptoms = existingHealth.getSymptoms_list();
+                initialDisease = dbhelper.getDiseaseNameById(existingHealth.getDisease_id());
+                if (!initialSymptoms.isEmpty()) {
+                    String[] symptomsArray = initialSymptoms.split(",");
+                    for (String symptom : symptomsArray) {
+                        selectedSymptoms.add(symptom.trim());
                     }
+                    symptomsListTextView.setVisibility(View.VISIBLE);
+                    updateSelectedSymptomsTextView(symptomsListTextView);
+                }
+                switch (existingHealth.getHealth_status()) {
+                    case "Healthy":
+                        initialHealthStatusId = R.id.radioHealthy;
+                        break;
+                    case "Has Symptoms":
+                        initialHealthStatusId = R.id.radioHasSymptoms;
+                        break;
+                    case "Contracted Disease":
+                        initialHealthStatusId = R.id.radioContractedDisease;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            // Set the initial values in the dialog
+            detailsEditText.setText(initialDetails);
+            medicationsEditText.setText(initialMedications);
+            // TODO: Set the initial selected symptoms and disease
+
+            healthRadioGroup.check(initialHealthStatusId);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                    .setView(dialogView)
+                    .setTitle(formalFormatDate(clickedDate))
+                    .setPositiveButton(dataExists ? "Save" : "Add", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
 
-                    // Get the details and medications values from the corresponding EditText views
-                    String details = detailsEditText.getText().toString();
-                    String medications = medicationsEditText.getText().toString();
-                    // Handle OK button click
-                    HCalendarGetSet health = new HCalendarGetSet(-1, standardFormatDate(clickedDate), ringId, details, selectedStatus, medications, selectedSymptomsString, diseaseId, profileId);
-                    boolean success = dbhelper.addHealth(health);
+                            int diseaseId=0;
 
-                    if (success) {
-                        ArrayList<HCalendarGetSet> updatedList = dbhelper.getEveryHealth(profileId);
+                            int selectedRadioButtonId = healthRadioGroup.getCheckedRadioButtonId();
+                            rbStatus = dialogView.findViewById(selectedRadioButtonId);
+                            String selectedStatus = rbStatus.getText().toString();
+
+                            // Get the selected spinner values
+                            String selectedSymptomsString = "";
+                            String selectedDisease = "";
+                            if (selectedRadioButtonId == R.id.radioHasSymptoms) {
+                                selectedSymptomsString = getSelectedSymptomsString();
+                            } else if (selectedRadioButtonId == R.id.radioContractedDisease) {
+                                selectedDisease = diseasesSpinner.getSelectedItem().toString();
+                                diseaseId = getDiseaseId(selectedDisease);
+
+                            }
+                            // Get the details and medications values from the corresponding EditText views
+                            String details = detailsEditText.getText().toString();
+                            String medications = medicationsEditText.getText().toString();
+
+                            if (dataExists) {
+                                // Update the existing record
+
+                                existingHealth.setNote_description(details);
+                                existingHealth.setSymptoms_list(selectedSymptomsString);
+                                existingHealth.setDisease_id(diseaseId);
+                                existingHealth.setHealth_status(selectedStatus);
+                                existingHealth.setNote_medication(medications);
+                                boolean success = dbhelper.editHealth(existingHealth);
+                                if (success) {
+                                    ArrayList<HCalendarGetSet> updatedList = dbhelper.getEveryHealth(profileId);
+                                    setMonthView();  // Update the data
+                                    calendarAdapter.notifyDataSetChanged();  // Refresh the view
 //                        HealthCalendarFragment.hcalendaradapter.setProducts(updatedList);
-                        Toast.makeText(HCalendarActivity.this, "Note added", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(HCalendarActivity.this, "Note not added", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(HCalendarActivity.this, "Note updated", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(HCalendarActivity.this, "Note not updated", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                HCalendarGetSet health = new HCalendarGetSet(-1, standardFormatDate(clickedDate), ringId, details, selectedStatus, medications, selectedSymptomsString, diseaseId, profileId);
+                                boolean success = dbhelper.addHealth(health);
+
+                                if (success) {
+                                    ArrayList<HCalendarGetSet> updatedList = dbhelper.getEveryHealth(profileId);
+                                    setMonthView();  // Update the data
+                                    calendarAdapter.notifyDataSetChanged();  // Refresh the view
+//                        HealthCalendarFragment.hcalendaradapter.setProducts(updatedList);
+                                    Toast.makeText(HCalendarActivity.this, "Note added", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(HCalendarActivity.this, "Note not added", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .setCancelable(false);
+
+
+            if (dataExists) {
+                builder.setNeutralButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        boolean success = dbhelper.deleteHealth(existingHealth);
+                        if (success) {
+                            ArrayList<HCalendarGetSet> updatedList = dbhelper.getEveryHealth(profileId);
+                            setMonthView();  // Update the data
+                            calendarAdapter.notifyDataSetChanged();  // Refresh the view
+//                        HealthCalendarFragment.hcalendaradapter.setProducts(updatedList);
+                            Toast.makeText(HCalendarActivity.this, "Note delete", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(HCalendarActivity.this, "Note not deleted", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                }
-            });
+                });
+            }
 
-            // Add a negative button and set its click listener
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    // Handle Cancel button click
-                }
-            });
-
-            // Set other properties of the dialog
-            builder.setCancelable(false); // Dialog cannot be dismissed by pressing outside of it
-
-            // Create the AlertDialog instance and show it
             AlertDialog dialog = builder.create();
             dialog.show();
         }
@@ -307,11 +374,11 @@ public class HCalendarActivity extends AppCompatActivity implements HCalendarAda
     private String getSelectedSymptomsString() {
         StringBuilder sb = new StringBuilder();
         for (String symptom : selectedSymptoms) {
-            sb.append(symptom).append(", ");
+            sb.append(symptom).append(",");
         }
         // Remove the trailing comma and space
         if (sb.length() > 0) {
-            sb.setLength(sb.length() - 2);
+            sb.setLength(sb.length() - 1);
         }
         return sb.toString();
     }
