@@ -82,8 +82,8 @@ public class TransactionEditing extends AppCompatActivity {
         type.add("Sell");
 //        type.add("Trade");
 
-        ArrayAdapter<String> typeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, type);
-        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> typeAdapter = new ArrayAdapter<>(this, R.layout.spinner_adapter, type);
+        typeAdapter.setDropDownViewResource(R.layout.spinner_adapter_dropdown);
         spType.setAdapter(typeAdapter);
 
         etDate.setFocusable(false);

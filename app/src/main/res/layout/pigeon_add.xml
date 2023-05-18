@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#28595E">
+    android:background="#1D2538">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -33,6 +33,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="16dp"
+                android:textColor="@color/white"
                 android:hint="Ring ID" />
 
             <EditText
@@ -43,7 +44,9 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="16dp"
-                android:hint="Name" />
+                android:textColor="@color/white"
+                android:hint="Name"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -59,7 +62,8 @@
                     android:id="@+id/tv_CageNo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cage Number"
+                    android:textColor="@color/white"
+                    android:text="Cage Number:"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="30dp"
                     android:textSize="18sp"
@@ -69,7 +73,8 @@
                     android:id="@+id/sp_CageNo"
                     android:layout_width="100dp"
                     android:layout_height="48dp"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:backgroundTint="@color/white"/>
 
                 <Button
                     android:id="@+id/bt_AddCage"
@@ -77,6 +82,7 @@
                     android:layout_height="50dp"
                     android:layout_marginLeft="10dp"
                     android:text="+"
+                    android:textColor="@color/white"
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/pigeon_image_placeholder_bg"
@@ -98,7 +104,8 @@
                     android:id="@+id/tv_BirthYear"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Birth Year"
+                    android:text="Birth Year:"
+                    android:textColor="@color/white"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="30dp"
                     android:textSize="18sp"
@@ -106,9 +113,10 @@
 
                 <Spinner
                     android:id="@+id/sp_BirthYear"
-                    android:layout_width="200dp"
+                    android:layout_width="133dp"
                     android:layout_height="48dp"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:backgroundTint="@color/white"/>
             </LinearLayout>
 
             <LinearLayout
@@ -125,7 +133,8 @@
                     android:id="@+id/tv_Breed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Breed"
+                    android:text="Breed:"
+                    android:textColor="@color/white"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="30dp"
                     android:textSize="18sp"
@@ -133,9 +142,10 @@
 
                 <Spinner
                     android:id="@+id/sp_Breed"
-                    android:layout_width="200dp"
+                    android:layout_width="166dp"
                     android:layout_height="48dp"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:backgroundTint="@color/white" />
 
 
             </LinearLayout>
@@ -155,7 +165,8 @@
                     android:id="@+id/tv_Gender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Gender"
+                    android:text="Gender:"
+                    android:textColor="@color/white"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="30dp"
                     android:textSize="18sp"
@@ -163,9 +174,10 @@
 
                 <Spinner
                     android:id="@+id/sp_Gender"
-                    android:layout_width="200dp"
+                    android:layout_width="155dp"
                     android:layout_height="48dp"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:backgroundTint="@color/white" />
             </LinearLayout>
 
             <EditText
@@ -176,6 +188,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="16dp"
+                android:textColor="@color/white"
                 android:hint="Color" />
 
             <RadioGroup
@@ -187,13 +200,15 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="16dp"
                 android:orientation="horizontal"
-                android:visibility="gone">
+                android:visibility="gone"
+                android:backgroundTint="@color/white">
 
                 <RadioButton
                     android:id="@+id/rb_Alive"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:text="Alive"
+                    android:textColor="@color/white"
                     android:layout_marginHorizontal="10dp"
                     android:checked="true" />
 
@@ -202,6 +217,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:text="Dead"
+                    android:textColor="@color/white"
                     android:layout_marginHorizontal="10dp" />
 
                 <RadioButton
@@ -209,6 +225,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:text="Sold"
+                    android:textColor="@color/white"
                     android:layout_marginHorizontal="10dp" />
             </RadioGroup>
 
@@ -220,6 +237,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="16dp"
+                android:textColor="@color/white"
                 android:hint="Notes" />
 
             <TextView
@@ -247,10 +265,9 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/rectangular_border"
-        android:backgroundTint="#333462"
-        android:text="Save"
-        android:textColor="@color/black"
+        android:background="@drawable/pigeon_button_bg"
+        android:text="Edit"
+        android:textColor="#DBDBDB"
         android:textSize="20sp" />
 
 

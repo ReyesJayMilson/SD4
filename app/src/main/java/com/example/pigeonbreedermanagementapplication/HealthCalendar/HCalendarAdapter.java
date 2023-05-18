@@ -1,5 +1,6 @@
 package com.example.pigeonbreedermanagementapplication.HealthCalendar;
 
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,10 +75,10 @@ public class HCalendarAdapter extends RecyclerView.Adapter<HCalendarViewHolder> 
 
             switch (healthStatus) {
                 case "Healthy":
-                    holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.green));
+                    holder.itemView.setBackgroundColor(Color.parseColor("#035c05"));
                     break;
                 case "Has Symptoms":
-                    holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.orange));
+                    holder.itemView.setBackgroundColor(Color.parseColor("#bd7108"));
                     break;
                 case "Contracted Disease":
                     holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.red));

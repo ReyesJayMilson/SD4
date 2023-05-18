@@ -1,7 +1,11 @@
 package com.example.pigeonbreedermanagementapplication.Egg;
 
 import android.app.DatePickerDialog;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -84,15 +88,32 @@ public class EggAdding extends AppCompatActivity {
         btSave = findViewById(R.id.bt_Save);
         spCageNo = findViewById(R.id.sp_CageNo);
         spNestNo = findViewById(R.id.sp_NestNo);
+
         etLayDate = findViewById(R.id.et_LayDate);
+        SpannableString spannableString_etLay = new SpannableString("Laying Date");
+        // Create a ForegroundColorSpan with the desired color
+        ForegroundColorSpan colorSpan_etLay = new ForegroundColorSpan(Color.parseColor("#ebe8e8"));
+        // Apply the color span to the spannable string
+        spannableString_etLay.setSpan(colorSpan_etLay, 0, spannableString_etLay.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        // Set the spannable string as the hint for the EditText
+        etLayDate.setHint(spannableString_etLay);
+
         etQuantity = findViewById(R.id.et_Quantity);
+        SpannableString spannableString_etQua = new SpannableString("Quantity");
+        // Create a ForegroundColorSpan with the desired color
+        ForegroundColorSpan colorSpan_etQua = new ForegroundColorSpan(Color.parseColor("#ebe8e8"));
+        // Apply the color span to the spannable string
+        spannableString_etQua.setSpan(colorSpan_etQua, 0, spannableString_etQua.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        // Set the spannable string as the hint for the EditText
+        etQuantity.setHint(spannableString_etQua);
+
         spFather = findViewById(R.id.sp_Father);
         spMother = findViewById(R.id.sp_Mother);
 
         //adding to cageNo
         cageNumbers = dbhelper.getAllCageNumbers(profileId);
-        ArrayAdapter<Integer> cageadapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cageNumbers);
-        cageadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<Integer> cageadapter = new ArrayAdapter<>(this, R.layout.spinner_adapter, cageNumbers);
+        cageadapter.setDropDownViewResource(R.layout.spinner_adapter_dropdown);
         spCageNo.setAdapter(cageadapter);
 
         btAddCage.setOnClickListener(new View.OnClickListener() {
@@ -106,8 +127,8 @@ public class EggAdding extends AppCompatActivity {
                     Toast.makeText(EggAdding.this, "Cage Number not added", Toast.LENGTH_SHORT).show();
                 }
                 cageNumbers = dbhelper.getAllCageNumbers(profileId);
-                ArrayAdapter<Integer> cageadapter = new ArrayAdapter<>(EggAdding.this, android.R.layout.simple_spinner_item, cageNumbers);
-                cageadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                ArrayAdapter<Integer> cageadapter = new ArrayAdapter<>(EggAdding.this, R.layout.spinner_adapter, cageNumbers);
+                cageadapter.setDropDownViewResource(R.layout.spinner_adapter_dropdown);
                 cageadapter.notifyDataSetChanged();
                 spCageNo.setAdapter(cageadapter);
             }
@@ -115,8 +136,8 @@ public class EggAdding extends AppCompatActivity {
 
         //adding to nestNo
         nestNumbers = dbhelper.getAllNestNumbers(profileId);
-        ArrayAdapter<Integer> nestadapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, nestNumbers);
-        nestadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<Integer> nestadapter = new ArrayAdapter<>(this, R.layout.spinner_adapter, nestNumbers);
+        nestadapter.setDropDownViewResource(R.layout.spinner_adapter_dropdown);
         spNestNo.setAdapter(nestadapter);
 
         btAddNest.setOnClickListener(new View.OnClickListener() {
@@ -130,8 +151,8 @@ public class EggAdding extends AppCompatActivity {
                     Toast.makeText(EggAdding.this, "New Nest not added", Toast.LENGTH_SHORT).show();
                 }
                 nestNumbers = dbhelper.getAllNestNumbers(profileId);
-                ArrayAdapter<Integer> nestadapter = new ArrayAdapter<>(EggAdding.this, android.R.layout.simple_spinner_item, nestNumbers);
-                nestadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                ArrayAdapter<Integer> nestadapter = new ArrayAdapter<>(EggAdding.this, R.layout.spinner_adapter, nestNumbers);
+                nestadapter.setDropDownViewResource(R.layout.spinner_adapter_dropdown);
                 nestadapter.notifyDataSetChanged();
                 spNestNo.setAdapter(nestadapter);
             }
@@ -146,15 +167,15 @@ public class EggAdding extends AppCompatActivity {
         });
         //adding the resources to the birthyear
         List<String> ringIdsMale = dbhelper.getAllRingMale(profileId);
-        ArrayAdapter<String> ringIdsAdapterMale = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ringIdsMale);
-        ringIdsAdapterMale.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> ringIdsAdapterMale = new ArrayAdapter<>(this, R.layout.spinner_adapter, ringIdsMale);
+        ringIdsAdapterMale.setDropDownViewResource(R.layout.spinner_adapter_dropdown);
         List<String> ringIdsFemale = dbhelper.getAllRingFemale(profileId);
-        ArrayAdapter<String> ringIdsAdapterFemale = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ringIdsFemale);
-        ringIdsAdapterFemale.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> ringIdsAdapterFemale = new ArrayAdapter<>(this, R.layout.spinner_adapter, ringIdsFemale);
+        ringIdsAdapterFemale.setDropDownViewResource(R.layout.spinner_adapter_dropdown);
 
 //        List<String> ringIds = dbhelper.getAllRingIds(profileId);
-//        ArrayAdapter<String> ringIdsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ringIds);
-//        ringIdsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        ArrayAdapter<String> ringIdsAdapter = new ArrayAdapter<>(this, R.layout.spinner_adapter, ringIds);
+//        ringIdsAdapter.setDropDownViewResource(R.layout.spinner_adapter_dropdown);
         spFather.setAdapter(ringIdsAdapterMale);
         spMother.setAdapter(ringIdsAdapterFemale);
 

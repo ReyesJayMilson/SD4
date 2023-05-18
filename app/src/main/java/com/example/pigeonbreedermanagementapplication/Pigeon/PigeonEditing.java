@@ -6,11 +6,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.InputType;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -96,14 +100,42 @@ public class PigeonEditing extends AppCompatActivity {
         btAddCage = findViewById(R.id.bt_AddCage);
         btSave = findViewById(R.id.bt_Save);
         etRingID = findViewById(R.id.et_RingID);
+
         etName = findViewById(R.id.et_Name);
+        SpannableString spannableString_etName = new SpannableString("Name");
+        // Create a ForegroundColorSpan with the desired color
+        ForegroundColorSpan colorSpan_etName = new ForegroundColorSpan(Color.parseColor("#ebe8e8"));
+        // Apply the color span to the spannable string
+        spannableString_etName.setSpan(colorSpan_etName, 0, spannableString_etName.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        // Set the spannable string as the hint for the EditText
+        etName.setHint(spannableString_etName);
+
         spCageNo = findViewById(R.id.sp_CageNo);
 //        etCageNumber = findViewById(R.id.et_CageNo);
         spBirthYear = findViewById(R.id.sp_BirthYear);
         spBreed = findViewById(R.id.sp_Breed);
+
         etColor = findViewById(R.id.et_Color);
+        etColor = findViewById(R.id.et_Color);
+        SpannableString spannableString_etColor = new SpannableString("Color");
+        // Create a ForegroundColorSpan with the desired color
+        ForegroundColorSpan colorSpan_etColor = new ForegroundColorSpan(Color.parseColor("#ebe8e8"));
+        // Apply the color span to the spannable string
+        spannableString_etColor.setSpan(colorSpan_etColor, 0, spannableString_etColor.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        // Set the spannable string as the hint for the EditText
+        etColor.setHint(spannableString_etColor);
+
         spGender = findViewById(R.id.sp_Gender);
+
         etNotes = findViewById(R.id.et_Notes);
+        SpannableString spannableString_etNotes = new SpannableString("Notes");
+        // Create a ForegroundColorSpan with the desired color
+        ForegroundColorSpan colorSpan_etNotes = new ForegroundColorSpan(Color.parseColor("#ebe8e8"));
+        // Apply the color span to the spannable string
+        spannableString_etNotes.setSpan(colorSpan_etNotes, 0, spannableString_etNotes.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        // Set the spannable string as the hint for the EditText
+        etNotes.setHint(spannableString_etNotes);
+
         rgStatus = findViewById(R.id.rg_Status);
 
 
@@ -134,8 +166,8 @@ public class PigeonEditing extends AppCompatActivity {
 
         //adding to cageNo
         List<Integer> cageNumbers = dbhelper.getAllCageNumbers(profileId);
-        ArrayAdapter<Integer> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cageNumbers);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<Integer> adapter = new ArrayAdapter<>(this, R.layout.spinner_adapter, cageNumbers);
+        adapter.setDropDownViewResource(R.layout.spinner_adapter_dropdown);
         spCageNo.setAdapter(adapter);
 
         btAddCage.setOnClickListener(new View.OnClickListener() {
@@ -149,8 +181,8 @@ public class PigeonEditing extends AppCompatActivity {
                     Toast.makeText(PigeonEditing.this, "Cage Number not added", Toast.LENGTH_SHORT).show();
                 }
                 List<Integer> cageNumbers = dbhelper.getAllCageNumbers(profileId);
-                ArrayAdapter<Integer> adapter = new ArrayAdapter<>(PigeonEditing.this, android.R.layout.simple_spinner_item, cageNumbers);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                ArrayAdapter<Integer> adapter = new ArrayAdapter<>(PigeonEditing.this, R.layout.spinner_adapter, cageNumbers);
+                adapter.setDropDownViewResource(R.layout.spinner_adapter_dropdown);
                 adapter.notifyDataSetChanged();
                 spCageNo.setAdapter(adapter);
             }
@@ -165,8 +197,8 @@ public class PigeonEditing extends AppCompatActivity {
             years.add(i);
         }
 
-        ArrayAdapter<Integer> yearsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, years);
-        yearsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<Integer> yearsAdapter = new ArrayAdapter<>(this, R.layout.spinner_adapter, years);
+        yearsAdapter.setDropDownViewResource(R.layout.spinner_adapter_dropdown);
         spBirthYear.setAdapter(yearsAdapter);
 
         spBirthYear.setPrompt("Birth Year");
@@ -180,8 +212,8 @@ public class PigeonEditing extends AppCompatActivity {
         Listgender.add("Female");
         Listgender.add("Young");
 
-        ArrayAdapter<String> genderAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Listgender);
-        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> genderAdapter = new ArrayAdapter<>(this, R.layout.spinner_adapter, Listgender);
+        genderAdapter.setDropDownViewResource(R.layout.spinner_adapter_dropdown);
         spGender.setAdapter(genderAdapter);
 //        spGender.setSelection(0);
 
@@ -192,8 +224,8 @@ public class PigeonEditing extends AppCompatActivity {
         breeds.add("Brown");
         breeds.add("Others...");
 
-        ArrayAdapter<String> breedsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, breeds);
-        breedsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> breedsAdapter = new ArrayAdapter<>(this, R.layout.spinner_adapter, breeds);
+        breedsAdapter.setDropDownViewResource(R.layout.spinner_adapter_dropdown);
         spBreed.setAdapter(breedsAdapter);
         spBreed.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
