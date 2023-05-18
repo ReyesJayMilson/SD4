@@ -248,7 +248,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.execSQL(insertSymptomStatement12);
             String insertSymptomStatement13 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Bloody Diarrhea', 3)";
             db.execSQL(insertSymptomStatement13);
-            String insertSymptomStatement14 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Watery', 3)";
+            String insertSymptomStatement14 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Watery Feces', 3)";
             db.execSQL(insertSymptomStatement14);
             String insertSymptomStatement15 = "INSERT INTO SYMPTOMS_TABLE (SYMPTOM_NAME, DISEASE_ID) VALUES ('Weakness', 3)";
             db.execSQL(insertSymptomStatement15);
