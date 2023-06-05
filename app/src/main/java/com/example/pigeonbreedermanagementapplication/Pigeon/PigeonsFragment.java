@@ -25,6 +25,7 @@ import com.example.pigeonbreedermanagementapplication.GlobalVariables;
 import com.example.pigeonbreedermanagementapplication.Home.HomeFragment;
 import com.example.pigeonbreedermanagementapplication.R;
 
+
 import java.util.ArrayList;
 
 
@@ -65,6 +66,14 @@ public class PigeonsFragment extends Fragment {
                 // Code to be executed when the button is clicked
                 Intent intent = new Intent(getContext(), PigeonAdding.class);
                 startActivity(intent);
+
+                View rootView = LayoutInflater.from(getContext()).inflate(R.layout.pigeon_add, null);
+
+                // Find the button within the inflated view
+                Button addButton = rootView.findViewById(R.id.bt_Save);
+
+                // Change the text of the button to "Add Pigeon"
+                addButton.setText("Add Pigeon");
             }
         });
 
