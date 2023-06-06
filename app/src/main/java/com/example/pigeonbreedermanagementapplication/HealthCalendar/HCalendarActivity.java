@@ -20,7 +20,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pigeonbreedermanagementapplication.DatabaseHelper;
+import com.example.pigeonbreedermanagementapplication.DatasetManager;
 import com.example.pigeonbreedermanagementapplication.GlobalVariables;
+import com.example.pigeonbreedermanagementapplication.PigeonDataset;
 import com.example.pigeonbreedermanagementapplication.R;
 import com.example.pigeonbreedermanagementapplication.Symptom;
 
@@ -28,8 +30,8 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class HCalendarActivity extends AppCompatActivity implements HCalendarAdapter.OnItemListener{
@@ -48,6 +50,7 @@ public class HCalendarActivity extends AppCompatActivity implements HCalendarAda
 
 
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +61,9 @@ public class HCalendarActivity extends AppCompatActivity implements HCalendarAda
         ringId = getIntent().getStringExtra("ring_id");
         dbhelper = new DatabaseHelper(this);
         setMonthView();
+
+        DatasetManager datasetManager = new DatasetManager(this);
+        List<PigeonDataset> pigeonData = datasetManager.loadPigeonData();
     }
 
 
