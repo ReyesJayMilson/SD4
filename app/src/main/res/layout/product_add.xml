@@ -8,12 +8,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"
-        android:background="#28595E">
+        android:background="#1D2538">
 
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:textColor="#DBDBDB"
             android:id="@+id/et_ProductName"
             android:layout_centerHorizontal="true"
             android:layout_marginHorizontal="20dp"
@@ -24,6 +25,7 @@
         <EditText
             android:id="@+id/et_ProductPrice"
             android:layout_width="match_parent"
+            android:textColor="#DBDBDB"
             android:layout_height="48dp"
             android:hint="Price"
             android:layout_below="@+id/et_ProductName"
@@ -34,6 +36,7 @@
 
         <EditText
             android:id="@+id/et_ProductQuantity"
+            android:textColor="#DBDBDB"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:hint="Quantity"
@@ -44,6 +47,7 @@
 
         <EditText
             android:id="@+id/et_UserPerWeek"
+            android:textColor="#DBDBDB"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:hint="Use Per Week"
@@ -65,7 +69,7 @@
             android:background="@drawable/rectangular_border"
             android:backgroundTint="#333462"
             android:text="Save"
-            android:textColor="@color/black"
+            android:textColor="#DBDBDB"
             android:textSize="20sp" />
 
 

@@ -1,7 +1,11 @@
 package com.example.pigeonbreedermanagementapplication.Transaction;
 
 import android.app.DatePickerDialog;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -59,10 +63,42 @@ public class TransactionAdding extends AppCompatActivity {
 
         btSave = findViewById(R.id.bt_SaveTransaction);
         spType = findViewById(R.id.sp_TransactionType);
+        
         etDate = findViewById(R.id.et_TransactionDate);
+        SpannableString spannableString_etDate = new SpannableString("Notes");
+        // Create a ForegroundColorSpan with the desired color
+        ForegroundColorSpan colorSpan_etDate = new ForegroundColorSpan(Color.parseColor("#ebe8e8"));
+        // Apply the color span to the spannable string
+        spannableString_etDate.setSpan(colorSpan_etDate, 0, spannableString_etDate.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        // Set the spannable string as the hint for the EditText
+        etDate.setHint(spannableString_etDate);
+        
         etPartner = findViewById(R.id.et_TransactionPartner);
+        SpannableString spannableString_etPartner = new SpannableString("Transaction Partner");
+        // Create a ForegroundColorSpan with the desired color
+        ForegroundColorSpan colorSpan_etPartner = new ForegroundColorSpan(Color.parseColor("#ebe8e8"));
+        // Apply the color span to the spannable string
+        spannableString_etPartner.setSpan(colorSpan_etPartner, 0, spannableString_etPartner.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        // Set the spannable string as the hint for the EditText
+        etPartner.setHint(spannableString_etPartner);
+        
         etAmount = findViewById(R.id.et_TransactionAmount);
+        SpannableString spannableString_etAmount = new SpannableString("Payment Amount");
+        // Create a ForegroundColorSpan with the desired color
+        ForegroundColorSpan colorSpan_etAmount = new ForegroundColorSpan(Color.parseColor("#ebe8e8"));
+        // Apply the color span to the spannable string
+        spannableString_etAmount.setSpan(colorSpan_etAmount, 0, spannableString_etAmount.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        // Set the spannable string as the hint for the EditText
+        etAmount.setHint(spannableString_etAmount);
+        
         etDetails = findViewById(R.id.et_TransactionDetails);
+        SpannableString spannableString_etDetails = new SpannableString("Transaction Details");
+        // Create a ForegroundColorSpan with the desired color
+        ForegroundColorSpan colorSpan_etDetails = new ForegroundColorSpan(Color.parseColor("#ebe8e8"));
+        // Apply the color span to the spannable string
+        spannableString_etDetails.setSpan(colorSpan_etDetails, 0, spannableString_etDetails.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        // Set the spannable string as the hint for the EditText
+        etDetails.setHint(spannableString_etDetails);
 
         //adding resources to the transaction type
         List<String> type = new ArrayList<>();
@@ -70,8 +106,8 @@ public class TransactionAdding extends AppCompatActivity {
         type.add("Sell");
 //        type.add("Trade");
 
-        ArrayAdapter<String> typeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, type);
-        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> typeAdapter = new ArrayAdapter<>(this, R.layout.spinner_adapter, type);
+        typeAdapter.setDropDownViewResource(R.layout.spinner_adapter_dropdown);
         spType.setAdapter(typeAdapter);
 
         etDate.setFocusable(false);

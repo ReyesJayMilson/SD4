@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class EggTrackerFragment extends Fragment {
 
     private int profileId = GlobalVariables.profileId;
-    private RecyclerView eggRecView;
+    private RecyclerView eggRecView, eggHatchedRecView, eggUnhatchedRecView;
     public static EggsRecViewAdapter eggadapter;
     private DatabaseHelper dbhelper;
     private ArrayList<EggsGetSet> eggs = new ArrayList<>();
@@ -36,6 +36,8 @@ public class EggTrackerFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_egg_tracker, container, false);
         dbhelper = new DatabaseHelper(getActivity());
         eggRecView = view.findViewById(R.id.rc_Eggs);
+        eggHatchedRecView = view.findViewById(R.id.rc_hatched);
+        eggUnhatchedRecView = view.findViewById(R.id.rc_unhatched);
 
         // to pass the context to the databasehelper
 
