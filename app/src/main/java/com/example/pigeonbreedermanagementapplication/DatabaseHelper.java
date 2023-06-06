@@ -522,6 +522,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public boolean deleteEgg(EggsGetSet eggs) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String whereClause = COLUMN_EGG_ID + " = ?";
+        String[] whereArgs = {String.valueOf(eggs.getEgg_id())};
+        int rowsDeleted = db.delete(EGGMONITORING_TABLE, whereClause, whereArgs);
+
+        if (rowsDeleted > 0) {
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public boolean editPigeon(PigeonsGetSet pigeons) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();

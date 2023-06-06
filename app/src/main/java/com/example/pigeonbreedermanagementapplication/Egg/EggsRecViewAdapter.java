@@ -1,11 +1,18 @@
 package com.example.pigeonbreedermanagementapplication.Egg;
 
+import static androidx.core.content.ContextCompat.startActivity;
+import static com.google.android.material.internal.ContextUtils.getActivity;
+import static java.security.AccessController.getContext;
+
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -18,7 +25,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pigeonbreedermanagementapplication.DatabaseHelper;
 import com.example.pigeonbreedermanagementapplication.GlobalVariables;
+import com.example.pigeonbreedermanagementapplication.Pigeon.PigeonEditing;
+import com.example.pigeonbreedermanagementapplication.Pigeon.PigeonsFragment;
+import com.example.pigeonbreedermanagementapplication.Pigeon.PigeonsGetSet;
 import com.example.pigeonbreedermanagementapplication.R;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
 
@@ -65,115 +76,80 @@ public class EggsRecViewAdapter extends RecyclerView.Adapter<EggsRecViewAdapter.
             @Override
             public void onClick(View v) {
                 int clickedPosition = holder.getAdapterPosition();
-
-
-
-
-                Toast.makeText(context, "egg no. "+ eggs.get(clickedPosition).getEgg_id() + " clicked", Toast.LENGTH_SHORT).show();
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Hatch Egg")
-                        .setMessage("Did this egg hatch successfully?")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Do something if the egg hatched successfully
-                                boolean success = dbhelper.updateEggStatus(eggs.get(clickedPosition).getEgg_id(), "Hatched");
-                                if (success) {
-                                    holder.egg.setImageResource(R.mipmap.hatched_egg);
-                                    Toast.makeText(context, "Egg hatched successfully", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(context, "Egg status not updated", Toast.LENGTH_SHORT).show();
-                                }
-                                dialog.dismiss();
-                            }
-                        })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Do something if the egg didn't hatch successfully
-                                boolean success = dbhelper.updateEggStatus(eggs.get(clickedPosition).getEgg_id(), "Unhatched");
-                                if (success) {
-                                    holder.egg.setImageResource(R.mipmap.unhatched_egg);
-                                    Toast.makeText(context, "Egg failed to hatch", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(context, "Egg status not updated", Toast.LENGTH_SHORT).show();
-                                }
-                                dialog.dismiss();
-                            }
-                        })
-                        .create()
-                        .show();
-//                View bottomSheetView = LayoutInflater.from(context).inflate(R.layout.pigeons_bottom_sheet, null);
+                View bottomSheetView = LayoutInflater.from(context).inflate(R.layout.egg_bottom_sheet, null);
 
                 //Set the contents of the bottom sheet
-//                TextView ringIdTextView = bottomSheetView.findViewById(R.id.bsv_ringid);
-//                ringIdTextView.setText("Ring ID: " + pigeons.get(clickedPosition).getRing_id());
-//
-//                TextView nameTextView = bottomSheetView.findViewById(R.id.bsv_name);
-//                nameTextView.setText("Name: " + pigeons.get(clickedPosition).getName());
-//
-//                TextView cagenumberTextView = bottomSheetView.findViewById(R.id.bsv_cagenumber);
-//                cagenumberTextView.setText("Cage No.: " + pigeons.get(clickedPosition).getCage_no());
-//
-//                TextView birthyearTextView = bottomSheetView.findViewById(R.id.bsv_birthyear);
-//                birthyearTextView.setText("Birth Year: " + pigeons.get(clickedPosition).getBirth_year());
-//
-//                TextView breedTextView = bottomSheetView.findViewById(R.id.bsv_breed);
-//                breedTextView.setText("Breed: " + pigeons.get(clickedPosition).getBreed());
-//
-//                TextView genderTextView = bottomSheetView.findViewById(R.id.bsv_gender);
-//                genderTextView.setText("Gender: " + pigeons.get(clickedPosition).getGender());
-//
-//                TextView colorTextView = bottomSheetView.findViewById(R.id.bsv_color);
-//                colorTextView.setText("Color: " + pigeons.get(clickedPosition).getColor());
-//
-//                TextView statusTextView = bottomSheetView.findViewById(R.id.bsv_status);
-//                statusTextView.setText("Status: " + pigeons.get(clickedPosition).getStatus());
-//
-//                TextView notesTextView = bottomSheetView.findViewById(R.id.bsv_notes);
-//                notesTextView.setText("Notes: " + pigeons.get(clickedPosition).getNotes());
-//
-//                //Create a new BottomSheetDialog
-//                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
-//                bottomSheetDialog.setContentView(bottomSheetView);
-//                bottomSheetDialog.show();
+                TextView eggIdTextView = bottomSheetView.findViewById(R.id.bsv_eggid);
+                eggIdTextView.setText("Egg ID: " + eggs.get(clickedPosition).getEgg_id());
+
+                TextView cageTextView = bottomSheetView.findViewById(R.id.bsv_cageno);
+                cageTextView.setText("Cage Number: " + eggs.get(clickedPosition).getCage_number());
+
+                TextView nestTextView = bottomSheetView.findViewById(R.id.bsv_nestno);
+                nestTextView.setText("Nest Number: " + eggs.get(clickedPosition).getNest_number());
+
+                TextView layingTextView = bottomSheetView.findViewById(R.id.bsv_layingdate);
+                layingTextView.setText("Laying Date: " + eggs.get(clickedPosition).getLaying_date());
+
+                TextView hatchTextView = bottomSheetView.findViewById(R.id.bsv_hatchingdate);
+                hatchTextView.setText("Hatching Date: " + eggs.get(clickedPosition).getHatching_date());
+
+                TextView statusTextView = bottomSheetView.findViewById(R.id.bsv_eggstatus);
+                statusTextView.setText("Status: " + eggs.get(clickedPosition).getEgg_status());
+
+                TextView fatherTextView = bottomSheetView.findViewById(R.id.bsv_father);
+                fatherTextView.setText("Father: " + eggs.get(clickedPosition).getFather());
+
+                TextView motherTextView = bottomSheetView.findViewById(R.id.bsv_mother);
+                motherTextView.setText("Mother: " + eggs.get(clickedPosition).getMother());
+
+                //Create a new BottomSheetDialog
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
+                bottomSheetDialog.setContentView(bottomSheetView);
+                bottomSheetDialog.show();
 
 
-//                final Button deleteButton = bottomSheetView.findViewById(R.id.bsv_deletepigeon);
-//                deleteButton.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        boolean success = dbhelper.deletePigeon(pigeons.get(clickedPosition));
-//
-//                        if (success) {
-//                            Toast.makeText(view.getContext(), "Pigeon deleted successfully", Toast.LENGTH_SHORT).show();
-//                            bottomSheetDialog.dismiss();
-//                        } else {
-//                            Toast.makeText(view.getContext(), "Pigeon not deleted", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
+                final Button deleteButton = bottomSheetView.findViewById(R.id.bsv_deleteegg);
+                deleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        boolean success = dbhelper.deleteEgg(eggs.get(clickedPosition));
 
-//                Button editButton = bottomSheetView.findViewById(R.id.bsv_editpigeon);
-//                editButton.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        //Create a new Intent
-//                        Intent intent = new Intent(context, PigeonEditing.class);
-//                        //Put the data in the intent extras
-//                        intent.putExtra("ring_id", pigeons.get(clickedPosition).getRing_id());
-//                        intent.putExtra("name", pigeons.get(clickedPosition).getName());
-//                        intent.putExtra("cage_number", pigeons.get(clickedPosition).getCage_no());
-//                        intent.putExtra("birth_year", pigeons.get(clickedPosition).getBirth_year());
-//                        intent.putExtra("breed", pigeons.get(clickedPosition).getBreed());
-//                        intent.putExtra("gender", pigeons.get(clickedPosition).getGender());
-//                        intent.putExtra("color", pigeons.get(clickedPosition).getColor());
-//                        intent.putExtra("status", pigeons.get(clickedPosition).getStatus());
-//                        intent.putExtra("notes", pigeons.get(clickedPosition).getNotes());
-//                        context.startActivity(intent);
-//                        bottomSheetDialog.dismiss();
-//                    }
-//                });
+                        if (success) {
+                            ArrayList<EggsGetSet> updatedList = dbhelper.getLaidEgg(profileId);
+                            ArrayList<EggsGetSet> updatedHatchedList = dbhelper.getHatchedEgg(profileId);
+                            ArrayList<EggsGetSet> updatedUnhatchedList = dbhelper.getUnhatchedEgg(profileId);
+                            EggTrackerFragment.eggadapter.setEggs(updatedList);
+                            EggTrackerFragment.egghatchedadapter.setEggs(updatedHatchedList);
+                            EggTrackerFragment.eggunhatchedadapter.setEggs(updatedUnhatchedList);
+
+                            Toast.makeText(view.getContext(), "Egg deleted successfully", Toast.LENGTH_SHORT).show();
+                            bottomSheetDialog.dismiss();
+                        } else {
+                            Toast.makeText(view.getContext(), "Egg not deleted", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+                Button editButton = bottomSheetView.findViewById(R.id.bsv_editegg);
+                editButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Create a new Intent
+                        Intent intent = new Intent(context, PigeonEditing.class);
+                        //Put the data in the intent extras
+                        intent.putExtra("egg_id", eggs.get(clickedPosition).getEgg_id());
+                        intent.putExtra("cage_number", eggs.get(clickedPosition).getCage_number());
+                        intent.putExtra("nest_number", eggs.get(clickedPosition).getNest_number());
+                        intent.putExtra("laying_date", eggs.get(clickedPosition).getLaying_date());
+                        intent.putExtra("hatching_date", eggs.get(clickedPosition).getHatching_date());
+                        intent.putExtra("egg_status", eggs.get(clickedPosition).getEgg_status());
+                        intent.putExtra("father", eggs.get(clickedPosition).getFather());
+                        intent.putExtra("mother", eggs.get(clickedPosition).getMother());
+                        context.startActivity(intent);
+                        bottomSheetDialog.dismiss();
+                    }
+                });
             }
         });
 

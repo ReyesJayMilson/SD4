@@ -266,7 +266,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/pigeon_button_bg"
-        android:text="Edit"
+        android:text="Confirm"
         android:textColor="#DBDBDB"
         android:textSize="20sp" />
 
