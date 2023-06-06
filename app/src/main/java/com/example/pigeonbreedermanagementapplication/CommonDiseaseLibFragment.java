@@ -97,6 +97,7 @@ public class CommonDiseaseLibFragment extends Fragment {
                     updateSelectedSymptomsTextView();
                     adapter.setDisease(filter(diseaseList, searchView.getQuery().toString()));
                 }
+                spinSymptom.setSelection(0);
             }
 
             @Override
@@ -147,34 +148,34 @@ public class CommonDiseaseLibFragment extends Fragment {
         txtSelectedSymptoms.setText(sb.toString());
     }
 
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        inflater.inflate(R.menu.actions_menu, menu);
-//        MenuItem searchItem = menu.findItem(R.id.action_search);
-//        searchView = (SearchView) searchItem.getActionView();
-//        searchView.setQueryHint("Search");
-//        searchView.setMaxWidth(Integer.MAX_VALUE);
-//
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                // filter the list with the search query
-//                ArrayList<Disease> filteredDisease = filter(diseaseList, newText);
-//                adapter.setDisease(filteredDisease);
-//                return true;
-//            }
-//        });
-//
-//
-//
-//
-//
-//    }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.actions_menu, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        searchView = (SearchView) searchItem.getActionView();
+        searchView.setQueryHint("Search");
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // filter the list with the search query
+                ArrayList<Disease> filteredDisease = filter(diseaseList, newText);
+                adapter.setDisease(filteredDisease);
+                return true;
+            }
+        });
+
+
+
+
+
+    }
 
     private ArrayList<Disease> filter(ArrayList<Disease> diseases, String query) {
         ArrayList<Disease> filteredDiseases = new ArrayList<>();
