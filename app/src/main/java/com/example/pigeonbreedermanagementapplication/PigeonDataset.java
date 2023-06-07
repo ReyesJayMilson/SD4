@@ -61,4 +61,12 @@ public class PigeonDataset {
         Yawning = yawning;
         Stretching_of_Neck = stretching_of_Neck;
     }
+
+    public String getRing_id() {
+        return ring_id;
+    }
+
+    public void setRing_id(String ring_id) {
+        this.ring_id = ring_id;
+    }
 }

@@ -15,6 +15,7 @@ import com.example.pigeonbreedermanagementapplication.Profile.ProfilesGetSet;
 import com.example.pigeonbreedermanagementapplication.Transaction.TransactionGetSet;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -1468,6 +1469,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         return diseaseName;
+    }
+
+    public Disease getDiseaseByName(String diseaseName) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + DISEASES_TABLE + " WHERE " + COLUMN_DISEASE_NAME + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{diseaseName});
+
+        if (cursor.moveToFirst()) {
+            int idIndex = cursor.getColumnIndex(COLUMN_DISEASE_ID);
+            int nameIndex = cursor.getColumnIndex(COLUMN_DISEASE_NAME);
+            int descIndex = cursor.getColumnIndex(COLUMN_DISEASE_DESC);
+
+            if (idIndex == -1 || nameIndex == -1 || descIndex == -1) {
+                throw new IllegalStateException("Unexpected columns in table: " + Arrays.toString(cursor.getColumnNames()));
+            }
+
+            int id = cursor.getInt(idIndex);
+            String name = cursor.getString(nameIndex);
+            String desc = cursor.getString(descIndex);
+
+            Disease disease = new Disease();
+            disease.setId(id);
+            disease.setName(name);
+            disease.setDesc(desc);
+
+            cursor.close();
+            return disease;
+        } else {
+            cursor.close();
+            return null;
+        }
+
     }
 
 }

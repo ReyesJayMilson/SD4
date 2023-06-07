@@ -86,4 +86,15 @@
         android:layout_below="@id/healthRadioGroup"
         android:inputType="textMultiLine" />
 
+    <Button
+        android:id="@+id/predictDiseaseButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Predict Disease"
+        android:visibility="gone"
+        android:layout_below="@id/medicationsEditText"
+        android:background="@drawable/rectangular_border"
+        android:backgroundTint="@color/teal_200"/>
+
+
 </RelativeLayout>

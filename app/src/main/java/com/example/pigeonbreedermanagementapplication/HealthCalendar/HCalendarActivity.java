@@ -2,10 +2,12 @@ package com.example.pigeonbreedermanagementapplication.HealthCalendar;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -21,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pigeonbreedermanagementapplication.DatabaseHelper;
 import com.example.pigeonbreedermanagementapplication.DatasetManager;
+import com.example.pigeonbreedermanagementapplication.DiseaseP;
 import com.example.pigeonbreedermanagementapplication.GlobalVariables;
 import com.example.pigeonbreedermanagementapplication.PigeonDataset;
 import com.example.pigeonbreedermanagementapplication.R;
@@ -30,12 +33,16 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class HCalendarActivity extends AppCompatActivity implements HCalendarAdapter.OnItemListener{
 
+    DiseaseP.DiseasePredictor diseasePredictor = new DiseaseP().new DiseasePredictor();
     private int profileId = GlobalVariables.profileId;
     private HCalendarAdapter calendarAdapter;
     DatabaseHelper dbhelper;
@@ -150,6 +157,7 @@ public class HCalendarActivity extends AppCompatActivity implements HCalendarAda
             final RadioGroup healthRadioGroup = dialogView.findViewById(R.id.healthRadioGroup);
             final Spinner symptomsSpinner = dialogView.findViewById(R.id.symptomsSpinner);
             final Spinner diseasesSpinner = dialogView.findViewById(R.id.diseaseSpinner);
+            final Button predictDiseaseButton = dialogView.findViewById(R.id.predictDiseaseButton);
 
             ArrayList<String> symptomNames = dbhelper.getEverySymptomNames();
             ArrayList<String> diseaseNames = dbhelper.getEveryDiseaseNames();
@@ -163,6 +171,54 @@ public class HCalendarActivity extends AppCompatActivity implements HCalendarAda
             // Set the ArrayAdapter for the Spinner
             symptomsSpinner.setAdapter(symptomsAdapter);
             diseasesSpinner.setAdapter(diseasesAdapter);
+            predictDiseaseButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Show a toast message while predicting diseases
+                    if (symptomsListTextView.equals("Selected Symptoms:") ) {
+                        Toast.makeText(HCalendarActivity.this, "Symptoms not found", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else {
+                        Toast.makeText(HCalendarActivity.this, "Predicting diseases...", Toast.LENGTH_SHORT).show();
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                List<String> symptoms = new ArrayList<>(selectedSymptoms);
+                                Map<String, Double> diseaseMatches = diseasePredictor.predictDiseases(symptoms);
+
+                                // Convert the map to a list of Map.Entry
+                                List<Map.Entry<String, Double>> entries = new ArrayList<>(diseaseMatches.entrySet());
+
+                                // Sort the list in descending order by value (percentage match)
+                                Collections.sort(entries, new Comparator<Map.Entry<String, Double>>() {
+                                    public int compare(Map.Entry<String, Double> a, Map.Entry<String, Double> b) {
+                                        return b.getValue().compareTo(a.getValue());
+                                    }
+                                });
+
+                                // Convert the sorted list to a list of strings
+                                List<String> diseasePredictions = new ArrayList<>();
+                                for (Map.Entry<String, Double> entry : entries) {
+                                    diseasePredictions.add(entry.getKey() + ": " + entry.getValue() + "% match");
+                                }
+
+                                AlertDialog.Builder builder = new AlertDialog.Builder(HCalendarActivity.this);
+                                builder.setTitle("Predicted Diseases")
+                                        .setItems(diseasePredictions.toArray(new String[0]), null)
+                                        .setPositiveButton("OK", null)
+                                        .show();
+                                AlertDialog dialog = builder.create();
+                                dialog.show();
+                            }
+                        }, 2000); // Delay of 3 seconds (3000 milliseconds)
+                    }
+
+                }
+            });
+
+
+
 
             symptomsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -178,6 +234,7 @@ public class HCalendarActivity extends AppCompatActivity implements HCalendarAda
                         updateSelectedSymptomsTextView(symptomsListTextView);
 
                     }
+                    symptomsSpinner.setSelection(0);
                 }
 
                 @Override
@@ -215,9 +272,11 @@ public class HCalendarActivity extends AppCompatActivity implements HCalendarAda
                     if (checkedId == R.id.radioHasSymptoms) {
                         symptomsSpinner.setVisibility(View.VISIBLE);
                         symptomsListTextView.setVisibility(View.VISIBLE);
+                        predictDiseaseButton.setVisibility(View.VISIBLE);
                     } else {
                         symptomsSpinner.setVisibility(View.GONE);
                         symptomsListTextView.setVisibility(View.GONE);
+                        predictDiseaseButton.setVisibility(View.GONE);
                     }
 
                     if (checkedId == R.id.radioContractedDisease) {
@@ -247,6 +306,7 @@ public class HCalendarActivity extends AppCompatActivity implements HCalendarAda
                     for (String symptom : symptomsArray) {
                         selectedSymptoms.add(symptom.trim());
                     }
+                    predictDiseaseButton.setVisibility(View.VISIBLE);
                     symptomsListTextView.setVisibility(View.VISIBLE);
                     updateSelectedSymptomsTextView(symptomsListTextView);
                 }
@@ -278,6 +338,7 @@ public class HCalendarActivity extends AppCompatActivity implements HCalendarAda
                     .setPositiveButton(dataExists ? "Save" : "Add", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+
 
 
                             int diseaseId=0;
@@ -342,6 +403,7 @@ public class HCalendarActivity extends AppCompatActivity implements HCalendarAda
                 builder.setNeutralButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
                         boolean success = dbhelper.deleteHealth(existingHealth);
                         if (success) {
                             ArrayList<HCalendarGetSet> updatedList = dbhelper.getEveryHealth(profileId);
@@ -387,6 +449,15 @@ public class HCalendarActivity extends AppCompatActivity implements HCalendarAda
             sb.setLength(sb.length() - 1);
         }
         return sb.toString();
+    }
+
+    private void populateDiseasesSpinner(Map<String, Double> diseaseMatches, ArrayAdapter<String> diseasesAdapter) {
+        List<String> diseasePredictions = new ArrayList<>();
+        for (Map.Entry<String, Double> entry : diseaseMatches.entrySet()) {
+            diseasePredictions.add(entry.getKey() + ": " + entry.getValue() + "% match");
+        }
+        diseasesAdapter.clear();
+        diseasesAdapter.addAll(diseasePredictions);
     }
 
 }

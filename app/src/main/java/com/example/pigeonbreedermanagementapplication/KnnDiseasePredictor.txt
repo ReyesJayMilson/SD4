@@ -1,0 +1,62 @@
+import java.util.*;
+
+public class KnnDiseasePredictor {
+    private int k;
+    private List<Pigeon> pigeons;
+
+    public KnnDiseasePredictor(int k, List<Pigeon> pigeons) {
+        this.k = k;
+        this.pigeons = pigeons;
+    }
+
+    public String predict(Pigeon newPigeon) {
+        List<PigeonDistancePair> distances = new ArrayList<>();
+
+        for (Pigeon pigeon : pigeons) {
+            double distance = calculateDistance(newPigeon.getSymptoms(), pigeon.getSymptoms());
+            distances.add(new PigeonDistancePair(pigeon, distance));
+        }
+
+        Collections.sort(distances);
+
+        Map<String, Integer> diseaseVotes = new HashMap<>();
+
+        for (int i = 0; i < k; i++) {
+            String disease = distances.get(i).getPigeon().getDisease();
+            diseaseVotes.put(disease, diseaseVotes.getOrDefault(disease, 0) + 1);
+        }
+
+        return Collections.max(diseaseVotes.entrySet(), Map.Entry.comparingByValue()).getKey();
+    }
+
+    private double calculateDistance(int[] symptoms1, int[] symptoms2) {
+        int sum = 0;
+        for (int i = 0; i < symptoms1.length; i++) {
+            sum += Math.pow(symptoms1[i] - symptoms2[i], 2);
+        }
+        return Math.sqrt(sum);
+    }
+
+    private class PigeonDistancePair implements Comparable<PigeonDistancePair> {
+        private Pigeon pigeon;
+        private double distance;
+
+        public PigeonDistancePair(Pigeon pigeon, double distance) {
+            this.pigeon = pigeon;
+            this.distance = distance;
+        }
+
+        public Pigeon getPigeon() {
+            return pigeon;
+        }
+
+        public double getDistance() {
+            return distance;
+        }
+
+        @Override
+        public int compareTo(PigeonDistancePair other) {
+            return Double.compare(this.distance, other.distance);
+        }
+    }
+}
