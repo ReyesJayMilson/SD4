@@ -10,126 +10,140 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/cv_eggs"
-        android:layout_marginVertical="5dp"
-        android:layout_marginHorizontal="2dp"
-        app:cardElevation="5dp"
-        app:cardCornerRadius="5dp"
-        android:padding="10dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/border_pigeon_info">
-
-            <TextView
-                android:id="@+id/txt_eggs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Current Eggs"
-                android:background="#333462"
-                android:paddingVertical="2dp"
-                android:textColor="#DBDBDB"
-                android:paddingHorizontal="5dp"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rc_Eggs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="3dp"
-                android:layout_below="@+id/txt_eggs"></androidx.recyclerview.widget.RecyclerView>
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_hatched"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/cv_eggs"
-        android:layout_marginHorizontal="2dp"
-        android:layout_marginVertical="5dp"
-        android:padding="10dp"
-        android:visibility="invisible"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="5dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/border_pigeon_info">
-
-            <TextView
-                android:id="@+id/txt_hatched"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#333462"
-                android:paddingHorizontal="5dp"
-                android:text="Successfully Hatched Eggs"
-                android:textColor="#DBDBDB" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rc_hatched"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_hatched" />
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/cv_unhatched"
-        android:layout_below="@+id/cv_hatched"
-        android:layout_marginVertical="5dp"
-        android:layout_marginHorizontal="2dp"
-        app:cardElevation="5dp"
-        app:cardCornerRadius="5dp"
-        android:padding="10dp"
-        android:visibility="invisible">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/border_pigeon_info">
-
-            <TextView
-                android:id="@+id/txt_unhatched"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Unsuccessfully Hatched Eggs"
-                android:background="#333462"
-                android:textColor="#DBDBDB"
-                android:paddingHorizontal="5dp"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rc_unhatched"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_unhatched"/>
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-
-    <Button
-        android:id="@+id/bt_AddEgg"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/rectangular_border"
-        android:backgroundTint="@color/teal_200"
-        android:text="Add Eggs"
-        android:textColor="#DBDBDB"
-        android:textSize="20sp" />
-
-    <FrameLayout
-        android:id="@+id/bs_Eggs"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </FrameLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_eggs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:layout_marginVertical="5dp"
+                android:padding="10dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_pigeon_info">
+
+                    <TextView
+                        android:id="@+id/txt_eggs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#333462"
+                        android:paddingHorizontal="5dp"
+                        android:paddingVertical="2dp"
+                        android:text="Current Eggs"
+                        android:textColor="#DBDBDB" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rc_Eggs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_eggs"
+                        android:padding="3dp"></androidx.recyclerview.widget.RecyclerView>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_hatched"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:layout_marginVertical="5dp"
+                android:padding="10dp"
+                android:layout_below="@+id/cv_eggs"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_pigeon_info">
+
+                    <TextView
+                        android:id="@+id/txt_hatched"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#333462"
+                        android:paddingHorizontal="5dp"
+                        android:text="Successfully Hatched Eggs"
+                        android:textColor="#DBDBDB" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rc_hatched"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_hatched" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_unhatched"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:layout_marginVertical="5dp"
+                android:padding="10dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp"
+                android:layout_below="@+id/cv_hatched">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_pigeon_info">
+
+                    <TextView
+                        android:id="@+id/txt_unhatched"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#333462"
+                        android:paddingHorizontal="5dp"
+                        android:text="Unsuccessfully Hatched Eggs"
+                        android:textColor="#DBDBDB" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rc_unhatched"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_unhatched" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/bt_AddEgg"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="105dp"
+                android:layout_marginEnd="105dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/rectangular_border"
+                android:backgroundTint="@color/teal_200"
+                android:text="Add Eggs"
+                android:textColor="#DBDBDB"
+                android:textSize="20sp"
+                android:layout_below="@+id/cv_unhatched"/>
+
+            <FrameLayout
+                android:id="@+id/bs_Eggs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </FrameLayout>
+
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>

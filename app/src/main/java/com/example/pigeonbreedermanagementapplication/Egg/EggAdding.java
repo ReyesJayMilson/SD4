@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.example.pigeonbreedermanagementapplication.DatabaseHelper;
 import com.example.pigeonbreedermanagementapplication.GlobalVariables;
@@ -202,8 +203,13 @@ public class EggAdding extends AppCompatActivity {
                         EggsGetSet eggs = new EggsGetSet(-1, selectedCageNo, selectedNestNo, laydate, hatchdate, eggStatus, selectedFather, selectedMother, profileId);
 
                         dbhelper.addEgg(eggs);
-                        ArrayList<EggsGetSet> updatedList = dbhelper.getEveryEgg(profileId);
+
+                        ArrayList<EggsGetSet> updatedList = dbhelper.getLaidEgg(profileId);
+                        ArrayList<EggsGetSet> updatedHatchedList = dbhelper.getHatchedEgg(profileId);
+                        ArrayList<EggsGetSet> updatedUnhatchedList = dbhelper.getUnhatchedEgg(profileId);
                         EggTrackerFragment.eggadapter.setEggs(updatedList);
+                        EggTrackerFragment.egghatchedadapter.setEggs(updatedHatchedList);
+                        EggTrackerFragment.eggunhatchedadapter.setEggs(updatedUnhatchedList);
                     }
 
                     finish();
