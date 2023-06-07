@@ -44,11 +44,21 @@
                         android:text="Current Eggs"
                         android:textColor="#DBDBDB" />
 
+                    <TextView
+                        android:id="@+id/txtEmpty1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_eggs"
+                        android:text="EMPTY"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:textColor="#DBDBDB"/>
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rc_Eggs"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/txt_eggs"
+                        android:layout_below="@+id/txtEmpty1"
                         android:padding="3dp"></androidx.recyclerview.widget.RecyclerView>
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
@@ -78,11 +88,21 @@
                         android:text="Successfully Hatched Eggs"
                         android:textColor="#DBDBDB" />
 
+                    <TextView
+                        android:id="@+id/txtEmpty2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_hatched"
+                        android:text="EMPTY"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:textColor="#DBDBDB" />
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rc_hatched"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/txt_hatched" />
+                        android:layout_below="@+id/txtEmpty2" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
@@ -111,11 +131,21 @@
                         android:text="Unsuccessfully Hatched Eggs"
                         android:textColor="#DBDBDB" />
 
+                    <TextView
+                        android:id="@+id/txtEmpty3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_unhatched"
+                        android:text="EMPTY"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:textColor="#DBDBDB" />
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rc_unhatched"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/txt_unhatched" />
+                        android:layout_below="@+id/txtEmpty3" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 

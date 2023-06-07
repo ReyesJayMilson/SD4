@@ -49,16 +49,16 @@ public class EggEditing extends AppCompatActivity {
 
     private int profileId = GlobalVariables.profileId;
     private Button btSave;
-    private Button btAddCage;
+    private Button btAddCage, btAddNest;
     private ImageView ivAddImage;
     private EditText etRingID;
     private EditText etName;
     private EditText etColor;
     private EditText etNotes;
-    private Spinner spBirthYear;
+    private Spinner spLayDate, spHatchDate;
     private Spinner spGender;
     private Spinner spBreed;
-    private Spinner spCageNo;
+    private Spinner spCageNo, spNestNo, spStatus, spFather, spMother;
     private RadioGroup rgStatus;
     private RadioButton rbStatus;
     private int selectedYear;
@@ -78,91 +78,39 @@ public class EggEditing extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pigeon_add);
+        setContentView(R.layout.egg_add);
 
 
         dbhelper = new DatabaseHelper(EggEditing.this);
 
-        String ringId = getIntent().getStringExtra("ring_id");
-        String name = getIntent().getStringExtra("name");
+        String eggId = getIntent().getStringExtra("egg_id");
         int cageNumber = getIntent().getIntExtra("cage_number", 0);
-        int birthYear = getIntent().getIntExtra("birth_year", 0);
-        String breed = getIntent().getStringExtra("breed");
-        String gender = getIntent().getStringExtra("gender");
-        String color = getIntent().getStringExtra("color");
-        String status = getIntent().getStringExtra("status");
-        String notes = getIntent().getStringExtra("notes");
-        String image = getIntent().getStringExtra("image");
-        Log.d("Image String", "file path" + image);
+        int nestNumber = getIntent().getIntExtra("nest_number", 0);
+        int layDate = getIntent().getIntExtra("laying_date", 0);
+        int hatchDate = getIntent().getIntExtra("hatching_date", 0);
+        String status = getIntent().getStringExtra("egg_status");
+        String father = getIntent().getStringExtra("father");
+        String mother = getIntent().getStringExtra("mother");
 
 
-        ivAddImage = findViewById(R.id.iv_AddImage);
+
+
         btAddCage = findViewById(R.id.bt_AddCage);
+        btAddNest = findViewById(R.id.bt_AddNest);
         btSave = findViewById(R.id.bt_Save);
-        etRingID = findViewById(R.id.et_RingID);
 
-        etName = findViewById(R.id.et_Name);
-        SpannableString spannableString_etName = new SpannableString("Name");
-        // Create a ForegroundColorSpan with the desired color
-        ForegroundColorSpan colorSpan_etName = new ForegroundColorSpan(Color.parseColor("#ebe8e8"));
-        // Apply the color span to the spannable string
-        spannableString_etName.setSpan(colorSpan_etName, 0, spannableString_etName.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        // Set the spannable string as the hint for the EditText
-        etName.setHint(spannableString_etName);
 
         spCageNo = findViewById(R.id.sp_CageNo);
+        spNestNo = findViewById(R.id.sp_NestNo);
 //        etCageNumber = findViewById(R.id.et_CageNo);
-        spBirthYear = findViewById(R.id.sp_BirthYear);
-        spBreed = findViewById(R.id.sp_Breed);
-
-        etColor = findViewById(R.id.et_Color);
-        etColor = findViewById(R.id.et_Color);
-        SpannableString spannableString_etColor = new SpannableString("Color");
-        // Create a ForegroundColorSpan with the desired color
-        ForegroundColorSpan colorSpan_etColor = new ForegroundColorSpan(Color.parseColor("#ebe8e8"));
-        // Apply the color span to the spannable string
-        spannableString_etColor.setSpan(colorSpan_etColor, 0, spannableString_etColor.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        // Set the spannable string as the hint for the EditText
-        etColor.setHint(spannableString_etColor);
-
-        spGender = findViewById(R.id.sp_Gender);
-
-        etNotes = findViewById(R.id.et_Notes);
-        SpannableString spannableString_etNotes = new SpannableString("Notes");
-        // Create a ForegroundColorSpan with the desired color
-        ForegroundColorSpan colorSpan_etNotes = new ForegroundColorSpan(Color.parseColor("#ebe8e8"));
-        // Apply the color span to the spannable string
-        spannableString_etNotes.setSpan(colorSpan_etNotes, 0, spannableString_etNotes.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        // Set the spannable string as the hint for the EditText
-        etNotes.setHint(spannableString_etNotes);
-
-        rgStatus = findViewById(R.id.rg_Status);
 
 
-        ivAddImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(EggEditing.this);
-                builder.setTitle("Add Photo");
-                builder.setItems(options, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int item) {
-                        if (options[item].equals("Take Photo")) {
-                            Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                            startActivityForResult(takePicture, 0);
-                        } else if (options[item].equals("Choose from Gallery")) {
-                            Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                            startActivityForResult(pickPhoto, 1);
-                        } else if (options[item].equals("Cancel")) {
-                            dialog.dismiss();
-                        }
-                    }
-                });
-                builder.show();
-            }
-        });
+        spStatus= findViewById(R.id.sp_Status);
+
+        spFather = findViewById(R.id.sp_Father);
+        spMother = findViewById(R.id.sp_Mother);
+
 
         //adding to cageNo
         List<Integer> cageNumbers = dbhelper.getAllCageNumbers(profileId);
@@ -188,6 +136,24 @@ public class EggEditing extends AppCompatActivity {
             }
         });
 
+        btAddNest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean success = dbhelper.addNestNumber(profileId);
+                if (success) {
+                    Toast.makeText(EggEditing.this, "Nest Number added", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    Toast.makeText(EggEditing.this, "NestNumber not added", Toast.LENGTH_SHORT).show();
+                }
+                List<Integer> nestNumbers = dbhelper.getAllNestNumbers(profileId);
+                ArrayAdapter<Integer> adapter = new ArrayAdapter<>(EggEditing.this, R.layout.spinner_adapter, nestNumbers);
+                adapter.setDropDownViewResource(R.layout.spinner_adapter_dropdown);
+                adapter.notifyDataSetChanged();
+                spNestNo.setAdapter(adapter);
+            }
+        });
+
 
         //adding the resources to the birthyear
         List<Integer> years = new ArrayList<>();
@@ -199,22 +165,22 @@ public class EggEditing extends AppCompatActivity {
 
         ArrayAdapter<Integer> yearsAdapter = new ArrayAdapter<>(this, R.layout.spinner_adapter, years);
         yearsAdapter.setDropDownViewResource(R.layout.spinner_adapter_dropdown);
-        spBirthYear.setAdapter(yearsAdapter);
+        spLayDate.setAdapter(yearsAdapter);
 
-        spBirthYear.setPrompt("Birth Year");
+        spLayDate.setPrompt("Laying Date");
 //        spBirthYear.setSelection(0);
 
 
 
         //adding the resources to the gender
-        List<String> Listgender = new ArrayList<>();
-        Listgender.add("Male");
-        Listgender.add("Female");
-        Listgender.add("Young");
+        List<String> Status = new ArrayList<>();
+        Status.add("Hatched");
+        Status.add("Unhatched");
 
-        ArrayAdapter<String> genderAdapter = new ArrayAdapter<>(this, R.layout.spinner_adapter, Listgender);
-        genderAdapter.setDropDownViewResource(R.layout.spinner_adapter_dropdown);
-        spGender.setAdapter(genderAdapter);
+
+        ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(this, R.layout.spinner_adapter, Status);
+        statusAdapter.setDropDownViewResource(R.layout.spinner_adapter_dropdown);
+        spStatus.setAdapter(statusAdapter);
 //        spGender.setSelection(0);
 
 
@@ -272,36 +238,16 @@ public class EggEditing extends AppCompatActivity {
 
 
         //setting the existing fields
-        if (image != null) {
-            ivAddImage.setImageBitmap(BitmapFactory.decodeFile(image));
-        }
-        etRingID.setVisibility(View.GONE);
-        rgStatus.setVisibility(View.VISIBLE);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT
         );
         params.addRule(RelativeLayout.BELOW, etNotes.getId());
         params.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
-        rgStatus.setLayoutParams(params);
-        etName.setText(name);
         spCageNo.setSelection(((ArrayAdapter<Integer>) spCageNo.getAdapter()).getPosition(cageNumber));
-        spBirthYear.setSelection(((ArrayAdapter<Integer>) spBirthYear.getAdapter()).getPosition(birthYear));
-        spBreed.setSelection(((ArrayAdapter<String>) spBreed.getAdapter()).getPosition(breed));
-        spGender.setSelection(((ArrayAdapter<String>) spGender.getAdapter()).getPosition(gender));
-        etColor.setText(color);
-        switch (status) {
-            case "Alive":
-                rgStatus.check(R.id.rb_Alive);
-                break;
-            case "Dead":
-                rgStatus.check(R.id.rb_Dead);
-                break;
-            case "Sold":
-                rgStatus.check(R.id.rb_Sold);
-                break;
-        }
-        etNotes.setText(notes);
+        spNestNo.setSelection(((ArrayAdapter<Integer>) spNestNo.getAdapter()).getPosition(nestNumber));
+
+        spStatus.setSelection(((ArrayAdapter<String>) spStatus.getAdapter()).getPosition(status));
 
 
         btSave.setOnClickListener(new View.OnClickListener() {
@@ -313,39 +259,26 @@ public class EggEditing extends AppCompatActivity {
 
                 selectedGender = spGender.getSelectedItem().toString();
                 selectedBreed = spBreed.getSelectedItem().toString();
-                selectedYear = Integer.parseInt(spBirthYear.getSelectedItem().toString());
                 selectedCageNo = Integer.parseInt(spCageNo.getSelectedItem().toString());
 
                 String name = etName.getText().toString();
                 String color = etColor.getText().toString();
                 String notes = etNotes.getText().toString();
 
+//
+//                    EggsGetSet eggs = new EggsGetSet(egg_Id, cage_number, nest_number, laying_date, hatching_date, egg_status, father, mother, profileId);
+//
+//
+//                    boolean success = dbhelper.editPigeon(pigeons);
 
-                if (imageBitmap != null) {
-                    // Check if the image string is not empty
-                    if (!TextUtils.isEmpty(image)) {
-                        File oldFile = new File(image);
-                        if (oldFile.exists()) {
-                            oldFile.delete();
-                        }
-                    }
-                    filePath = saveImageToInternalStorage(imageBitmap, ringId);
-                } else {
-                    filePath = image;
-                }
-                    PigeonsGetSet pigeons = new PigeonsGetSet(ringId, name, selectedCageNo, selectedYear, selectedBreed, selectedGender, color, selectedStatus, notes, filePath, profileId);
-
-
-                    boolean success = dbhelper.editPigeon(pigeons);
-
-                    if (success) {
-                        ArrayList<PigeonsGetSet> updatedList = dbhelper.getEveryPigeon(profileId);
-                        PigeonsFragment.pigeonadapter.setPigeons(updatedList);
-                        Toast.makeText(EggEditing.this, "Pigeon saved", Toast.LENGTH_SHORT).show();
-                        finish();
-                    } else {
-                        Toast.makeText(EggEditing.this, "Pigeon not saved", Toast.LENGTH_SHORT).show();
-                    }
+//                    if (success) {
+//                        ArrayList<PigeonsGetSet> updatedList = dbhelper.getEveryPigeon(profileId);
+//                        PigeonsFragment.pigeonadapter.setPigeons(updatedList);
+//                        Toast.makeText(EggEditing.this, "Pigeon saved", Toast.LENGTH_SHORT).show();
+//                        finish();
+//                    } else {
+//                        Toast.makeText(EggEditing.this, "Pigeon not saved", Toast.LENGTH_SHORT).show();
+//                    }
 
             }
         });

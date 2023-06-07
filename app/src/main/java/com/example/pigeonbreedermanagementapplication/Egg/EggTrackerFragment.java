@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
@@ -44,25 +45,25 @@ public class EggTrackerFragment extends Fragment {
         eggRecView = view.findViewById(R.id.rc_Eggs);
         eggHatchedRecView = view.findViewById(R.id.rc_hatched);
         eggUnhatchedRecView = view.findViewById(R.id.rc_unhatched);
-        CardView cvEggs = view.findViewById(R.id.cv_eggs);
-        CardView cvHatched = view.findViewById(R.id.cv_hatched);
-        CardView cvUnhatched = view.findViewById(R.id.cv_unhatched);
+        TextView txtEmpty3 = view.findViewById(R.id.txtEmpty3);
+        TextView txtEmpty2 = view.findViewById(R.id.txtEmpty2);
+        TextView txtEmpty1 = view.findViewById(R.id.txtEmpty1);
         // to pass the context to the databasehelper
 
-        if (eggsCount > 0){
-            cvEggs.setVisibility(View.VISIBLE);
+        if (eggsCount == 0){
+            txtEmpty1.setVisibility(View.VISIBLE);
         } else {
-            cvEggs.setVisibility(View.GONE);
+            txtEmpty1.setVisibility(View.GONE);
         }
-        if (hatchedEggsCount > 0){
-            cvHatched.setVisibility(View.VISIBLE);
+        if (hatchedEggsCount == 0){
+            txtEmpty2.setVisibility(View.VISIBLE);
         } else {
-            cvHatched.setVisibility(View.GONE);
+            txtEmpty2.setVisibility(View.GONE);
         }
-        if (unhatchedEggsCount > 0){
-            cvUnhatched.setVisibility(View.VISIBLE);
+        if (unhatchedEggsCount == 0){
+            txtEmpty3.setVisibility(View.VISIBLE);
         } else {
-            cvUnhatched.setVisibility(View.GONE);
+            txtEmpty3.setVisibility(View.GONE);
         }
 
         eggs = dbhelper.getLaidEgg(profileId);
